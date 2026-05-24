@@ -124,7 +124,11 @@ section{
   z-index:2;
 }
 
-/* ===== ANIMATION FIX ===== */
+/* ↓ УМЕНЬШЕННЫЙ ОТСТУП ДЛЯ ДЕТАЛЕЙ ДНЯ */
+.details{
+  padding-top:50px;
+}
+
 .fade{
   opacity:0;
   transform:translateY(30px);
@@ -266,15 +270,18 @@ section{
 
 <section class="fade">
   <h2 class="section-title">Дорогие Андрей, Юлия, Александр</h2>
-
   <p class="invite-text">
-    С большой радостью приглашаем вас разделить с нами один из самых счастливых дней нашей жизни — день рождения нашей семьи.  
-    Будем рады видеть вас рядом в этот особенный момент.
+   С большой радостью приглашаем вас разделить с нами один из самых счастливых дней нашей жизни — день рождения нашей семьи.  
+   Будем рады видеть вас рядом в этот особенный момент.
   </p>
 </section>
-<section class="fade">
+
+<!-- ДОБАВЛЕН КЛАСС details -->
+<section class="fade details">
   <h2 class="section-title">Детали дня</h2>
+
   <div class="info-block">
+
     <div class="info-card">
       <h3>Место проведения</h3>
       <p>
@@ -309,18 +316,10 @@ section{
 
 <script>
 
-/* FADE — REPLAY ON SCROLL */
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    const el=entry.target;
-
-    if(entry.isIntersecting){
-      el.classList.remove('show');
-      void el.offsetWidth;
-      el.classList.add('show');
-    }else{
-      el.classList.remove('show');
-    }
+/* FADE */
+const observer=new IntersectionObserver(e=>{
+  e.forEach(i=>{
+    if(i.isIntersecting) i.target.classList.add('show');
   });
 },{threshold:0.4});
 
