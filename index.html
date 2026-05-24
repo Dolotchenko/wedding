@@ -393,11 +393,11 @@
 
   <!-- MUSIC -->
 
-  <button class="music-btn" onclick="toggleMusic()">
+  <button class="music-btn" id="musicBtn">
     ♫ Музыка
   </button>
 
-  <audio id="music" loop>
+  <audio id="music" autoplay loop>
     <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8e1b1c6.mp3?filename=romantic-love-112199.mp3" type="audio/mpeg">
   </audio>
 
@@ -656,16 +656,33 @@
     // MUSIC
 
     const music = document.getElementById('music');
+    const musicBtn = document.getElementById('musicBtn');
 
-    function toggleMusic(){
+    // Автозапуск после первого клика
+
+    document.addEventListener('click', () => {
+
+      music.play().catch(() => {});
+
+    }, { once:true });
+
+    // Кнопка включения/выключения
+
+    musicBtn.addEventListener('click', () => {
 
       if(music.paused){
+
         music.play();
+        musicBtn.innerHTML = '♫ Музыка';
+
       } else {
+
         music.pause();
+        musicBtn.innerHTML = '♫ Пауза';
+
       }
 
-    }
+    });
 
   </script>
 
