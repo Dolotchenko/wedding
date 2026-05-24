@@ -14,8 +14,8 @@
   --bg:#f7f4f0;
   --text:#1f1f1f;
   --muted:#7a7a7a;
-  --gold:#b08a66;
   --line:#e7dfd7;
+  --gold:#b08a66;
 }
 
 *{
@@ -57,10 +57,7 @@ body{
   filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
 }
 
-.heart svg{
-  width:100%;
-  height:100%;
-}
+.heart svg{width:100%;height:100%;display:block;}
 
 @keyframes fall{
   0%{transform:translate(0,-10vh) rotate(0deg);opacity:0;}
@@ -111,59 +108,36 @@ h1{
 }
 
 /* INVITE */
-.invite-heading{
+.invite-title{
   text-align:center;
-  font-size:34px;
   font-family:'Cormorant Garamond',serif;
+  font-size:40px;
   font-weight:500;
-
-  opacity:0;
-  transform:translateY(20px);
-  animation:fadeUp 1.2s ease forwards;
-
-  margin-bottom:20px;
+  margin-bottom:18px;
 }
 
-.invite-heading::after{
-  content:"";
-  display:block;
-  width:120px;
-  height:2px;
-  margin:12px auto 0;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);
-}
-
-/* BOX */
-.invite-box{
-  max-width:800px;
+.invite-text-box{
+  max-width:820px;
   margin:0 auto;
-  padding:30px 35px;
+  padding:38px 42px;
+
   background:rgba(255,255,255,0.75);
-  backdrop-filter:blur(10px);
-  border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.06);
+  backdrop-filter:blur(12px);
+  border-radius:22px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.07);
+
+  text-align:center;
 
   opacity:0;
   transform:translateY(30px);
-  animation:fadeUp 1.5s ease 0.3s forwards;
+  transition:1.2s ease;
   position:relative;
 }
 
-/* 💛 ЗОЛОТИСТЫЙ ТЕКСТ + АНИМАЦИЯ */
-.invite-box p{
-  font-size:20px;
-  line-height:1.9;
-  text-align:center;
-
-  color:var(--gold);
-
-  animation:goldGlow 4s ease-in-out infinite;
-}
-
-.invite-box::before{
+.invite-text-box::before{
   content:"❦";
   position:absolute;
-  top:-14px;
+  top:-16px;
   left:50%;
   transform:translateX(-50%);
   font-size:22px;
@@ -172,22 +146,17 @@ h1{
   padding:0 10px;
 }
 
-/* glow animation */
-@keyframes goldGlow{
-  0%{
-    text-shadow:0 0 0 rgba(176,138,102,0);
-  }
-  50%{
-    text-shadow:0 0 10px rgba(176,138,102,0.35);
-  }
-  100%{
-    text-shadow:0 0 0 rgba(176,138,102,0);
-  }
+.invite-text-box p{
+  font-size:22px;   /* ⬅️ УВЕЛИЧЕНО */
+  line-height:2.05;
+  color:var(--gold);
+  animation:goldPulse 4s ease-in-out infinite;
 }
 
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(25px);}
-  to{opacity:1;transform:translateY(0);}
+@keyframes goldPulse{
+  0%{text-shadow:0 0 0 rgba(176,138,102,0);}
+  50%{text-shadow:0 0 12px rgba(176,138,102,0.35);}
+  100%{text-shadow:0 0 0 rgba(176,138,102,0);}
 }
 
 /* SECTIONS */
@@ -215,7 +184,6 @@ section{
   font-family:'Cormorant Garamond',serif;
   font-size:60px;
   margin-bottom:30px;
-  font-weight:500;
 }
 
 /* MUSIC */
@@ -255,21 +223,20 @@ section{
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-
   <div class="hero-content">
     <h1>Максим<br>& Екатерина</h1>
-    <div class="hero-date">17 июля 2026</div>
+    <div>17 июля 2026</div>
   </div>
 </section>
 
 <!-- INVITE -->
 <section class="fade">
 
-  <h2 class="invite-heading">
+  <h2 class="invite-title">
     Дорогие Андрей, Юлия и Александр
   </h2>
 
-  <div class="invite-box">
+  <div class="invite-text-box">
     <p>
       С большой радостью приглашаем вас разделить с нами один из самых счастливых дней нашей жизни —
       день рождения нашей семьи. Будем рады видеть вас рядом в этот особенный момент.
@@ -289,33 +256,17 @@ const observer=new IntersectionObserver(e=>{
 
 document.querySelectorAll('.fade').forEach(e=>observer.observe(e));
 
-/* MUSIC — старт по скроллу (один раз) */
+/* MUSIC ON SCROLL */
 const music=document.getElementById('music');
 let started=false;
 
 function startMusic(){
   if(started) return;
   started=true;
-
   music.play().catch(()=> started=false);
 }
 
 window.addEventListener('scroll',startMusic,{passive:true});
-window.addEventListener('wheel',startMusic,{passive:true});
-window.addEventListener('touchmove',startMusic,{passive:true});
-
-/* BUTTON */
-const btn=document.getElementById('musicBtn');
-
-btn.onclick=async()=>{
-  if(music.paused){
-    await music.play();
-    btn.textContent='❚❚';
-  }else{
-    music.pause();
-    btn.textContent='♫';
-  }
-};
 
 /* HEARTS */
 const overlay=document.getElementById('hearts-overlay');
