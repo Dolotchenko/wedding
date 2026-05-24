@@ -1,254 +1,492 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-<title>Максим & Екатерина — Wedding Day</title>
+  <title>Максим & Екатерина — Wedding Day</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<style>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
-:root{
-  --gold:#c9a46a;
-  --bg:#f7f4f0;
-}
+  <style>
 
-*{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --bg:#f7f4f0;
+      --text:#1f1f1f;
+      --muted:#7a7a7a;
+      --accent:#c3a58f;
+      --line:#e7dfd7;
+    }
 
-body{
-  background:var(--bg);
-  overflow-x:hidden;
-  font-family:'Montserrat',sans-serif;
-}
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      -webkit-tap-highlight-color:transparent;
+    }
 
-/* ===== CANVAS ===== */
-canvas{
-  position:fixed;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-}
+    body{
+      background:var(--bg);
+      color:var(--text);
+      font-family:'Montserrat', sans-serif;
+      overflow-x:hidden;
+    }
 
-/* ===== HERO ===== */
-.hero{
-  height:100svh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-}
+    section{
+      max-width:1100px;
+      margin:auto;
+      padding:110px 24px;
+      position:relative;
+      z-index:2;
+    }
 
-/* PARALLAX BACKGROUND */
-.hero-bg{
-  position:absolute;
-  inset:-20%;
-  background:
-    radial-gradient(circle at center, rgba(0,0,0,.2), rgba(0,0,0,.7)),
-    url('./photo.jpg');
-  background-size:cover;
-  background-position:center;
-  transform:scale(1.1);
-  filter:contrast(1.05) saturate(1.1);
-}
+    /* ===== GOLD PARTICLES LAYER ===== */
+    #particles{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      opacity:.55;
+    }
 
-/* VIGNETTE */
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle, transparent 40%, rgba(0,0,0,.55));
-  z-index:1;
-}
+    /* HERO */
+    .hero{
+      min-height:100svh;
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      overflow:hidden;
+    }
 
-/* TEXT */
-.hero-content{
-  position:relative;
-  z-index:2;
-  color:white;
-}
+    .hero-bg{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)),
+        url('./photo.jpg');
+      background-size:cover;
+      background-position:center;
+      transform:scale(1.05);
+      animation:zoom 18s ease-in-out infinite alternate;
+      z-index:1;
+    }
 
-.subtitle{
-  letter-spacing:6px;
-  text-transform:uppercase;
-  opacity:0;
-  animation:fadeUp 1.2s ease forwards;
-}
+    /* cinematic vignette */
+    .hero-bg::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at center,
+        rgba(0,0,0,0.2),
+        rgba(0,0,0,0.6)
+      );
+    }
 
-h1{
-  font-family:'Great Vibes',cursive;
-  font-size:140px;
-  opacity:0;
-  animation:fadeUp 1.4s ease forwards .3s;
-  text-shadow:0 20px 60px rgba(0,0,0,.5);
-}
+    @keyframes zoom{
+      from{transform:scale(1.05);}
+      to{transform:scale(1.12);}
+    }
 
-.hero-date{
-  opacity:0;
-  animation:fadeUp 1.4s ease forwards .6s;
-}
+    .hero-content{
+      position:relative;
+      z-index:2;
+      color:white;
+      animation:heroIn 1.6s ease both;
+    }
 
-/* CINEMATIC ANIMATION */
-@keyframes fadeUp{
-  from{
-    opacity:0;
-    transform:translateY(40px);
-    filter:blur(10px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-    filter:blur(0);
-  }
-}
+    @keyframes heroIn{
+      from{
+        opacity:0;
+        transform:translateY(25px);
+        filter:blur(10px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+        filter:blur(0);
+      }
+    }
 
-/* ===== GOLD PARTICLES ===== */
-.gold-dot{
-  position:absolute;
-  width:3px;
-  height:3px;
-  background:var(--gold);
-  border-radius:50%;
-  opacity:.6;
-  box-shadow:0 0 10px var(--gold);
-}
+    .subtitle{
+      letter-spacing:6px;
+      text-transform:uppercase;
+      font-size:12px;
+      margin-bottom:22px;
+      opacity:.9;
+    }
 
-/* ===== MUSIC ===== */
-.music-btn{
-  position:fixed;
-  top:20px;
-  right:20px;
-  width:54px;
-  height:54px;
-  border-radius:50%;
-  border:none;
-  background:rgba(255,255,255,.15);
-  color:white;
-  backdrop-filter:blur(10px);
-  z-index:999;
-}
+    h1{
+      font-family:'Great Vibes', cursive;
+      font-size:150px;
+      font-weight:400;
+      line-height:.9;
+      text-shadow:0 10px 30px rgba(0,0,0,.25);
+    }
 
-/* ===== SECTION ===== */
-section{
-  max-width:1100px;
-  margin:auto;
-  padding:100px 20px;
-  position:relative;
-  z-index:2;
-}
+    .hero-date{
+      margin-top:30px;
+      font-size:24px;
+      letter-spacing:2px;
+    }
 
-.title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:64px;
-  text-align:center;
-}
+    .hero-line{
+      width:1px;
+      height:90px;
+      background:rgba(255,255,255,.5);
+      margin:40px auto 0;
+    }
 
-/* FADE */
-.fade{
-  opacity:0;
-  transform:translateY(40px);
-  transition:1.2s ease;
-}
-.fade.show{
-  opacity:1;
-  transform:translateY(0);
-}
+    /* MUSIC */
+    .music-btn{
+      position:fixed;
+      top:18px;
+      right:18px;
+      z-index:999;
+      width:54px;
+      height:54px;
+      border:none;
+      border-radius:50%;
+      background:rgba(255,255,255,.18);
+      backdrop-filter:blur(14px);
+      color:white;
+      font-size:18px;
+      cursor:pointer;
+      box-shadow:0 10px 30px rgba(0,0,0,.15);
+    }
 
-</style>
+    /* TITLES */
+    .section-title{
+      text-align:center;
+      font-family:'Cormorant Garamond', serif;
+      font-size:68px;
+      margin-bottom:24px;
+      font-weight:500;
+    }
+
+    .section-text{
+      max-width:700px;
+      margin:auto;
+      text-align:center;
+      color:var(--muted);
+      line-height:1.9;
+      font-size:18px;
+    }
+
+    /* INVITE */
+    .invite-text{
+      font-size:20px;
+      line-height:2;
+      color:var(--muted);
+      max-width:700px;
+      margin:20px auto 0;
+      position:relative;
+      padding:0 10px;
+
+      animation:invite 1.3s ease both;
+    }
+
+    .invite-text::before,
+    .invite-text::after{
+      content:"";
+      display:block;
+      width:70px;
+      height:1px;
+      margin:18px auto;
+      background:linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+
+    @keyframes invite{
+      from{
+        opacity:0;
+        transform:translateY(20px);
+        filter:blur(8px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+        filter:blur(0);
+      }
+    }
+
+    /* CARDS */
+    .cards{
+      margin-top:70px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:24px;
+    }
+
+    .card{
+      background:rgba(255,255,255,.7);
+      backdrop-filter:blur(12px);
+      border-radius:30px;
+      padding:42px 34px;
+      transition:.45s ease;
+    }
+
+    .card:hover{
+      transform:translateY(-10px);
+      box-shadow:0 20px 40px rgba(0,0,0,.08);
+    }
+
+    .card h3{
+      font-family:'Cormorant Garamond', serif;
+      font-size:38px;
+      margin-bottom:14px;
+    }
+
+    .card p{
+      color:var(--muted);
+      line-height:1.8;
+    }
+
+    /* TIMELINE */
+    .timeline-item{
+      display:flex;
+      gap:30px;
+      padding:30px 0;
+      border-bottom:1px solid var(--line);
+    }
+
+    .time{
+      min-width:110px;
+      color:var(--accent);
+      font-size:13px;
+      letter-spacing:2px;
+    }
+
+    .event{
+      font-size:26px;
+      font-family:'Cormorant Garamond', serif;
+    }
+
+    /* COUNTDOWN */
+    .countdown{
+      display:flex;
+      justify-content:center;
+      gap:24px;
+      flex-wrap:wrap;
+      margin-top:60px;
+    }
+
+    .count-box{
+      width:140px;
+      height:140px;
+      border-radius:50%;
+      background:white;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      box-shadow:0 10px 30px rgba(0,0,0,.05);
+    }
+
+    .count-box span{
+      font-size:46px;
+      font-family:'Cormorant Garamond', serif;
+    }
+
+    .count-box small{
+      color:var(--muted);
+    }
+
+    /* FADE */
+    .fade{
+      opacity:0;
+      transform:translateY(45px);
+      transition:1.2s ease;
+    }
+
+    .fade.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    /* MOBILE */
+    @media(max-width:900px){
+      h1{font-size:88px;}
+      .section-title{font-size:48px;}
+      .hero-date{font-size:18px;}
+      .timeline-item{flex-direction:column;}
+      .count-box{width:110px;height:110px;}
+      .count-box span{font-size:36px;}
+    }
+
+  </style>
 </head>
 
 <body>
 
-<canvas id="gold"></canvas>
+<canvas id="particles"></canvas>
 
 <button class="music-btn" id="musicBtn">♫</button>
 
 <audio id="music" loop>
-  <source src="./music/wedding.mp3">
+  <source src="./music/wedding.mp3" type="audio/mpeg">
 </audio>
 
-<div class="hero">
-
-  <div class="hero-bg" id="bg"></div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
 
   <div class="hero-content">
     <div class="subtitle">wedding day</div>
     <h1>Максим<br>& Екатерина</h1>
     <div class="hero-date">17 июля 2026</div>
+    <div class="hero-line"></div>
+  </div>
+</section>
+
+<!-- INVITE -->
+<section class="fade">
+  <h2 class="section-title">Мы приглашаем вас</h2>
+
+  <p class="invite-text">
+    С огромной радостью приглашаем вас разделить с нами один из самых счастливых дней нашей жизни.
+  </p>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Дата</h3>
+      <p>17 июля 2026</p>
+    </div>
+
+    <div class="card">
+      <h3>ЗАГС</h3>
+      <p>Советский ЗАГС, Уфа</p>
+    </div>
+
+    <div class="card">
+      <h3>Ресторан</h3>
+      <p>«На Высоте»</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section class="fade">
+  <h2 class="section-title">Программа дня</h2>
+
+  <div class="timeline-item">
+    <div class="time">14:00</div>
+    <div class="event">Церемония</div>
   </div>
 
-</div>
-
-<section class="fade">
-  <div class="title">Мы приглашаем вас</div>
+  <div class="timeline-item">
+    <div class="time">17:00</div>
+    <div class="event">Банкет</div>
+  </div>
 </section>
 
+<!-- COUNTDOWN -->
 <section class="fade">
-  <div class="title">До свадьбы</div>
+  <h2 class="section-title">До свадьбы</h2>
+
+  <div class="countdown">
+    <div class="count-box"><span id="days">0</span><small>дней</small></div>
+    <div class="count-box"><span id="hours">0</span><small>часов</small></div>
+    <div class="count-box"><span id="minutes">0</span><small>минут</small></div>
+  </div>
 </section>
+
+<!-- RSVP -->
+<section class="fade">
+  <h2 class="section-title">RSVP</h2>
+
+  <form>
+    <input type="text" placeholder="Ваше имя">
+    <input type="email" placeholder="Email">
+    <textarea rows="4" placeholder="Сообщение"></textarea>
+    <button class="submit">Подтвердить</button>
+  </form>
+</section>
+
+<footer>
+  Максим & Екатерина — 2026
+</footer>
 
 <script>
 
-/* ===== FADE ===== */
-const io=new IntersectionObserver(e=>{
-  e.forEach(x=>x.isIntersecting&&x.target.classList.add("show"));
-},{threshold:.2});
+/* FADE */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('show');
+  });
+},{threshold:0.2});
 
-document.querySelectorAll(".fade").forEach(e=>io.observe(e));
+document.querySelectorAll('.fade').forEach(el=>observer.observe(el));
 
-/* ===== MUSIC ===== */
-const music=document.getElementById("music");
-const btn=document.getElementById("musicBtn");
+/* COUNTDOWN */
+const weddingDate = new Date("July 17, 2026 14:00:00").getTime();
 
-document.addEventListener("click",()=>music.play().catch(()=>{}),{once:true});
+setInterval(()=>{
+  const now = new Date().getTime();
+  const d = weddingDate - now;
+
+  document.getElementById('days').innerText =
+    Math.floor(d/(1000*60*60*24));
+
+  document.getElementById('hours').innerText =
+    Math.floor((d%(1000*60*60*24))/(1000*60*60));
+
+  document.getElementById('minutes').innerText =
+    Math.floor((d%(1000*60*60))/(1000*60));
+},1000);
+
+/* MUSIC */
+const music = document.getElementById('music');
+const btn = document.getElementById('musicBtn');
+
+document.addEventListener('click',()=>music.play().catch(()=>{}),{once:true});
 
 btn.onclick=()=>{
-  if(music.paused){music.play();btn.innerHTML="♫";}
-  else{music.pause();btn.innerHTML="⏸";}
+  if(music.paused){
+    music.play();
+    btn.innerHTML='♫';
+  } else {
+    music.pause();
+    btn.innerHTML='⏸';
+  }
 };
 
-/* ===== PARALLAX ===== */
-window.addEventListener("scroll",()=>{
-  document.getElementById("bg").style.transform=
-    `translateY(${window.scrollY*0.3}px) scale(1.1)`;
-});
-
-/* ===== GOLD PARTICLES ===== */
-const c=document.getElementById("gold");
-const ctx=c.getContext("2d");
+/* GOLD PARTICLES */
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
 
 function resize(){
-  c.width=innerWidth;
-  c.height=innerHeight;
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
 }
 resize();
 window.addEventListener("resize",resize);
 
-const p=[];
-for(let i=0;i<80;i++){
-  p.push({
-    x:Math.random()*innerWidth,
-    y:Math.random()*innerHeight,
-    r:Math.random()*2,
-    d:(Math.random()*0.6)+0.2
-  });
-}
+const dots = Array.from({length:55},()=>({
+  x:Math.random()*innerWidth,
+  y:Math.random()*innerHeight,
+  r:Math.random()*1.6+0.4,
+  s:Math.random()*0.4+0.1
+}));
 
 function draw(){
-  ctx.clearRect(0,0,c.width,c.height);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
 
-  for(let i=0;i<p.length;i++){
-    let s=p[i];
+  for(const d of dots){
+    d.y -= d.s;
+    d.x += Math.sin(d.y*0.01)*0.2;
 
-    s.y-=s.d;
-    if(s.y<0)s.y=innerHeight;
+    if(d.y<0){
+      d.y=canvas.height;
+      d.x=Math.random()*canvas.width;
+    }
 
     ctx.beginPath();
-    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    ctx.fillStyle="rgba(201,164,106,0.7)";
+    ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
+    ctx.fillStyle="rgba(201,164,106,0.55)";
     ctx.shadowBlur=10;
     ctx.shadowColor="#c9a46a";
     ctx.fill();
@@ -256,6 +494,7 @@ function draw(){
 
   requestAnimationFrame(draw);
 }
+
 draw();
 
 </script>
