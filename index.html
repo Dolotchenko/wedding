@@ -30,7 +30,7 @@ body{
   color:var(--text);
 }
 
-/* PARTICLES BEHIND EVERYTHING */
+/* PARTICLES */
 #particles{
   position:fixed;
   inset:0;
@@ -57,16 +57,28 @@ body{
     url('./photo.jpg');
   background-size:cover;
   background-position:center;
+  animation:zoom 18s ease-in-out infinite alternate;
+}
+
+@keyframes zoom{
+  from{transform:scale(1.05);}
+  to{transform:scale(1.12);}
 }
 
 .hero-content{
   position:relative;
   z-index:2;
   color:#fff;
+  animation:fadeIn 1.5s ease both;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(25px);}
+  to{opacity:1;transform:translateY(0);}
 }
 
 h1{
-  font-family:'Great Vibes',cursive;
+  font-family:'Great+Vibes',cursive;
   font-size:120px;
   line-height:1;
 }
@@ -85,6 +97,18 @@ section{
   z-index:2;
 }
 
+/* FADE ANIMATION (ВОССТАНОВЛЕНО) */
+.fade{
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s ease;
+}
+
+.fade.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
 .section-title{
   text-align:center;
   font-family:'Cormorant Garamond',serif;
@@ -92,7 +116,6 @@ section{
   margin-bottom:20px;
 }
 
-/* INVITE TEXT (УЛУЧШЕН) */
 .invite-text{
   text-align:center;
   font-size:20px;
@@ -102,12 +125,7 @@ section{
   color:var(--muted);
 }
 
-.invite-text strong{
-  color:#000;
-  font-weight:500;
-}
-
-/* RSVP CARD (ИСПРАВЛЕНО) */
+/* RSVP */
 .rsvp-card{
   max-width:600px;
   margin:40px auto 0;
@@ -115,28 +133,18 @@ section{
   padding:30px;
   border-radius:20px;
   box-shadow:0 10px 30px rgba(0,0,0,.06);
-  position:relative;
-  z-index:3;
-}
-
-.rsvp-title{
-  text-align:center;
-  font-family:'Cormorant Garamond',serif;
-  font-size:34px;
-  margin-bottom:15px;
 }
 
 .rsvp-phone{
   text-align:center;
-  margin-bottom:25px;
+  margin-bottom:20px;
   font-size:16px;
-  color:#444;
 }
 
 .rsvp-phone a{
   color:#000;
-  text-decoration:none;
   font-weight:500;
+  text-decoration:none;
 }
 
 form{
@@ -149,34 +157,30 @@ input,textarea{
   padding:14px;
   border:1px solid var(--line);
   border-radius:10px;
-  font-family:inherit;
 }
 
 button{
   padding:14px;
   border:none;
-  border-radius:10px;
   background:#000;
   color:#fff;
+  border-radius:10px;
   cursor:pointer;
 }
 
-/* FADE */
-.fade{
-  opacity:0;
-  transform:translateY(40px);
-  transition:1s ease;
-}
-
-.fade.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* MOBILE */
-@media(max-width:900px){
-  h1{font-size:78px;}
-  .section-title{font-size:40px;}
+/* MUSIC BUTTON */
+.music-btn{
+  position:fixed;
+  top:18px;
+  right:18px;
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  border:none;
+  background:rgba(255,255,255,.2);
+  color:#fff;
+  backdrop-filter:blur(10px);
+  z-index:999;
 }
 
 </style>
@@ -185,6 +189,12 @@ button{
 <body>
 
 <canvas id="particles"></canvas>
+
+<button class="music-btn" id="musicBtn">♫</button>
+
+<audio id="music" loop>
+  <source src="./music/wedding.mp3">
+</audio>
 
 <!-- HERO -->
 <section class="hero">
@@ -201,8 +211,8 @@ button{
   <h2 class="section-title">Мы приглашаем вас</h2>
 
   <p class="invite-text">
-    С большой радостью приглашаем вас разделить с нами <strong>самый важный и счастливый день нашей жизни</strong> —
-    день, который станет началом нашей семьи.
+    С большой радостью приглашаем вас разделить с нами самый важный день нашей жизни —
+    день рождения нашей семьи.
   </p>
 </section>
 
@@ -213,15 +223,13 @@ button{
 
   <div class="rsvp-card">
 
-    <div class="rsvp-title">Подтвердите участие</div>
-
     <div class="rsvp-phone">
-      Связь с нами: <a href="tel:+79273379400">+7 (927) 337-94-00</a>
+      Связь: <a href="tel:+79273379400">+7 (927) 337-94-00</a>
     </div>
 
     <form>
-      <input type="text" placeholder="Ваше имя">
-      <input type="email" placeholder="Email">
+      <input placeholder="Ваше имя">
+      <input placeholder="Email">
       <textarea rows="4" placeholder="Сообщение"></textarea>
       <button type="button">Отправить</button>
     </form>
@@ -244,16 +252,34 @@ const observer=new IntersectionObserver(e=>{
 
 document.querySelectorAll('.fade').forEach(e=>observer.observe(e));
 
+/* MUSIC (ВОССТАНОВЛЕНО) */
+const music=document.getElementById('music');
+const btn=document.getElementById('musicBtn');
+
+document.addEventListener('click',()=>{
+  music.play().catch(()=>{});
+},{once:true});
+
+btn.onclick=()=>{
+  if(music.paused){
+    music.play();
+    btn.innerHTML='♫';
+  } else {
+    music.pause();
+    btn.innerHTML='⏸';
+  }
+};
+
 /* PARTICLES */
-const c=document.getElementById("particles");
-const ctx=c.getContext("2d");
+const c=document.getElementById('particles');
+const ctx=c.getContext('2d');
 
 function resize(){
   c.width=innerWidth;
   c.height=innerHeight;
 }
 resize();
-addEventListener("resize",resize);
+addEventListener('resize',resize);
 
 const dots=Array.from({length:50},()=>({
   x:Math.random()*innerWidth,
