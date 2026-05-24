@@ -62,7 +62,6 @@ body{
   display:block;
 }
 
-/* падение (замедлено ~10%) */
 @keyframes fall{
   0%{
     transform:translate(0,-10vh) rotate(0deg);
@@ -124,6 +123,66 @@ h1{
 .hero-date{
   margin-top:15px;
   font-size:20px;
+}
+
+/* INVITE HEADER */
+.invite-heading{
+  text-align:center;
+  font-size:34px;
+  font-family:'Cormorant Garamond',serif;
+  font-weight:500;
+  opacity:0;
+  transform:translateY(20px);
+  animation:fadeUp 1.2s ease forwards;
+  margin-bottom:20px;
+}
+
+.invite-heading::after{
+  content:"";
+  display:block;
+  width:120px;
+  height:2px;
+  margin:12px auto 0;
+  background:linear-gradient(90deg,transparent,#b08a66,transparent);
+}
+
+/* INVITE BOX */
+.invite-box{
+  max-width:800px;
+  margin:0 auto;
+  padding:30px 35px;
+  background:rgba(255,255,255,0.75);
+  backdrop-filter:blur(10px);
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.06);
+
+  opacity:0;
+  transform:translateY(30px);
+  animation:fadeUp 1.5s ease 0.3s forwards;
+}
+
+.invite-box p{
+  font-size:20px;
+  line-height:1.9;
+  color:#5f5f5f;
+  text-align:center;
+}
+
+.invite-box::before{
+  content:"❦";
+  position:absolute;
+  top:-14px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:22px;
+  color:#b08a66;
+  background:var(--bg);
+  padding:0 10px;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(25px);}
+  to{opacity:1;transform:translateY(0);}
 }
 
 /* SECTIONS */
@@ -235,7 +294,6 @@ section{
 <body>
 
 <canvas id="particles"></canvas>
-
 <div id="hearts-overlay"></div>
 
 <button class="music-btn" id="musicBtn">♫</button>
@@ -254,14 +312,23 @@ section{
   </div>
 </section>
 
+<!-- INVITE -->
 <section class="fade">
-  <h2 class="section-title">Дорогие Андрей, Юлия и Александр</h2>
-  <p class="invite-text">
-    С большой радостью приглашаем вас разделить с нами один из самых счастливых дней нашей жизни — день рождения нашей семьи.
-    Будем рады видеть вас рядом в этот особенный момент.
-  </p>
+
+  <h2 class="invite-heading">
+    Дорогие Андрей, Юлия и Александр
+  </h2>
+
+  <div class="invite-box">
+    <p>
+      С большой радостью приглашаем вас разделить с нами один из самых счастливых дней нашей жизни —
+      день рождения нашей семьи. Будем рады видеть вас рядом в этот особенный момент.
+    </p>
+  </div>
+
 </section>
 
+<!-- DETAILS -->
 <section class="fade">
   <h2 class="section-title">Детали дня</h2>
 
@@ -323,18 +390,6 @@ function tryPlay(){
 }
 
 window.addEventListener('scroll',tryPlay,{passive:true});
-window.addEventListener('wheel',tryPlay,{passive:true});
-window.addEventListener('touchmove',tryPlay,{passive:true});
-
-btn.onclick=async()=>{
-  if(music.paused){
-    await music.play();
-    btn.textContent='❚❚';
-  }else{
-    music.pause();
-    btn.textContent='♫';
-  }
-};
 
 /* PARTICLES */
 const c=document.getElementById('particles');
@@ -371,7 +426,7 @@ function draw(){
 }
 draw();
 
-/* HEARTS (FIXED + NO ACCUMULATION) */
+/* HEARTS */
 const overlay=document.getElementById('hearts-overlay');
 
 function createHeart(){
@@ -380,7 +435,7 @@ function createHeart(){
 
   const size=14+Math.random()*18;
   const left=Math.random()*100;
-  const duration=7+Math.random()*12; // ⬅️ +10% slower
+  const duration=7+Math.random()*12;
 
   const colors=['#ff8fb1','#ffb3c7','#ffd1dc','#ffc0cb'];
 
@@ -398,11 +453,9 @@ function createHeart(){
 
   overlay.appendChild(h);
 
-  /* ⬇️ УБИРАЕМ сердца по факту падения */
   setTimeout(()=>h.remove(),20000);
 }
 
-/* стабильный поток без накопления */
 setInterval(createHeart,350);
 
 </script>
