@@ -17,11 +17,7 @@
   --line:#e7dfd7;
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
   background:var(--bg);
@@ -30,7 +26,7 @@ body{
   color:var(--text);
 }
 
-/* PARTICLES (фон) */
+/* PARTICLES */
 #particles{
   position:fixed;
   inset:0;
@@ -51,16 +47,22 @@ body{
   position:absolute;
   width:24px;
   height:24px;
-  animation:fall linear infinite;
   opacity:0.85;
   filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+  will-change: transform;
+  animation: fall linear forwards;
 }
 
 @keyframes fall{
-  0%{transform:translate(0,-10vh) rotate(0deg);opacity:0;}
+  0%{
+    transform:translate(0,-10vh) rotate(0deg);
+    opacity:0;
+  }
   10%{opacity:1;}
-  50%{transform:translate(40px,50vh) rotate(180deg);}
-  100%{transform:translate(-30px,110vh) rotate(360deg);opacity:0;}
+  100%{
+    transform:translate(0,110vh) rotate(360deg);
+    opacity:0;
+  }
 }
 
 /* HERO */
@@ -104,10 +106,7 @@ h1{
   line-height:1;
 }
 
-.hero-date{
-  margin-top:15px;
-  font-size:20px;
-}
+.hero-date{margin-top:15px;font-size:20px;}
 
 section{
   max-width:1100px;
@@ -133,7 +132,6 @@ section{
   font-family:'Cormorant Garamond',serif;
   font-size:60px;
   margin-bottom:30px;
-  font-weight:500;
 }
 
 .invite-text{
@@ -145,62 +143,7 @@ section{
   color:var(--muted);
 }
 
-/* INFO */
-.info-block{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-  gap:25px;
-  margin-top:40px;
-}
-
-.info-card{
-  background:#fff;
-  padding:35px;
-  border-radius:25px;
-  box-shadow:0 12px 35px rgba(0,0,0,.06);
-  position:relative;
-}
-
-.info-card::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:4px;
-  background:linear-gradient(90deg,#b08a66,#e7dfd7);
-}
-
-.info-card h3{
-  font-family:'Cormorant Garamond',serif;
-  font-size:32px;
-  margin-bottom:15px;
-}
-
-.info-card p{
-  color:var(--muted);
-  line-height:1.8;
-}
-
-.timeline{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-
-.timeline-item{
-  display:flex;
-  gap:15px;
-  padding:12px 0;
-  border-bottom:1px solid var(--line);
-}
-
-.time{
-  min-width:80px;
-  color:#b08a66;
-  font-weight:500;
-}
-
+/* MUSIC */
 .music-btn{
   position:fixed;
   top:18px;
@@ -213,11 +156,6 @@ section{
   color:#fff;
   backdrop-filter:blur(10px);
   z-index:10000;
-}
-
-@media(max-width:900px){
-  h1{font-size:80px;}
-  .section-title{font-size:40px;}
 }
 
 </style>
@@ -234,7 +172,6 @@ section{
   <source src="./music/wedding.mp3">
 </audio>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
@@ -245,36 +182,7 @@ section{
 
 <section class="fade">
   <h2 class="section-title">Мы приглашаем вас</h2>
-  <p class="invite-text">
-    С большой радостью приглашаем вас разделить с нами самый важный день нашей жизни —
-    день рождения нашей семьи.
-  </p>
-</section>
-
-<section class="fade">
-  <h2 class="section-title">Детали дня</h2>
-
-  <div class="info-block">
-
-    <div class="info-card">
-      <h3>Место проведения</h3>
-      <p>
-        ЗАГС: Советский ЗАГС, г. Уфа<br>
-        Ресторан: «На Высоте»<br>
-        Начало банкета: 17:00
-      </p>
-    </div>
-
-    <div class="info-card">
-      <h3>Программа дня</h3>
-      <div class="timeline">
-        <div class="timeline-item"><div class="time">14:00</div><div>Церемония в ЗАГСе</div></div>
-        <div class="timeline-item"><div class="time">15:00</div><div>Фотосессия</div></div>
-        <div class="timeline-item"><div class="time">17:00</div><div>Банкет</div></div>
-      </div>
-    </div>
-
-  </div>
+  <p class="invite-text">С большой радостью приглашаем вас разделить с нами самый важный день.</p>
 </section>
 
 <script>
@@ -288,7 +196,7 @@ const observer=new IntersectionObserver(e=>{
 
 document.querySelectorAll('.fade').forEach(e=>observer.observe(e));
 
-/* ===== MUSIC FIX (STABLE AUTOPLAY UNLOCK) ===== */
+/* MUSIC FIX */
 const music=document.getElementById('music');
 const btn=document.getElementById('musicBtn');
 
@@ -300,14 +208,11 @@ function unlockAudio(){
 
   music.play().then(()=>{
     btn.textContent='❚❚';
-  }).catch(()=>{
-    unlocked=false;
-  });
+  }).catch(()=> unlocked=false);
 }
 
-['click','touchstart','scroll','keydown'].forEach(evt=>{
-  window.addEventListener(evt,unlockAudio,{once:true,passive:true});
-});
+['click','touchstart','scroll','keydown']
+.forEach(e=>window.addEventListener(e,unlockAudio,{once:true,passive:true}));
 
 btn.onclick=async()=>{
   if(music.paused){
@@ -327,6 +232,8 @@ function resize(){
   c.width=innerWidth;
   c.height=innerHeight;
 }
+resize();
+addEventListener('resize',resize);
 
 let dots=Array.from({length:50},()=>({
   x:Math.random()*innerWidth,
@@ -334,27 +241,21 @@ let dots=Array.from({length:50},()=>({
   r:Math.random()*1.5
 }));
 
-resize();
-addEventListener('resize',resize);
-
 function draw(){
   ctx.clearRect(0,0,c.width,c.height);
-
   dots.forEach(d=>{
     d.y-=0.25;
     if(d.y<0)d.y=c.height;
-
     ctx.beginPath();
     ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
     ctx.fillStyle="rgba(201,164,106,.5)";
     ctx.fill();
   });
-
   requestAnimationFrame(draw);
 }
 draw();
 
-/* HEARTS */
+/* HEARTS FIXED */
 const overlay=document.getElementById('hearts-overlay');
 
 function createHeart(){
@@ -366,17 +267,22 @@ function createHeart(){
   h.style.left=Math.random()*100+'vw';
   h.style.width=size+'px';
   h.style.height=size+'px';
-  h.style.animationDuration=(6+Math.random()*10)+'s';
-  h.style.animationDelay=Math.random()*5+'s';
+
+  const drift=(Math.random()*80-40)+'px';
+  h.style.setProperty('--drift',drift);
+
+  const duration=6000+Math.random()*6000;
+  h.style.animationDuration=duration+'ms';
 
   h.innerHTML=`
-  <svg viewBox="0 0 32 29" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 32 29">
     <path d="M23.6 0c-2.7 0-5.2 1.4-6.6 3.6C15.6 1.4 13.1 0 10.4 0 4.6 0 0 4.6 0 10.4c0 6.9 6.2 10.8 15.3 18.2.4.3.9.3 1.3 0C25.8 21.2 32 17.3 32 10.4 32 4.6 27.4 0 21.6 0h2z"
     fill="rgba(255,120,160,.85)"/>
   </svg>`;
 
   overlay.appendChild(h);
-  setTimeout(()=>h.remove(),15000);
+
+  setTimeout(()=>h.remove(),duration+200);
 }
 
 setInterval(createHeart,300);
