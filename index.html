@@ -18,11 +18,7 @@
       --line:#e7dfd7;
     }
 
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
+    *{margin:0;padding:0;box-sizing:border-box;}
 
     body{
       background:var(--bg);
@@ -31,13 +27,13 @@
       overflow-x:hidden;
     }
 
-    img{max-width:100%;display:block;}
-
     section{
       max-width:1100px;
       margin:auto;
       padding:110px 24px;
     }
+
+    img{max-width:100%;display:block;}
 
     /* HERO */
     .hero{
@@ -73,17 +69,12 @@
       color:white;
     }
 
-    .text-anim{
-      opacity:0;
-      transform:translateY(30px);
-      animation:textUp 1.2s ease forwards;
-    }
-
-    @keyframes textUp{
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
+    h1{
+      font-family:'Great Vibes', cursive;
+      font-size:130px;
+      font-weight:400;
+      line-height:.9;
+      text-shadow:0 10px 30px rgba(0,0,0,.3);
     }
 
     .subtitle{
@@ -94,61 +85,55 @@
       opacity:.9;
     }
 
-    h1{
-      font-family:'Great Vibes', cursive;
-      font-size:140px;
-      font-weight:400;
-      line-height:.9;
-      text-shadow:0 10px 30px rgba(0,0,0,.3);
-    }
-
     .hero-date{
-      margin-top:30px;
-      font-size:22px;
+      margin-top:25px;
+      font-size:20px;
       letter-spacing:2px;
     }
 
     .hero-line{
       width:1px;
-      height:90px;
+      height:80px;
       background:rgba(255,255,255,.5);
-      margin:40px auto 0;
+      margin:30px auto 0;
+    }
+
+    /* MUSIC BUTTON */
+    .music-btn{
+      position:fixed;
+      top:18px;
+      right:18px;
+      z-index:999;
+      width:54px;
+      height:54px;
+      border-radius:50%;
+      border:none;
+      background:rgba(255,255,255,.2);
+      backdrop-filter:blur(10px);
+      color:white;
+      font-size:18px;
+      cursor:pointer;
     }
 
     /* TITLES */
     .section-title{
       font-family:'Playfair Display', serif;
-      font-size:64px;
+      font-size:56px;
       text-align:center;
-      font-weight:500;
-      position:relative;
-      display:inline-block;
-      left:50%;
-      transform:translateX(-50%);
       margin-bottom:20px;
     }
 
-    .section-title::after{
-      content:"";
-      display:block;
-      width:60%;
-      height:2px;
-      background:linear-gradient(90deg,transparent,#c3a58f,transparent);
-      margin:12px auto 0;
-    }
-
     .section-text{
-      max-width:700px;
-      margin:auto;
       text-align:center;
       color:var(--muted);
-      line-height:1.9;
-      font-size:18px;
+      max-width:700px;
+      margin:auto;
+      line-height:1.8;
     }
 
     /* CARDS */
     .cards{
-      margin-top:70px;
+      margin-top:60px;
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
       gap:24px;
@@ -157,42 +142,34 @@
     .card{
       background:rgba(255,255,255,.75);
       backdrop-filter:blur(12px);
-      border-radius:28px;
-      padding:40px;
+      border-radius:26px;
+      padding:36px;
       transition:.4s ease;
     }
 
-    .card:hover{
-      transform:translateY(-10px);
-    }
+    .card:hover{transform:translateY(-8px);}
 
     .card h3{
       font-family:'Playfair Display', serif;
-      font-size:34px;
-      margin-bottom:12px;
+      font-size:32px;
+      margin-bottom:10px;
     }
 
-    .card p{
-      color:var(--muted);
-      line-height:1.7;
-    }
+    .card p{color:var(--muted);line-height:1.7;}
 
     /* TIMELINE */
     .timeline-item{
       display:flex;
       gap:30px;
-      padding:25px 0;
+      padding:20px 0;
       border-bottom:1px solid var(--line);
     }
 
-    .time{
-      min-width:100px;
-      color:var(--accent);
-    }
+    .time{color:var(--accent);min-width:90px;}
 
     .event{
       font-family:'Playfair Display', serif;
-      font-size:24px;
+      font-size:22px;
     }
 
     /* COUNTDOWN */
@@ -205,24 +182,49 @@
     }
 
     .count-box{
-      width:130px;
-      height:130px;
+      width:120px;
+      height:120px;
       border-radius:50%;
       background:white;
       display:flex;
       flex-direction:column;
-      justify-content:center;
       align-items:center;
+      justify-content:center;
       box-shadow:0 10px 30px rgba(0,0,0,.08);
     }
 
     .count-box span{
-      font-size:40px;
+      font-size:38px;
       font-family:'Playfair Display', serif;
     }
 
-    .count-box small{
-      color:var(--muted);
+    .count-box small{color:var(--muted);}
+
+    /* RSVP */
+    form{
+      max-width:600px;
+      margin:auto;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    input, textarea{
+      border:none;
+      border-bottom:1px solid var(--line);
+      padding:14px;
+      font-family:'Inter';
+      outline:none;
+      background:transparent;
+    }
+
+    button.submit{
+      background:var(--text);
+      color:white;
+      padding:16px;
+      border:none;
+      border-radius:14px;
+      cursor:pointer;
     }
 
     /* FADE */
@@ -238,62 +240,59 @@
     }
 
     @media(max-width:768px){
-      h1{font-size:80px;}
-      .section-title{font-size:42px;}
+      h1{font-size:72px;}
+      .section-title{font-size:40px;}
     }
   </style>
 </head>
 
 <body>
 
-<section class="hero">
+<!-- MUSIC -->
+<button class="music-btn" id="musicBtn">♫</button>
 
+<audio id="music" loop>
+  <source src="./music/wedding.mp3" type="audio/mpeg">
+</audio>
+
+<!-- HERO -->
+<section class="hero">
   <div class="hero-bg"></div>
 
   <div class="hero-content">
-
-    <div class="subtitle text-anim">wedding day</div>
-
-    <h1 class="text-anim">
-      Максим<br>& Екатерина
-    </h1>
-
-    <div class="hero-date text-anim">
-      17 июля 2026
-    </div>
-
+    <div class="subtitle">wedding day</div>
+    <h1>Максим<br>& Екатерина</h1>
+    <div class="hero-date">17 июля 2026</div>
     <div class="hero-line"></div>
-
   </div>
-
 </section>
 
+<!-- INVITE -->
 <section class="fade">
   <h2 class="section-title">Мы приглашаем вас</h2>
-  <p class="section-text">
-    С огромной радостью приглашаем вас разделить с нами один из самых счастливых дней.
-  </p>
+  <p class="section-text">Разделите с нами этот важный день.</p>
 
   <div class="cards">
     <div class="card">
       <h3>Дата</h3>
-      <p>17 июля 2026<br>Пятница</p>
+      <p>17 июля 2026</p>
     </div>
 
     <div class="card">
       <h3>ЗАГС</h3>
-      <p>Советский ЗАГС<br>Уфа</p>
+      <p>Советский ЗАГС, Уфа</p>
     </div>
 
     <div class="card">
       <h3>Ресторан</h3>
-      <p>«На Высоте»<br>17:00</p>
+      <p>«На Высоте»</p>
     </div>
   </div>
 </section>
 
+<!-- PROGRAM -->
 <section class="fade">
-  <h2 class="section-title">Программа дня</h2>
+  <h2 class="section-title">Программа</h2>
 
   <div class="timeline-item">
     <div class="time">14:00</div>
@@ -304,9 +303,9 @@
     <div class="time">17:00</div>
     <div class="event">Банкет</div>
   </div>
-
 </section>
 
+<!-- COUNTDOWN -->
 <section class="fade">
   <h2 class="section-title">До свадьбы</h2>
 
@@ -317,17 +316,29 @@
   </div>
 </section>
 
+<!-- RSVP -->
+<section class="fade">
+  <h2 class="section-title">RSVP</h2>
+
+  <form>
+    <input type="text" placeholder="Имя">
+    <input type="email" placeholder="Email">
+    <textarea rows="4" placeholder="Сообщение"></textarea>
+    <button class="submit">Отправить</button>
+  </form>
+</section>
+
 <script>
+  /* FADE */
   const observer = new IntersectionObserver(entries=>{
     entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.classList.add('show');
-      }
+      if(e.isIntersecting) e.target.classList.add('show');
     });
   },{threshold:0.2});
 
   document.querySelectorAll('.fade').forEach(el=>observer.observe(el));
 
+  /* COUNTDOWN */
   const weddingDate = new Date("July 17, 2026 14:00:00").getTime();
 
   setInterval(()=>{
@@ -338,6 +349,36 @@
     document.getElementById('hours').innerText = Math.floor((d%(1000*60*60*24))/(1000*60*60));
     document.getElementById('minutes').innerText = Math.floor((d%(1000*60*60))/(1000*60));
   },1000);
+
+  /* MUSIC */
+  const music = document.getElementById('music');
+  const btn = document.getElementById('musicBtn');
+
+  music.volume = 0.5;
+
+  function tryPlay(){
+    music.play().catch(()=>{
+      const enable = ()=>{
+        music.play();
+        document.removeEventListener('click',enable);
+        document.removeEventListener('touchstart',enable);
+      };
+      document.addEventListener('click',enable);
+      document.addEventListener('touchstart',enable);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', tryPlay);
+
+  btn.addEventListener('click',()=>{
+    if(music.paused){
+      music.play();
+      btn.innerHTML='♫';
+    }else{
+      music.pause();
+      btn.innerHTML='⏸';
+    }
+  });
 </script>
 
 </body>
