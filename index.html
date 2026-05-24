@@ -38,7 +38,7 @@ body{
   pointer-events:none;
 }
 
-/* ROMANTIC BACKGROUND */
+/* HEARTS BACKGROUND */
 .romance-bg{
   position:fixed;
   inset:0;
@@ -47,30 +47,50 @@ body{
   overflow:hidden;
 }
 
-.romance-bg span{
+.romance-bg .heart{
   position:absolute;
-  display:block;
+  width:18px;
+  height:18px;
+  transform:rotate(45deg);
+  opacity:0.7;
+  animation:fall linear infinite;
+}
+
+/* сердце форма */
+.romance-bg .heart::before,
+.romance-bg .heart::after{
+  content:"";
+  position:absolute;
   width:18px;
   height:18px;
   border-radius:50%;
-  filter:blur(1.5px);
-  opacity:0.7;
-  animation:floatBig linear infinite;
+  background:inherit;
 }
 
-@keyframes floatBig{
+.romance-bg .heart::before{
+  top:-9px;
+  left:0;
+}
+
+.romance-bg .heart::after{
+  left:-9px;
+  top:0;
+}
+
+/* падение + хаотичность */
+@keyframes fall{
   0%{
-    transform:translateY(110vh) scale(0.6) rotate(0deg);
+    transform:translate(0,-10vh) rotate(45deg);
     opacity:0;
   }
   10%{
     opacity:0.9;
   }
   50%{
-    transform:translateY(50vh) scale(1) rotate(180deg);
+    transform:translate(40px,50vh) rotate(90deg);
   }
   100%{
-    transform:translateY(-20vh) scale(1.3) rotate(360deg);
+    transform:translate(-30px,110vh) rotate(120deg);
     opacity:0;
   }
 }
@@ -158,7 +178,7 @@ section{
   color:var(--muted);
 }
 
-/* INFO BLOCK */
+/* INFO */
 .info-block{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
@@ -172,7 +192,6 @@ section{
   border-radius:25px;
   box-shadow:0 12px 35px rgba(0,0,0,.06);
   position:relative;
-  overflow:hidden;
 }
 
 .info-card::before{
@@ -258,7 +277,7 @@ button{
   cursor:pointer;
 }
 
-/* MUSIC BUTTON */
+/* MUSIC */
 .music-btn{
   position:fixed;
   top:18px;
@@ -440,40 +459,35 @@ function draw(){
 }
 draw();
 
-/* ROMANCE PARTICLES */
+/* HEARTS */
 const romance=document.querySelector('.romance-bg');
 
-function createRomance(){
-  const count=14;
+function createHearts(){
+  const count=18;
 
   for(let i=0;i<count;i++){
-    const s=document.createElement('span');
+    const h=document.createElement('div');
+    h.className='heart';
 
-    const size=12+Math.random()*24;
+    const size=10+Math.random()*18;
     const left=Math.random()*100;
-    const duration=14+Math.random()*20;
-    const delay=Math.random()*12;
+    const duration=8+Math.random()*12;
+    const delay=Math.random()*10;
 
-    const colors=[
-      'rgba(255,182,193,.8)',
-      'rgba(255,215,180,.7)',
-      'rgba(255,240,245,.8)'
-    ];
+    const colors=['#ff8fb1','#ffb3c7','#ffd1dc','#ffc0cb'];
 
-    s.style.width=size+'px';
-    s.style.height=size+'px';
-    s.style.left=left+'vw';
-    s.style.bottom='-10px';
-    s.style.position='absolute';
-    s.style.animationDuration=duration+'s';
-    s.style.animationDelay=delay+'s';
-    s.style.background=`radial-gradient(circle, ${colors[Math.floor(Math.random()*colors.length)]}, rgba(255,255,255,0))`;
+    h.style.width=size+'px';
+    h.style.height=size+'px';
+    h.style.left=left+'vw';
+    h.style.animationDuration=duration+'s';
+    h.style.animationDelay=delay+'s';
+    h.style.background=colors[Math.floor(Math.random()*colors.length)];
 
-    romance.appendChild(s);
+    romance.appendChild(h);
   }
 }
 
-createRomance();
+createHearts();
 
 </script>
 
