@@ -2,31 +2,42 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
   <title>Максим & Екатерина — Wedding Day</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
+
     :root{
       --bg:#f7f4f0;
       --text:#1f1f1f;
       --muted:#7a7a7a;
       --accent:#c3a58f;
       --line:#e7dfd7;
+      --white:#ffffff;
     }
 
     *{
       margin:0;
       padding:0;
       box-sizing:border-box;
+      -webkit-tap-highlight-color:transparent;
+    }
+
+    html{
+      scroll-behavior:smooth;
     }
 
     body{
       background:var(--bg);
       color:var(--text);
-      font-family:'Inter', sans-serif;
+      font-family:'Montserrat', sans-serif;
       overflow-x:hidden;
     }
 
@@ -36,31 +47,41 @@
       padding:110px 24px;
     }
 
+    img{
+      max-width:100%;
+      display:block;
+    }
+
     /* HERO */
     .hero{
       min-height:100svh;
       position:relative;
+      overflow:hidden;
+
       display:flex;
       align-items:center;
       justify-content:center;
+
       text-align:center;
-      overflow:hidden;
     }
 
     .hero-bg{
       position:absolute;
       inset:0;
+
       background:
         linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)),
         url('./photo.jpg');
+
       background-size:cover;
-      background-position:center 30%;
-      transform:scale(1.05);
-      animation:zoom 18s ease-in-out infinite alternate;
+      background-position:center;
+
+      transform:scale(1.04);
+      animation:heroZoom 18s ease-in-out infinite alternate;
     }
 
-    @keyframes zoom{
-      from{transform:scale(1.05);}
+    @keyframes heroZoom{
+      from{transform:scale(1.04);}
       to{transform:scale(1.12);}
     }
 
@@ -69,16 +90,19 @@
       z-index:2;
       color:white;
 
-      /* ✅ ВОТ ТУТ МЯГКО ОПУСКАЕМ ТЕКСТ БЕЗ ЛОМА ВЕРСТКИ */
+      /* ✅ ОПУСКАЕМ ТЕКСТ (без ломания flex) */
       padding-top:120px;
     }
 
-    h1{
-      font-family:'Great Vibes', cursive;
-      font-size:130px;
-      font-weight:400;
-      line-height:.9;
-      text-shadow:0 10px 30px rgba(0,0,0,.3);
+    @keyframes heroText{
+      from{
+        opacity:0;
+        transform:translateY(40px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
     }
 
     .subtitle{
@@ -89,17 +113,42 @@
       opacity:.9;
     }
 
+    h1{
+      font-family:'Great Vibes', cursive;
+      font-size:150px;
+      font-weight:400;
+      line-height:.9;
+      text-shadow:0 10px 30px rgba(0,0,0,.25);
+    }
+
     .hero-date{
-      margin-top:25px;
-      font-size:20px;
+      margin-top:30px;
+      font-size:24px;
       letter-spacing:2px;
     }
 
     .hero-line{
       width:1px;
-      height:80px;
+      height:90px;
       background:rgba(255,255,255,.5);
-      margin:30px auto 0;
+      margin:40px auto 0;
+    }
+
+    .scroll{
+      position:absolute;
+      bottom:35px;
+      left:50%;
+      transform:translateX(-50%);
+      color:white;
+      letter-spacing:3px;
+      font-size:12px;
+      animation:bounce 2s infinite;
+      z-index:10;
+    }
+
+    @keyframes bounce{
+      0%,100%{transform:translate(-50%,0);}
+      50%{transform:translate(-50%,10px);}
     }
 
     /* MUSIC */
@@ -110,115 +159,170 @@
       z-index:999;
       width:54px;
       height:54px;
-      border-radius:50%;
       border:none;
-      background:rgba(255,255,255,.2);
-      backdrop-filter:blur(10px);
+      border-radius:50%;
+      background:rgba(255,255,255,.18);
+      backdrop-filter:blur(14px);
       color:white;
       font-size:18px;
       cursor:pointer;
+      box-shadow:0 10px 30px rgba(0,0,0,.15);
     }
 
     /* TITLES */
     .section-title{
-      font-family:'Playfair Display', serif;
-      font-size:56px;
       text-align:center;
-      margin-bottom:20px;
+      font-family:'Cormorant Garamond', serif;
+      font-size:68px;
+      margin-bottom:24px;
+      font-weight:500;
     }
 
     .section-text{
-      text-align:center;
-      color:var(--muted);
       max-width:700px;
       margin:auto;
-      line-height:1.8;
+      text-align:center;
+      color:var(--muted);
+      line-height:1.9;
+      font-size:18px;
     }
 
     /* CARDS */
     .cards{
-      margin-top:60px;
+      margin-top:70px;
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
       gap:24px;
     }
 
     .card{
-      background:rgba(255,255,255,.75);
+      background:rgba(255,255,255,.7);
       backdrop-filter:blur(12px);
-      border-radius:26px;
-      padding:36px;
-      transition:.4s ease;
+      border:1px solid rgba(255,255,255,.5);
+      border-radius:30px;
+      padding:42px 34px;
+      transition:.45s ease;
     }
 
     .card:hover{
-      transform:translateY(-8px);
+      transform:translateY(-10px);
+      box-shadow:0 20px 40px rgba(0,0,0,.08);
     }
 
     .card h3{
-      font-family:'Playfair Display', serif;
-      font-size:32px;
-      margin-bottom:10px;
+      font-family:'Cormorant Garamond', serif;
+      font-size:38px;
+      margin-bottom:14px;
     }
 
     .card p{
       color:var(--muted);
-      line-height:1.7;
+      line-height:1.8;
     }
 
     /* TIMELINE */
     .timeline-item{
       display:flex;
       gap:30px;
-      padding:20px 0;
+      padding:30px 0;
       border-bottom:1px solid var(--line);
     }
 
     .time{
+      min-width:110px;
       color:var(--accent);
-      min-width:90px;
+      letter-spacing:2px;
+      font-size:13px;
     }
 
     .event{
-      font-family:'Playfair Display', serif;
-      font-size:22px;
+      font-size:26px;
+      font-family:'Cormorant Garamond', serif;
     }
 
     /* COUNTDOWN */
     .countdown{
       display:flex;
       justify-content:center;
-      gap:20px;
+      gap:24px;
       flex-wrap:wrap;
-      margin-top:50px;
+      margin-top:60px;
     }
 
     .count-box{
-      width:120px;
-      height:120px;
+      width:140px;
+      height:140px;
       border-radius:50%;
       background:white;
       display:flex;
       flex-direction:column;
-      align-items:center;
       justify-content:center;
-      box-shadow:0 10px 30px rgba(0,0,0,.08);
+      align-items:center;
+      box-shadow:0 10px 30px rgba(0,0,0,.05);
     }
 
     .count-box span{
-      font-size:38px;
-      font-family:'Playfair Display', serif;
+      font-size:46px;
+      font-family:'Cormorant Garamond', serif;
     }
 
     .count-box small{
       color:var(--muted);
+      margin-top:6px;
+    }
+
+    /* RSVP */
+    form{
+      max-width:620px;
+      margin:70px auto 0;
+      display:flex;
+      flex-direction:column;
+      gap:22px;
+    }
+
+    input,
+    textarea{
+      border:none;
+      border-bottom:1px solid var(--line);
+      background:transparent;
+      padding:18px 8px;
+      font-size:16px;
+      outline:none;
+      font-family:'Montserrat', sans-serif;
+    }
+
+    textarea{
+      resize:none;
+    }
+
+    button.submit{
+      border:none;
+      background:var(--text);
+      color:white;
+      padding:18px;
+      border-radius:18px;
+      margin-top:10px;
+      cursor:pointer;
+      transition:.3s ease;
+    }
+
+    button.submit:hover{
+      transform:translateY(-2px);
+      background:black;
+    }
+
+    footer{
+      text-align:center;
+      padding:60px 20px;
+      color:var(--muted);
+      font-size:14px;
     }
 
     /* FADE */
     .fade{
       opacity:0;
-      transform:translateY(40px);
-      transition:1s ease;
+      transform:translateY(50px);
+      transition:1.2s ease;
     }
 
     .fade.show{
@@ -227,23 +331,51 @@
     }
 
     /* MOBILE */
-    @media(max-width:768px){
+    @media(max-width:900px){
+
+      section{
+        padding:90px 20px;
+      }
+
       h1{
-        font-size:72px;
+        font-size:88px;
       }
 
       .hero-content{
-        padding-top:90px; /* ✅ ещё чуть ниже на мобилке */
+        padding-top:90px;
       }
 
-      .hero-bg{
-        background-position:center 25%;
+      .hero-date{
+        font-size:18px;
       }
 
       .section-title{
-        font-size:40px;
+        font-size:48px;
+      }
+
+      .section-text{
+        font-size:16px;
+      }
+
+      .timeline-item{
+        flex-direction:column;
+        gap:10px;
+      }
+
+      .event{
+        font-size:22px;
+      }
+
+      .count-box{
+        width:110px;
+        height:110px;
+      }
+
+      .count-box span{
+        font-size:36px;
       }
     }
+
   </style>
 </head>
 
@@ -256,25 +388,68 @@
 </audio>
 
 <section class="hero">
+
   <div class="hero-bg"></div>
 
   <div class="hero-content">
-    <div class="subtitle">wedding day</div>
 
-    <h1>Максим<br>& Екатерина</h1>
+    <div class="subtitle">
+      wedding day
+    </div>
 
-    <div class="hero-date">17 июля 2026</div>
+    <h1>
+      Максим<br>
+      & Екатерина
+    </h1>
+
+    <div class="hero-date">
+      17 июля 2026
+    </div>
 
     <div class="hero-line"></div>
+
   </div>
+
+  <div class="scroll">
+    SCROLL ↓
+  </div>
+
 </section>
 
 <section class="fade">
   <h2 class="section-title">Мы приглашаем вас</h2>
+  <p class="section-text">С огромной радостью приглашаем вас разделить с нами один из самых счастливых дней нашей жизни.</p>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Дата</h3>
+      <p>17 июля 2026</p>
+    </div>
+
+    <div class="card">
+      <h3>ЗАГС</h3>
+      <p>Советский ЗАГС, Уфа</p>
+    </div>
+
+    <div class="card">
+      <h3>Ресторан</h3>
+      <p>«На Высоте»</p>
+    </div>
+  </div>
 </section>
 
 <section class="fade">
   <h2 class="section-title">Программа дня</h2>
+
+  <div class="timeline-item">
+    <div class="time">14:00</div>
+    <div class="event">Церемония</div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="time">17:00</div>
+    <div class="event">Банкет</div>
+  </div>
 </section>
 
 <section class="fade">
@@ -291,64 +466,79 @@
   <h2 class="section-title">RSVP</h2>
 
   <form>
-    <input type="text" placeholder="Имя">
+    <input type="text" placeholder="Ваше имя">
     <input type="email" placeholder="Email">
     <textarea rows="4" placeholder="Сообщение"></textarea>
-    <button class="submit">Отправить</button>
+    <button class="submit">Подтвердить</button>
   </form>
 </section>
 
+<footer>
+  Максим & Екатерина — 2026
+</footer>
+
 <script>
-  // fade
-  const observer = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting) e.target.classList.add('show');
+
+  // FADE
+  const fades = document.querySelectorAll('.fade');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('show');
+      }
     });
-  },{threshold:0.2});
+  }, {threshold:0.2});
 
-  document.querySelectorAll('.fade').forEach(el=>observer.observe(el));
+  fades.forEach(el => observer.observe(el));
 
-  // countdown
+  // COUNTDOWN
   const weddingDate = new Date("July 17, 2026 14:00:00").getTime();
 
-  setInterval(()=>{
+  setInterval(() => {
+
     const now = new Date().getTime();
-    const d = weddingDate - now;
+    const distance = weddingDate - now;
 
-    document.getElementById('days').innerText = Math.floor(d/(1000*60*60*24));
-    document.getElementById('hours').innerText = Math.floor((d%(1000*60*60*24))/(1000*60*60));
-    document.getElementById('minutes').innerText = Math.floor((d%(1000*60*60))/(1000*60));
-  },1000);
+    document.getElementById('days').innerHTML =
+      Math.floor(distance / (1000 * 60 * 60 * 24));
 
-  // music
+    document.getElementById('hours').innerHTML =
+      Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+    document.getElementById('minutes').innerHTML =
+      Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+  }, 1000);
+
+  // MUSIC
   const music = document.getElementById('music');
-  const btn = document.getElementById('musicBtn');
+  const musicBtn = document.getElementById('musicBtn');
 
   music.volume = 0.5;
 
-  function tryPlay(){
-    music.play().catch(()=>{
-      const start=()=>{
-        music.play();
-        document.removeEventListener('click',start);
-        document.removeEventListener('touchstart',start);
-      };
-      document.addEventListener('click',start);
-      document.addEventListener('touchstart',start);
-    });
+  function startMusic(){
+    music.play().catch(() => {});
+
+    document.removeEventListener('touchstart', startMusic);
+    document.removeEventListener('click', startMusic);
   }
 
-  document.addEventListener('DOMContentLoaded', tryPlay);
+  document.addEventListener('touchstart', startMusic);
+  document.addEventListener('click', startMusic);
 
-  btn.addEventListener('click',()=>{
+  musicBtn.addEventListener('click', () => {
+
     if(music.paused){
       music.play();
-      btn.innerHTML='♫';
+      musicBtn.innerHTML = '♫';
     } else {
       music.pause();
-      btn.innerHTML='⏸';
+      musicBtn.innerHTML = '⏸';
     }
+
   });
+
 </script>
 
 </body>
