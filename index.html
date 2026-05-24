@@ -2,7 +2,8 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+
   <title>Максим & Екатерина — Wedding Day</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,18 +14,19 @@
   <style>
 
     :root{
-      --bg:#f7f4f0;
+      --bg:#f6f3ef;
       --text:#1f1f1f;
-      --muted:#777;
-      --line:#ddd6cf;
+      --muted:#7c7c7c;
       --accent:#b69b89;
-      --white:#fff;
+      --line:#e4ddd6;
+      --white:#ffffff;
     }
 
     *{
       margin:0;
       padding:0;
       box-sizing:border-box;
+      -webkit-tap-highlight-color:transparent;
     }
 
     html{
@@ -38,16 +40,21 @@
       overflow-x:hidden;
     }
 
+    img{
+      max-width:100%;
+      display:block;
+    }
+
     section{
+      padding:110px 22px;
       max-width:1100px;
       margin:auto;
-      padding:120px 24px;
     }
 
     /* HERO */
 
     .hero{
-      min-height:100vh;
+      min-height:100svh;
       position:relative;
       display:flex;
       align-items:center;
@@ -59,21 +66,24 @@
     .hero-bg{
       position:absolute;
       inset:0;
+
       background:
-        linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)),
-        url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1600&auto=format&fit=crop');
+        linear-gradient(rgba(0,0,0,.38), rgba(0,0,0,.38)),
+        url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1800&auto=format&fit=crop');
+
       background-size:cover;
       background-position:center;
-      animation:zoom 18s ease-in-out infinite alternate;
+
+      animation:heroZoom 18s ease-in-out infinite alternate;
       transform:scale(1.05);
     }
 
-    @keyframes zoom{
+    @keyframes heroZoom{
       from{
         transform:scale(1.05);
       }
       to{
-        transform:scale(1.15);
+        transform:scale(1.14);
       }
     }
 
@@ -82,39 +92,47 @@
       z-index:2;
       color:white;
       animation:fadeUp 1.5s ease;
+      padding:20px;
     }
 
     .subtitle{
-      text-transform:uppercase;
       letter-spacing:5px;
-      font-size:12px;
-      margin-bottom:20px;
+      text-transform:uppercase;
+      font-size:11px;
+      margin-bottom:18px;
       opacity:0.9;
     }
 
     h1{
       font-family:'Cormorant Garamond', serif;
-      font-size:110px;
-      line-height:0.95;
+      font-size:120px;
+      line-height:0.92;
       font-weight:300;
     }
 
     .hero-date{
-      margin-top:30px;
+      margin-top:28px;
       font-size:22px;
       letter-spacing:2px;
     }
 
+    .hero-line{
+      width:1px;
+      height:80px;
+      background:rgba(255,255,255,.5);
+      margin:35px auto 0;
+    }
+
     .scroll{
       position:absolute;
-      bottom:40px;
+      bottom:34px;
       left:50%;
       transform:translateX(-50%);
+      z-index:5;
       color:white;
-      letter-spacing:2px;
-      font-size:14px;
+      font-size:12px;
+      letter-spacing:3px;
       animation:bounce 2s infinite;
-      z-index:2;
     }
 
     @keyframes bounce{
@@ -126,18 +144,43 @@
       }
     }
 
-    /* SECTION */
+    /* MUSIC BUTTON */
+
+    .music-btn{
+      position:fixed;
+      top:18px;
+      right:18px;
+      z-index:1000;
+
+      border:none;
+      background:rgba(255,255,255,.16);
+      backdrop-filter:blur(14px);
+
+      color:white;
+
+      width:52px;
+      height:52px;
+
+      border-radius:50%;
+      cursor:pointer;
+
+      font-size:18px;
+
+      box-shadow:0 10px 30px rgba(0,0,0,.12);
+    }
+
+    /* TITLES */
 
     .section-title{
       text-align:center;
       font-family:'Cormorant Garamond', serif;
       font-size:64px;
       font-weight:400;
-      margin-bottom:25px;
+      margin-bottom:24px;
     }
 
     .section-text{
-      max-width:700px;
+      max-width:680px;
       margin:auto;
       text-align:center;
       color:var(--muted);
@@ -145,45 +188,38 @@
       font-size:18px;
     }
 
-    /* ANIMATION */
-
-    .fade{
-      opacity:0;
-      transform:translateY(40px);
-      transition:1s ease;
-    }
-
-    .fade.show{
-      opacity:1;
-      transform:translateY(0);
-    }
-
-    /* CARDS */
+    /* GLASS CARDS */
 
     .cards{
-      margin-top:70px;
+      margin-top:65px;
+
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
       gap:24px;
     }
 
     .card{
-      background:rgba(255,255,255,0.7);
-      border:1px solid rgba(255,255,255,0.5);
+      background:rgba(255,255,255,.7);
       backdrop-filter:blur(12px);
-      border-radius:24px;
-      padding:40px;
-      transition:0.4s ease;
+
+      border:1px solid rgba(255,255,255,.5);
+
+      border-radius:28px;
+
+      padding:42px 34px;
+
+      transition:.45s ease;
     }
 
     .card:hover{
       transform:translateY(-10px);
-      box-shadow:0 20px 40px rgba(0,0,0,0.08);
+      box-shadow:0 20px 40px rgba(0,0,0,.08);
     }
 
     .card h3{
       font-family:'Cormorant Garamond', serif;
-      font-size:36px;
+      font-size:38px;
       margin-bottom:14px;
       font-weight:500;
     }
@@ -198,20 +234,21 @@
     .photo-section{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:50px;
+      gap:55px;
       align-items:center;
     }
 
     .photo{
-      height:620px;
-      border-radius:30px;
+      border-radius:34px;
       overflow:hidden;
+      height:650px;
     }
 
     .photo img{
       width:100%;
       height:100%;
       object-fit:cover;
+
       transition:1.2s ease;
     }
 
@@ -221,14 +258,14 @@
 
     .photo-text h2{
       font-family:'Cormorant Garamond', serif;
-      font-size:60px;
-      margin-bottom:25px;
+      font-size:62px;
+      margin-bottom:26px;
       font-weight:400;
     }
 
     .photo-text p{
       color:var(--muted);
-      line-height:1.9;
+      line-height:1.95;
       font-size:18px;
     }
 
@@ -249,7 +286,7 @@
       min-width:110px;
       color:var(--accent);
       letter-spacing:2px;
-      font-size:14px;
+      font-size:13px;
     }
 
     .event{
@@ -262,25 +299,28 @@
     .countdown{
       display:flex;
       justify-content:center;
-      gap:30px;
-      margin-top:60px;
       flex-wrap:wrap;
+      gap:22px;
+      margin-top:60px;
     }
 
     .count-box{
-      width:150px;
-      height:150px;
-      background:white;
+      width:145px;
+      height:145px;
       border-radius:50%;
+
+      background:white;
+
       display:flex;
       flex-direction:column;
-      justify-content:center;
       align-items:center;
-      box-shadow:0 10px 30px rgba(0,0,0,0.05);
+      justify-content:center;
+
+      box-shadow:0 10px 30px rgba(0,0,0,.05);
     }
 
     .count-box span{
-      font-size:48px;
+      font-size:46px;
       font-family:'Cormorant Garamond', serif;
     }
 
@@ -292,36 +332,53 @@
     /* RSVP */
 
     form{
-      max-width:600px;
+      max-width:620px;
       margin:70px auto 0;
+
       display:flex;
       flex-direction:column;
-      gap:20px;
+      gap:22px;
     }
 
     input,
     textarea{
       border:none;
       border-bottom:1px solid var(--line);
+
       background:transparent;
+
       padding:18px 8px;
+
       font-size:16px;
+
       outline:none;
+
       font-family:'Inter', sans-serif;
     }
 
-    button{
-      border:none;
-      background:var(--text);
-      color:white;
-      padding:18px;
-      margin-top:20px;
-      cursor:pointer;
-      transition:0.3s ease;
-      letter-spacing:1px;
+    textarea{
+      resize:none;
     }
 
-    button:hover{
+    button.submit{
+      border:none;
+      background:var(--text);
+
+      color:white;
+
+      padding:18px;
+
+      margin-top:10px;
+
+      border-radius:18px;
+
+      cursor:pointer;
+
+      transition:.3s ease;
+    }
+
+    button.submit:hover{
+      transform:translateY(-2px);
       background:black;
     }
 
@@ -332,21 +389,17 @@
       font-size:14px;
     }
 
-    /* MUSIC BUTTON */
+    /* ANIMATIONS */
 
-    .music-btn{
-      position:fixed;
-      top:20px;
-      right:20px;
-      z-index:999;
-      border:none;
-      background:rgba(255,255,255,0.8);
-      backdrop-filter:blur(10px);
-      padding:14px 18px;
-      border-radius:50px;
-      cursor:pointer;
-      font-size:14px;
-      box-shadow:0 10px 20px rgba(0,0,0,0.08);
+    .fade{
+      opacity:0;
+      transform:translateY(45px);
+      transition:1s ease;
+    }
+
+    .fade.show{
+      opacity:1;
+      transform:translateY(0);
     }
 
     @keyframes fadeUp{
@@ -360,14 +413,28 @@
       }
     }
 
+    /* MOBILE */
+
     @media(max-width:900px){
 
+      section{
+        padding:90px 20px;
+      }
+
       h1{
-        font-size:72px;
+        font-size:68px;
+      }
+
+      .hero-date{
+        font-size:18px;
       }
 
       .section-title{
         font-size:46px;
+      }
+
+      .section-text{
+        font-size:16px;
       }
 
       .photo-section{
@@ -375,7 +442,7 @@
       }
 
       .photo{
-        height:420px;
+        height:430px;
       }
 
       .photo-text h2{
@@ -384,6 +451,25 @@
 
       .timeline-item{
         flex-direction:column;
+        gap:10px;
+      }
+
+      .event{
+        font-size:22px;
+      }
+
+      .count-box{
+        width:110px;
+        height:110px;
+      }
+
+      .count-box span{
+        font-size:36px;
+      }
+
+      .music-btn{
+        width:48px;
+        height:48px;
       }
     }
 
@@ -394,11 +480,11 @@
   <!-- MUSIC -->
 
   <button class="music-btn" id="musicBtn">
-    ♫ Музыка
+    ♫
   </button>
 
-  <audio id="music" autoplay loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8e1b1c6.mp3?filename=romantic-love-112199.mp3" type="audio/mpeg">
+  <audio id="music" loop>
+    <source src="./music/wedding.mp3" type="audio/mpeg">
   </audio>
 
   <!-- HERO -->
@@ -422,10 +508,12 @@
         17 июля 2026
       </div>
 
+      <div class="hero-line"></div>
+
     </div>
 
     <div class="scroll">
-      scroll ↓
+      SCROLL ↓
     </div>
 
   </section>
@@ -439,15 +527,16 @@
     </h2>
 
     <p class="section-text">
-      С огромной радостью приглашаем вас разделить
-      вместе с нами один из самых счастливых дней
-      нашей жизни.
+      С огромной радостью приглашаем вас
+      разделить вместе с нами один из самых
+      счастливых дней нашей жизни.
     </p>
 
     <div class="cards">
 
       <div class="card">
         <h3>Дата</h3>
+
         <p>
           17 июля 2026<br>
           Пятница
@@ -456,6 +545,7 @@
 
       <div class="card">
         <h3>ЗАГС</h3>
+
         <p>
           Советский ЗАГС<br>
           г. Уфа<br>
@@ -465,6 +555,7 @@
 
       <div class="card">
         <h3>Ресторан</h3>
+
         <p>
           «На Высоте»<br>
           Начало банкета — 17:00
@@ -480,7 +571,12 @@
   <section class="photo-section fade">
 
     <div class="photo">
-      <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1200&auto=format&fit=crop" alt="">
+
+      <img
+        src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1200&auto=format&fit=crop"
+        alt=""
+      >
+
     </div>
 
     <div class="photo-text">
@@ -493,7 +589,8 @@
         Любовь — это когда два сердца
         находят друг друга среди миллионов.
         Мы счастливы начать новую главу нашей жизни
-        и будем рады видеть вас рядом в этот день.
+        и будем рады видеть вас рядом
+        в этот особенный день.
       </p>
 
     </div>
@@ -511,31 +608,51 @@
     <div class="timeline">
 
       <div class="timeline-item">
-        <div class="time">14:00</div>
+
+        <div class="time">
+          14:00
+        </div>
+
         <div class="event">
           Церемония в Советском ЗАГСе
         </div>
+
       </div>
 
       <div class="timeline-item">
-        <div class="time">15:00</div>
+
+        <div class="time">
+          15:00
+        </div>
+
         <div class="event">
           Фотосессия и прогулка
         </div>
+
       </div>
 
       <div class="timeline-item">
-        <div class="time">17:00</div>
+
+        <div class="time">
+          17:00
+        </div>
+
         <div class="event">
           Начало банкета в ресторане «На Высоте»
         </div>
+
       </div>
 
       <div class="timeline-item">
-        <div class="time">21:00</div>
+
+        <div class="time">
+          21:00
+        </div>
+
         <div class="event">
           Торт и танцы
         </div>
+
       </div>
 
     </div>
@@ -591,7 +708,7 @@
 
       <textarea rows="4" placeholder="Сообщение"></textarea>
 
-      <button>
+      <button class="submit">
         Подтвердить
       </button>
 
@@ -605,7 +722,7 @@
 
   <script>
 
-    // FADE ANIMATION
+    // FADE EFFECT
 
     const fades = document.querySelectorAll('.fade');
 
@@ -614,7 +731,9 @@
       entries.forEach(entry => {
 
         if(entry.isIntersecting){
+
           entry.target.classList.add('show');
+
         }
 
       });
@@ -627,7 +746,8 @@
 
     // COUNTDOWN
 
-    const weddingDate = new Date("July 17, 2026 14:00:00").getTime();
+    const weddingDate =
+      new Date("July 17, 2026 14:00:00").getTime();
 
     setInterval(() => {
 
@@ -635,7 +755,9 @@
 
       const distance = weddingDate - now;
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const days = Math.floor(
+        distance / (1000 * 60 * 60 * 24)
+      );
 
       const hours = Math.floor(
         (distance % (1000 * 60 * 60 * 24)) /
@@ -658,27 +780,48 @@
     const music = document.getElementById('music');
     const musicBtn = document.getElementById('musicBtn');
 
-    // Автозапуск после первого клика
+    music.volume = 0.5;
 
-    document.addEventListener('click', () => {
+    // autoplay после первого касания
+
+    function startMusic(){
 
       music.play().catch(() => {});
 
-    }, { once:true });
+      document.removeEventListener(
+        'touchstart',
+        startMusic
+      );
 
-    // Кнопка включения/выключения
+      document.removeEventListener(
+        'click',
+        startMusic
+      );
+    }
+
+    document.addEventListener(
+      'touchstart',
+      startMusic
+    );
+
+    document.addEventListener(
+      'click',
+      startMusic
+    );
+
+    // кнопка
 
     musicBtn.addEventListener('click', () => {
 
       if(music.paused){
 
         music.play();
-        musicBtn.innerHTML = '♫ Музыка';
+        musicBtn.innerHTML = '♫';
 
       } else {
 
         music.pause();
-        musicBtn.innerHTML = '♫ Пауза';
+        musicBtn.innerHTML = '⏸';
 
       }
 
