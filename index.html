@@ -20,7 +20,6 @@
       --muted:#7a7a7a;
       --accent:#c3a58f;
       --line:#e7dfd7;
-      --white:#ffffff;
     }
 
     *{
@@ -28,10 +27,6 @@
       padding:0;
       box-sizing:border-box;
       -webkit-tap-highlight-color:transparent;
-    }
-
-    html{
-      scroll-behavior:smooth;
     }
 
     body{
@@ -47,40 +42,30 @@
       padding:110px 24px;
     }
 
-    img{
-      max-width:100%;
-      display:block;
-    }
-
     /* HERO */
     .hero{
       min-height:100svh;
       position:relative;
-      overflow:hidden;
-
       display:flex;
       align-items:center;
       justify-content:center;
-
       text-align:center;
+      overflow:hidden;
     }
 
     .hero-bg{
       position:absolute;
       inset:0;
-
       background:
         linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)),
         url('./photo.jpg');
-
       background-size:cover;
       background-position:center;
-
       transform:scale(1.04);
-      animation:heroZoom 18s ease-in-out infinite alternate;
+      animation:zoom 18s ease-in-out infinite alternate;
     }
 
-    @keyframes heroZoom{
+    @keyframes zoom{
       from{transform:scale(1.04);}
       to{transform:scale(1.12);}
     }
@@ -89,20 +74,6 @@
       position:relative;
       z-index:2;
       color:white;
-
-      /* ✅ ОПУСКАЕМ ТЕКСТ (без ломания flex) */
-      padding-top:120px;
-    }
-
-    @keyframes heroText{
-      from{
-        opacity:0;
-        transform:translateY(40px);
-      }
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
     }
 
     .subtitle{
@@ -132,23 +103,6 @@
       height:90px;
       background:rgba(255,255,255,.5);
       margin:40px auto 0;
-    }
-
-    .scroll{
-      position:absolute;
-      bottom:35px;
-      left:50%;
-      transform:translateX(-50%);
-      color:white;
-      letter-spacing:3px;
-      font-size:12px;
-      animation:bounce 2s infinite;
-      z-index:10;
-    }
-
-    @keyframes bounce{
-      0%,100%{transform:translate(-50%,0);}
-      50%{transform:translate(-50%,10px);}
     }
 
     /* MUSIC */
@@ -187,6 +141,40 @@
       font-size:18px;
     }
 
+    /* INVITE (КРАСИВЫЙ БЛОК) */
+    .invite-text{
+      font-size:20px;
+      line-height:2;
+      color:var(--muted);
+      max-width:700px;
+      margin:20px auto 0;
+      position:relative;
+      padding:0 10px;
+      animation:inviteFade 1.2s ease both;
+    }
+
+    .invite-text::before,
+    .invite-text::after{
+      content:"";
+      display:block;
+      width:70px;
+      height:1px;
+      margin:18px auto;
+      background:linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity:.8;
+    }
+
+    @keyframes inviteFade{
+      from{
+        opacity:0;
+        transform:translateY(18px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
     /* CARDS */
     .cards{
       margin-top:70px;
@@ -198,7 +186,6 @@
     .card{
       background:rgba(255,255,255,.7);
       backdrop-filter:blur(12px);
-      border:1px solid rgba(255,255,255,.5);
       border-radius:30px;
       padding:42px 34px;
       transition:.45s ease;
@@ -231,8 +218,8 @@
     .time{
       min-width:110px;
       color:var(--accent);
-      letter-spacing:2px;
       font-size:13px;
+      letter-spacing:2px;
     }
 
     .event{
@@ -268,10 +255,9 @@
 
     .count-box small{
       color:var(--muted);
-      margin-top:6px;
     }
 
-    /* RSVP */
+    /* FORM */
     form{
       max-width:620px;
       margin:70px auto 0;
@@ -291,17 +277,12 @@
       font-family:'Montserrat', sans-serif;
     }
 
-    textarea{
-      resize:none;
-    }
-
     button.submit{
       border:none;
       background:var(--text);
       color:white;
       padding:18px;
       border-radius:18px;
-      margin-top:10px;
       cursor:pointer;
       transition:.3s ease;
     }
@@ -333,37 +314,19 @@
     /* MOBILE */
     @media(max-width:900px){
 
-      section{
-        padding:90px 20px;
-      }
+      h1{font-size:88px;}
 
-      h1{
-        font-size:88px;
-      }
-
-      .hero-content{
-        padding-top:90px;
+      .section-title{
+        font-size:48px;
       }
 
       .hero-date{
         font-size:18px;
       }
 
-      .section-title{
-        font-size:48px;
-      }
-
-      .section-text{
-        font-size:16px;
-      }
-
       .timeline-item{
         flex-direction:column;
         gap:10px;
-      }
-
-      .event{
-        font-size:22px;
       }
 
       .count-box{
@@ -374,6 +337,7 @@
       .count-box span{
         font-size:36px;
       }
+
     }
 
   </style>
@@ -387,38 +351,28 @@
   <source src="./music/wedding.mp3" type="audio/mpeg">
 </audio>
 
+<!-- HERO -->
 <section class="hero">
-
   <div class="hero-bg"></div>
 
   <div class="hero-content">
+    <div class="subtitle">wedding day</div>
 
-    <div class="subtitle">
-      wedding day
-    </div>
+    <h1>Максим<br>& Екатерина</h1>
 
-    <h1>
-      Максим<br>
-      & Екатерина
-    </h1>
-
-    <div class="hero-date">
-      17 июля 2026
-    </div>
+    <div class="hero-date">17 июля 2026</div>
 
     <div class="hero-line"></div>
-
   </div>
-
-  <div class="scroll">
-    SCROLL ↓
-  </div>
-
 </section>
 
+<!-- INVITE -->
 <section class="fade">
   <h2 class="section-title">Мы приглашаем вас</h2>
-  <p class="section-text">С огромной радостью приглашаем вас разделить с нами один из самых счастливых дней нашей жизни.</p>
+
+  <p class="invite-text">
+    С огромной радостью приглашаем вас разделить с нами один из самых счастливых дней нашей жизни.
+  </p>
 
   <div class="cards">
     <div class="card">
@@ -438,6 +392,7 @@
   </div>
 </section>
 
+<!-- PROGRAM -->
 <section class="fade">
   <h2 class="section-title">Программа дня</h2>
 
@@ -452,6 +407,7 @@
   </div>
 </section>
 
+<!-- COUNTDOWN -->
 <section class="fade">
   <h2 class="section-title">До свадьбы</h2>
 
@@ -462,6 +418,7 @@
   </div>
 </section>
 
+<!-- RSVP -->
 <section class="fade">
   <h2 class="section-title">RSVP</h2>
 
@@ -513,30 +470,27 @@
 
   // MUSIC
   const music = document.getElementById('music');
-  const musicBtn = document.getElementById('musicBtn');
+  const btn = document.getElementById('musicBtn');
 
   music.volume = 0.5;
 
   function startMusic(){
-    music.play().catch(() => {});
-
-    document.removeEventListener('touchstart', startMusic);
+    music.play().catch(()=>{});
     document.removeEventListener('click', startMusic);
+    document.removeEventListener('touchstart', startMusic);
   }
 
-  document.addEventListener('touchstart', startMusic);
   document.addEventListener('click', startMusic);
+  document.addEventListener('touchstart', startMusic);
 
-  musicBtn.addEventListener('click', () => {
-
+  btn.addEventListener('click', () => {
     if(music.paused){
       music.play();
-      musicBtn.innerHTML = '♫';
+      btn.innerHTML = '♫';
     } else {
       music.pause();
-      musicBtn.innerHTML = '⏸';
+      btn.innerHTML = '⏸';
     }
-
   });
 
 </script>
