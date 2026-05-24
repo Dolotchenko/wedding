@@ -17,7 +17,11 @@
       --line:#e7dfd7;
     }
 
-    *{margin:0;padding:0;box-sizing:border-box;}
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
 
     body{
       background:var(--bg);
@@ -50,7 +54,7 @@
         linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)),
         url('./photo.jpg');
       background-size:cover;
-      background-position:center 35%; /* 👈 подняли фокус вверх */
+      background-position:center 30%;
       transform:scale(1.05);
       animation:zoom 18s ease-in-out infinite alternate;
     }
@@ -65,8 +69,8 @@
       z-index:2;
       color:white;
 
-      /* 👇 СДВИГ ТЕКСТА ВНИЗ */
-      transform: translateY(40px);
+      /* ✅ ВОТ ТУТ МЯГКО ОПУСКАЕМ ТЕКСТ БЕЗ ЛОМА ВЕРСТКИ */
+      padding-top:120px;
     }
 
     h1{
@@ -147,7 +151,9 @@
       transition:.4s ease;
     }
 
-    .card:hover{transform:translateY(-8px);}
+    .card:hover{
+      transform:translateY(-8px);
+    }
 
     .card h3{
       font-family:'Playfair Display', serif;
@@ -155,7 +161,10 @@
       margin-bottom:10px;
     }
 
-    .card p{color:var(--muted);line-height:1.7;}
+    .card p{
+      color:var(--muted);
+      line-height:1.7;
+    }
 
     /* TIMELINE */
     .timeline-item{
@@ -165,7 +174,10 @@
       border-bottom:1px solid var(--line);
     }
 
-    .time{color:var(--accent);min-width:90px;}
+    .time{
+      color:var(--accent);
+      min-width:90px;
+    }
 
     .event{
       font-family:'Playfair Display', serif;
@@ -198,7 +210,9 @@
       font-family:'Playfair Display', serif;
     }
 
-    .count-box small{color:var(--muted);}
+    .count-box small{
+      color:var(--muted);
+    }
 
     /* FADE */
     .fade{
@@ -212,19 +226,18 @@
       transform:translateY(0);
     }
 
-    /* MOBILE FIX (ВАЖНО) */
+    /* MOBILE */
     @media(max-width:768px){
-
       h1{
-        font-size:70px;
+        font-size:72px;
       }
 
       .hero-content{
-        transform: translateY(70px); /* 👈 ещё ниже на мобилке */
+        padding-top:90px; /* ✅ ещё чуть ниже на мобилке */
       }
 
       .hero-bg{
-        background-position:center 20%; /* 👈 лучше видно лица */
+        background-position:center 25%;
       }
 
       .section-title{
