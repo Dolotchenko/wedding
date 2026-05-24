@@ -2,23 +2,33 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 
-  <title>Максим & Екатерина — Wedding Day</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
+
+  <title>
+    Максим & Екатерина — Wedding Day
+  </title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
 
     :root{
-      --bg:#f6f3ef;
+      --bg:#f7f4f0;
       --text:#1f1f1f;
-      --muted:#7c7c7c;
-      --accent:#b69b89;
-      --line:#e4ddd6;
+      --muted:#7a7a7a;
+      --accent:#c3a58f;
+      --line:#e7dfd7;
       --white:#ffffff;
     }
 
@@ -36,7 +46,7 @@
     body{
       background:var(--bg);
       color:var(--text);
-      font-family:'Inter', sans-serif;
+      font-family:'Montserrat', sans-serif;
       overflow-x:hidden;
     }
 
@@ -46,9 +56,9 @@
     }
 
     section{
-      padding:110px 22px;
       max-width:1100px;
       margin:auto;
+      padding:110px 24px;
     }
 
     /* HERO */
@@ -56,156 +66,235 @@
     .hero{
       min-height:100svh;
       position:relative;
+      overflow:hidden;
+
       display:flex;
       align-items:center;
       justify-content:center;
+
       text-align:center;
-      overflow:hidden;
     }
 
     .hero-bg{
+
       position:absolute;
       inset:0;
 
       background:
-        linear-gradient(rgba(0,0,0,.38), rgba(0,0,0,.38)),
-        url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1800&auto=format&fit=crop');
+        linear-gradient(
+          rgba(0,0,0,.45),
+          rgba(0,0,0,.45)
+        ),
+        url('./photo.jpg');
 
       background-size:cover;
       background-position:center;
 
+      transform:scale(1.04);
+
       animation:heroZoom 18s ease-in-out infinite alternate;
-      transform:scale(1.05);
     }
 
     @keyframes heroZoom{
+
       from{
-        transform:scale(1.05);
+        transform:scale(1.04);
       }
+
       to{
-        transform:scale(1.14);
+        transform:scale(1.12);
       }
+
     }
 
     .hero-content{
       position:relative;
       z-index:2;
       color:white;
-      animation:fadeUp 1.5s ease;
+
       padding:20px;
+
+      animation:heroText 1.8s ease;
+    }
+
+    @keyframes heroText{
+
+      from{
+        opacity:0;
+        transform:translateY(40px);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+
     }
 
     .subtitle{
-      letter-spacing:5px;
+
+      letter-spacing:6px;
+
       text-transform:uppercase;
-      font-size:11px;
-      margin-bottom:18px;
-      opacity:0.9;
+
+      font-size:12px;
+
+      margin-bottom:22px;
+
+      opacity:.9;
     }
 
     h1{
-      font-family:'Cormorant Garamond', serif;
-      font-size:120px;
-      line-height:0.92;
-      font-weight:300;
+
+      font-family:'Great Vibes', cursive;
+
+      font-size:150px;
+
+      font-weight:400;
+
+      line-height:.9;
+
+      text-shadow:0 10px 30px rgba(0,0,0,.25);
     }
 
     .hero-date{
-      margin-top:28px;
-      font-size:22px;
+
+      margin-top:30px;
+
+      font-size:24px;
+
       letter-spacing:2px;
     }
 
     .hero-line{
+
       width:1px;
-      height:80px;
+
+      height:90px;
+
       background:rgba(255,255,255,.5);
-      margin:35px auto 0;
+
+      margin:40px auto 0;
     }
 
     .scroll{
+
       position:absolute;
-      bottom:34px;
+
+      bottom:35px;
+
       left:50%;
+
       transform:translateX(-50%);
-      z-index:5;
+
       color:white;
-      font-size:12px;
+
       letter-spacing:3px;
+
+      font-size:12px;
+
       animation:bounce 2s infinite;
+
+      z-index:10;
     }
 
     @keyframes bounce{
+
       0%,100%{
         transform:translate(-50%,0);
       }
+
       50%{
         transform:translate(-50%,10px);
       }
+
     }
 
-    /* MUSIC BUTTON */
+    /* MUSIC */
 
     .music-btn{
+
       position:fixed;
+
       top:18px;
+
       right:18px;
-      z-index:1000;
+
+      z-index:999;
+
+      width:54px;
+      height:54px;
 
       border:none;
-      background:rgba(255,255,255,.16);
+
+      border-radius:50%;
+
+      background:rgba(255,255,255,.18);
+
       backdrop-filter:blur(14px);
 
       color:white;
 
-      width:52px;
-      height:52px;
-
-      border-radius:50%;
-      cursor:pointer;
-
       font-size:18px;
 
-      box-shadow:0 10px 30px rgba(0,0,0,.12);
+      cursor:pointer;
+
+      box-shadow:0 10px 30px rgba(0,0,0,.15);
     }
 
     /* TITLES */
 
     .section-title{
+
       text-align:center;
+
       font-family:'Cormorant Garamond', serif;
-      font-size:64px;
-      font-weight:400;
+
+      font-size:68px;
+
       margin-bottom:24px;
+
+      font-weight:500;
     }
 
     .section-text{
-      max-width:680px;
+
+      max-width:700px;
+
       margin:auto;
+
       text-align:center;
+
       color:var(--muted);
+
       line-height:1.9;
+
       font-size:18px;
     }
 
     /* GLASS CARDS */
 
     .cards{
-      margin-top:65px;
+
+      margin-top:70px;
 
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+      grid-template-columns:
+      repeat(auto-fit,minmax(260px,1fr));
 
       gap:24px;
     }
 
     .card{
+
       background:rgba(255,255,255,.7);
+
       backdrop-filter:blur(12px);
 
       border:1px solid rgba(255,255,255,.5);
 
-      border-radius:28px;
+      border-radius:30px;
 
       padding:42px 34px;
 
@@ -213,136 +302,133 @@
     }
 
     .card:hover{
+
       transform:translateY(-10px);
+
       box-shadow:0 20px 40px rgba(0,0,0,.08);
     }
 
     .card h3{
+
       font-family:'Cormorant Garamond', serif;
+
       font-size:38px;
+
       margin-bottom:14px;
-      font-weight:500;
     }
 
     .card p{
+
       color:var(--muted);
+
       line-height:1.8;
-    }
-
-    /* PHOTO */
-
-    .photo-section{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:55px;
-      align-items:center;
-    }
-
-    .photo{
-      border-radius:34px;
-      overflow:hidden;
-      height:650px;
-    }
-
-    .photo img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-
-      transition:1.2s ease;
-    }
-
-    .photo:hover img{
-      transform:scale(1.08);
-    }
-
-    .photo-text h2{
-      font-family:'Cormorant Garamond', serif;
-      font-size:62px;
-      margin-bottom:26px;
-      font-weight:400;
-    }
-
-    .photo-text p{
-      color:var(--muted);
-      line-height:1.95;
-      font-size:18px;
     }
 
     /* TIMELINE */
 
     .timeline{
+
       margin-top:60px;
     }
 
     .timeline-item{
+
       display:flex;
+
       gap:30px;
+
       padding:30px 0;
+
       border-bottom:1px solid var(--line);
     }
 
     .time{
+
       min-width:110px;
+
       color:var(--accent);
+
       letter-spacing:2px;
+
       font-size:13px;
     }
 
     .event{
-      font-size:24px;
+
+      font-size:26px;
+
       font-family:'Cormorant Garamond', serif;
     }
 
     /* COUNTDOWN */
 
     .countdown{
+
       display:flex;
+
       justify-content:center;
+
+      gap:24px;
+
       flex-wrap:wrap;
-      gap:22px;
+
       margin-top:60px;
     }
 
     .count-box{
-      width:145px;
-      height:145px;
+
+      width:140px;
+      height:140px;
+
       border-radius:50%;
 
       background:white;
 
       display:flex;
+
       flex-direction:column;
-      align-items:center;
+
       justify-content:center;
+
+      align-items:center;
 
       box-shadow:0 10px 30px rgba(0,0,0,.05);
     }
 
     .count-box span{
+
       font-size:46px;
+
       font-family:'Cormorant Garamond', serif;
     }
 
     .count-box small{
+
       color:var(--muted);
+
       margin-top:6px;
     }
 
     /* RSVP */
 
     form{
+
       max-width:620px;
+
       margin:70px auto 0;
 
       display:flex;
+
       flex-direction:column;
+
       gap:22px;
     }
 
     input,
     textarea{
+
       border:none;
+
       border-bottom:1px solid var(--line);
 
       background:transparent;
@@ -353,7 +439,7 @@
 
       outline:none;
 
-      font-family:'Inter', sans-serif;
+      font-family:'Montserrat', sans-serif;
     }
 
     textarea{
@@ -361,16 +447,18 @@
     }
 
     button.submit{
+
       border:none;
+
       background:var(--text);
 
       color:white;
 
       padding:18px;
 
-      margin-top:10px;
-
       border-radius:18px;
+
+      margin-top:10px;
 
       cursor:pointer;
 
@@ -378,39 +466,39 @@
     }
 
     button.submit:hover{
+
       transform:translateY(-2px);
+
       background:black;
     }
 
     footer{
+
       text-align:center;
+
       padding:60px 20px;
+
       color:var(--muted);
+
       font-size:14px;
     }
 
-    /* ANIMATIONS */
+    /* SCROLL ANIMATION */
 
     .fade{
+
       opacity:0;
-      transform:translateY(45px);
-      transition:1s ease;
+
+      transform:translateY(50px);
+
+      transition:1.2s ease;
     }
 
     .fade.show{
-      opacity:1;
-      transform:translateY(0);
-    }
 
-    @keyframes fadeUp{
-      from{
-        opacity:0;
-        transform:translateY(40px);
-      }
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
+      opacity:1;
+
+      transform:translateY(0);
     }
 
     /* MOBILE */
@@ -422,7 +510,7 @@
       }
 
       h1{
-        font-size:68px;
+        font-size:88px;
       }
 
       .hero-date{
@@ -430,23 +518,11 @@
       }
 
       .section-title{
-        font-size:46px;
+        font-size:48px;
       }
 
       .section-text{
         font-size:16px;
-      }
-
-      .photo-section{
-        grid-template-columns:1fr;
-      }
-
-      .photo{
-        height:430px;
-      }
-
-      .photo-text h2{
-        font-size:46px;
       }
 
       .timeline-item{
@@ -467,10 +543,6 @@
         font-size:36px;
       }
 
-      .music-btn{
-        width:48px;
-        height:48px;
-      }
     }
 
   </style>
@@ -535,15 +607,18 @@
     <div class="cards">
 
       <div class="card">
+
         <h3>Дата</h3>
 
         <p>
           17 июля 2026<br>
           Пятница
         </p>
+
       </div>
 
       <div class="card">
+
         <h3>ЗАГС</h3>
 
         <p>
@@ -551,53 +626,25 @@
           г. Уфа<br>
           проспект Октября, 50
         </p>
+
       </div>
 
       <div class="card">
+
         <h3>Ресторан</h3>
 
         <p>
           «На Высоте»<br>
           Начало банкета — 17:00
         </p>
+
       </div>
 
     </div>
 
   </section>
 
-  <!-- PHOTO -->
-
-  <section class="photo-section fade">
-
-    <div class="photo">
-
-      <img
-        src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1200&auto=format&fit=crop"
-        alt=""
-      >
-
-    </div>
-
-    <div class="photo-text">
-
-      <h2>
-        Наша история
-      </h2>
-
-      <p>
-        Любовь — это когда два сердца
-        находят друг друга среди миллионов.
-        Мы счастливы начать новую главу нашей жизни
-        и будем рады видеть вас рядом
-        в этот особенный день.
-      </p>
-
-    </div>
-
-  </section>
-
-  <!-- TIMELINE -->
+  <!-- PROGRAM -->
 
   <section class="fade">
 
@@ -638,7 +685,7 @@
         </div>
 
         <div class="event">
-          Начало банкета в ресторане «На Высоте»
+          Банкет в ресторане «На Высоте»
         </div>
 
       </div>
@@ -722,11 +769,13 @@
 
   <script>
 
-    // FADE EFFECT
+    // FADE ON SCROLL
 
-    const fades = document.querySelectorAll('.fade');
+    const fades =
+      document.querySelectorAll('.fade');
 
-    const observer = new IntersectionObserver(entries => {
+    const observer =
+      new IntersectionObserver(entries => {
 
       entries.forEach(entry => {
 
@@ -777,12 +826,13 @@
 
     // MUSIC
 
-    const music = document.getElementById('music');
-    const musicBtn = document.getElementById('musicBtn');
+    const music =
+      document.getElementById('music');
+
+    const musicBtn =
+      document.getElementById('musicBtn');
 
     music.volume = 0.5;
-
-    // autoplay после первого касания
 
     function startMusic(){
 
@@ -809,18 +859,18 @@
       startMusic
     );
 
-    // кнопка
-
     musicBtn.addEventListener('click', () => {
 
       if(music.paused){
 
         music.play();
+
         musicBtn.innerHTML = '♫';
 
       } else {
 
         music.pause();
+
         musicBtn.innerHTML = '⏸';
 
       }
