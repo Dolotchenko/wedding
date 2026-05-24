@@ -14,6 +14,7 @@
   --bg:#f7f4f0;
   --text:#1f1f1f;
   --muted:#7a7a7a;
+  --gold:#b08a66;
   --line:#e7dfd7;
 }
 
@@ -38,7 +39,7 @@ body{
   pointer-events:none;
 }
 
-/* HEARTS OVERLAY */
+/* HEARTS */
 #hearts-overlay{
   position:fixed;
   inset:0;
@@ -59,24 +60,13 @@ body{
 .heart svg{
   width:100%;
   height:100%;
-  display:block;
 }
 
 @keyframes fall{
-  0%{
-    transform:translate(0,-10vh) rotate(0deg);
-    opacity:0;
-  }
-  10%{
-    opacity:1;
-  }
-  50%{
-    transform:translate(35px,55vh) rotate(180deg);
-  }
-  100%{
-    transform:translate(-25px,110vh) rotate(360deg);
-    opacity:0;
-  }
+  0%{transform:translate(0,-10vh) rotate(0deg);opacity:0;}
+  10%{opacity:1;}
+  50%{transform:translate(35px,55vh) rotate(180deg);}
+  100%{transform:translate(-25px,110vh) rotate(360deg);opacity:0;}
 }
 
 /* HERO */
@@ -120,20 +110,17 @@ h1{
   line-height:1;
 }
 
-.hero-date{
-  margin-top:15px;
-  font-size:20px;
-}
-
-/* INVITE HEADER */
+/* INVITE */
 .invite-heading{
   text-align:center;
   font-size:34px;
   font-family:'Cormorant Garamond',serif;
   font-weight:500;
+
   opacity:0;
   transform:translateY(20px);
   animation:fadeUp 1.2s ease forwards;
+
   margin-bottom:20px;
 }
 
@@ -143,10 +130,10 @@ h1{
   width:120px;
   height:2px;
   margin:12px auto 0;
-  background:linear-gradient(90deg,transparent,#b08a66,transparent);
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
 }
 
-/* INVITE BOX */
+/* BOX */
 .invite-box{
   max-width:800px;
   margin:0 auto;
@@ -159,13 +146,18 @@ h1{
   opacity:0;
   transform:translateY(30px);
   animation:fadeUp 1.5s ease 0.3s forwards;
+  position:relative;
 }
 
+/* 💛 ЗОЛОТИСТЫЙ ТЕКСТ + АНИМАЦИЯ */
 .invite-box p{
   font-size:20px;
   line-height:1.9;
-  color:#5f5f5f;
   text-align:center;
+
+  color:var(--gold);
+
+  animation:goldGlow 4s ease-in-out infinite;
 }
 
 .invite-box::before{
@@ -175,9 +167,22 @@ h1{
   left:50%;
   transform:translateX(-50%);
   font-size:22px;
-  color:#b08a66;
+  color:var(--gold);
   background:var(--bg);
   padding:0 10px;
+}
+
+/* glow animation */
+@keyframes goldGlow{
+  0%{
+    text-shadow:0 0 0 rgba(176,138,102,0);
+  }
+  50%{
+    text-shadow:0 0 10px rgba(176,138,102,0.35);
+  }
+  100%{
+    text-shadow:0 0 0 rgba(176,138,102,0);
+  }
 }
 
 @keyframes fadeUp{
@@ -210,61 +215,6 @@ section{
   font-family:'Cormorant Garamond',serif;
   font-size:60px;
   margin-bottom:30px;
-  font-weight:500;
-}
-
-.invite-text{
-  text-align:center;
-  font-size:20px;
-  line-height:2;
-  max-width:750px;
-  margin:0 auto;
-  color:var(--muted);
-}
-
-/* INFO */
-.info-block{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-  gap:25px;
-  margin-top:40px;
-}
-
-.info-card{
-  background:#fff;
-  padding:35px;
-  border-radius:25px;
-  box-shadow:0 12px 35px rgba(0,0,0,.06);
-}
-
-.info-card h3{
-  font-family:'Cormorant Garamond',serif;
-  font-size:32px;
-  margin-bottom:15px;
-}
-
-.info-card p{
-  color:var(--muted);
-  line-height:1.8;
-}
-
-/* TIMELINE */
-.timeline{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-
-.timeline-item{
-  display:flex;
-  gap:15px;
-  padding:12px 0;
-  border-bottom:1px solid var(--line);
-}
-
-.time{
-  min-width:80px;
-  color:#b08a66;
   font-weight:500;
 }
 
@@ -328,44 +278,6 @@ section{
 
 </section>
 
-<!-- DETAILS -->
-<section class="fade">
-  <h2 class="section-title">Детали дня</h2>
-
-  <div class="info-block">
-
-    <div class="info-card">
-      <h3>Место проведения</h3>
-      <p>
-        ЗАГС: Советский ЗАГС, г. Уфа<br>
-        Ресторан: «На Высоте»<br>
-        Начало банкета: 17:00
-      </p>
-    </div>
-
-    <div class="info-card">
-      <h3>Программа дня</h3>
-
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="time">14:00</div>
-          <div>Церемония в ЗАГСе</div>
-        </div>
-        <div class="timeline-item">
-          <div class="time">15:00</div>
-          <div>Фотосессия</div>
-        </div>
-        <div class="timeline-item">
-          <div class="time">17:00</div>
-          <div>Банкет</div>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
 <script>
 
 /* FADE */
@@ -377,54 +289,33 @@ const observer=new IntersectionObserver(e=>{
 
 document.querySelectorAll('.fade').forEach(e=>observer.observe(e));
 
-/* MUSIC */
+/* MUSIC — старт по скроллу (один раз) */
 const music=document.getElementById('music');
-const btn=document.getElementById('musicBtn');
-
 let started=false;
 
-function tryPlay(){
+function startMusic(){
   if(started) return;
   started=true;
+
   music.play().catch(()=> started=false);
 }
 
-window.addEventListener('scroll',tryPlay,{passive:true});
+window.addEventListener('scroll',startMusic,{passive:true});
+window.addEventListener('wheel',startMusic,{passive:true});
+window.addEventListener('touchmove',startMusic,{passive:true});
 
-/* PARTICLES */
-const c=document.getElementById('particles');
-const ctx=c.getContext('2d');
+/* BUTTON */
+const btn=document.getElementById('musicBtn');
 
-function resize(){
-  c.width=innerWidth;
-  c.height=innerHeight;
-}
-
-let dots=Array.from({length:50},()=>({
-  x:Math.random()*innerWidth,
-  y:Math.random()*innerHeight,
-  r:Math.random()*1.5
-}));
-
-resize();
-addEventListener('resize',resize);
-
-function draw(){
-  ctx.clearRect(0,0,c.width,c.height);
-
-  dots.forEach(d=>{
-    d.y-=0.25;
-    if(d.y<0)d.y=c.height;
-
-    ctx.beginPath();
-    ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
-    ctx.fillStyle="rgba(201,164,106,.5)";
-    ctx.fill();
-  });
-
-  requestAnimationFrame(draw);
-}
-draw();
+btn.onclick=async()=>{
+  if(music.paused){
+    await music.play();
+    btn.textContent='❚❚';
+  }else{
+    music.pause();
+    btn.textContent='♫';
+  }
+};
 
 /* HEARTS */
 const overlay=document.getElementById('hearts-overlay');
@@ -452,7 +343,6 @@ function createHeart(){
   `;
 
   overlay.appendChild(h);
-
   setTimeout(()=>h.remove(),20000);
 }
 
