@@ -169,24 +169,49 @@
             border: 1px solid #fff0e4;
         }
 
+        /* Увеличенный текст приглашения */
+        .guest-placeholder {
+            font-size: 1.4rem;
+            background: #fcf1e8;
+            display: inline-block;
+            padding: 6px 24px;
+            border-radius: 60px;
+            margin-bottom: 20px;
+            font-weight: 500;
+            color: #b8825a;
+            letter-spacing: 1px;
+        }
+
         .invitation-text {
-            font-size: 1.2rem;
-            line-height: 1.7;
-            margin: 28px 0;
+            font-size: 1.45rem;
+            line-height: 1.65;
+            margin: 30px 0;
             font-family: 'Cormorant Garamond', serif;
             font-weight: 500;
             color: #4a3a2a;
         }
-
-        .guest-placeholder {
-            font-size: 1rem;
-            background: #fcf1e8;
-            display: inline-block;
-            padding: 5px 20px;
-            border-radius: 60px;
-            margin-bottom: 15px;
-            font-weight: 400;
-            color: #b8825a;
+        
+        .invitation-text strong {
+            color: #b47c5a;
+            font-weight: 600;
+        }
+        
+        .wedding-signature {
+            font-size: 1.35rem;
+            margin-top: 15px;
+            font-style: italic;
+        }
+        
+        .banket-note {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            color: #b47c5a;
+        }
+        
+        .invitation-card .flower-divider {
+            font-size: 1.6rem;
+            margin: 15px 0;
+            color: #dbbc97;
         }
 
         .info-grid {
@@ -373,7 +398,10 @@
             .hero h1 { font-size: 2.6rem; }
             .hero .names { font-size: 2rem; }
             h2 { font-size: 1.9rem; }
-            .invitation-text { font-size: 1rem; }
+            .invitation-text { font-size: 1.2rem; }
+            .guest-placeholder { font-size: 1.2rem; }
+            .wedding-signature { font-size: 1.15rem; }
+            .banket-note { font-size: 1rem; }
             .timer-number { font-size: 1.8rem; }
             .timer-block { min-width: 70px; padding: 12px 12px; }
             .contact-item { padding: 6px 16px; font-size: 0.85rem; }
@@ -399,7 +427,6 @@
         .color-bg-2 {
             background-color: #fff7f0;
         }
-        /* Стили для музыкального плеера */
         .music-control {
             position: fixed;
             bottom: 20px;
@@ -426,7 +453,6 @@
         .music-control span {
             font-size: 1.2rem;
         }
-        /* Скрытый аудиоэлемент */
         audio {
             display: none;
         }
@@ -442,12 +468,10 @@
 </head>
 <body>
 
-<!-- Аудио плеер с музыкой из папки music/wedding.mp3 -->
 <audio id="weddingAudio" loop preload="auto" src="music/wedding.mp3">
     Ваш браузер не поддерживает аудио.
 </audio>
 
-<!-- Кнопка управления музыкой (видимая, чтобы пользователь мог включить/выключить) -->
 <div class="music-control" id="musicToggle">
     <span id="musicIcon">🎵</span>
     <span id="musicText">Музыка загружается...</span>
@@ -465,18 +489,19 @@
     </div>
 </section>
 
+<!-- Секция приглашения с увеличенным текстом -->
 <section id="details" class="color-bg-1">
     <div class="container">
         <div class="invitation-card">
-            <span class="guest-placeholder">🌟 Дорогие наши гости 🌟</span>
+            <div class="guest-placeholder">🌟 Дорогие наши гости 🌟</div>
             <div class="invitation-text">
                 «Любимые наши [Имена гостей]!<br>
                 В нашей жизни происходит прекрасное событие — мы создаем семью. Этот день станет началом нашей новой общей истории.<br>
                 Мы будем очень рады видеть вас на празднике нашей любви, который состоится <strong>17 июля 2026</strong> в <strong>12:40</strong> по адресу: <strong>ЗАГС Советского района, 50-летия Октября, 26, Уфа</strong>.<br>
-                С любовью, <strong>Максим и Екатерина</strong>»
+                <span class="wedding-signature">С любовью, <strong>Максим и Екатерина</strong></span>»
             </div>
             <div class="flower-divider">❁ ❁ ❁</div>
-            <p style="font-size: 0.95rem;">Торжество продолжится банкетом в 17:00 в комплексе отдыха "Лель"</p>
+            <div class="banket-note">Торжество продолжится банкетом в 17:00 в комплексе отдыха "Лель"</div>
         </div>
     </div>
 </section>
@@ -585,7 +610,6 @@
 </footer>
 
 <script>
-    // Таймер обратного отсчёта
     function updateTimer() {
         const weddingDate = new Date(2026, 6, 17, 0, 0, 0);
         const now = new Date();
@@ -613,22 +637,19 @@
     setInterval(updateTimer, 1000);
     updateTimer();
     
-    // Плавный скролл
     document.querySelector('a[href="#details"]')?.addEventListener('click', function(e) {
         e.preventDefault();
         document.querySelector('#details').scrollIntoView({ behavior: 'smooth' });
     });
     
-    // ========== АВТОМАТИЧЕСКОЕ ВОСПРОИЗВЕДЕНИЕ МУЗЫКИ ==========
+    // Музыка
     const audio = document.getElementById('weddingAudio');
     const toggleBtn = document.getElementById('musicToggle');
     const musicIcon = document.getElementById('musicIcon');
     const musicText = document.getElementById('musicText');
-    
     let isPlaying = false;
     let autoPlayAttempted = false;
     
-    // Функция запуска музыки
     function playMusic() {
         if (isPlaying) return Promise.resolve(true);
         return audio.play().then(() => {
@@ -644,14 +665,11 @@
         });
     }
     
-    // Пытаемся запустить музыку при первой возможности (после любого взаимодействия с пользователем)
     function enableAutoPlay() {
         if (autoPlayAttempted) return;
         autoPlayAttempted = true;
-        
         playMusic().then(success => {
             if (!success) {
-                // Если не удалось, ждём следующего клика
                 const handler = () => {
                     playMusic();
                     document.removeEventListener('click', handler);
@@ -663,26 +681,17 @@
         });
     }
     
-    // Пробуем запустить музыку сразу (для браузеров, которые разрешают автовоспроизведение тихих/фоновых звуков)
-    // Но современные браузеры (Chrome, Safari) блокируют, поэтому основной способ — через enableAutoPlay
     audio.load();
-    // Устанавливаем низкую громкость, чтобы не пугать пользователя, но потом можно будет сделать громче по желанию
     audio.volume = 0.6;
-    
-    // Запускаем попытку автовоспроизведения с небольшой задержкой
     setTimeout(() => {
         playMusic().catch(() => {
-            // Если не получилось, показываем сообщение и ждём клика
             musicIcon.textContent = '🔇';
             musicText.textContent = 'Нажмите, чтобы включить музыку';
             enableAutoPlay();
         });
     }, 500);
-    
-    // Также запускаем автовоспроизведение при первом касании/клике в любом месте (на случай блокировки)
     enableAutoPlay();
     
-    // Обработчик клика по кнопке (вручную)
     toggleBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         if (isPlaying) {
@@ -697,7 +706,6 @@
         }
     });
     
-    // Если музыка закончилась, перезапускаем (loop уже есть, но подстрахуем)
     audio.addEventListener('ended', () => {
         if (isPlaying) {
             audio.play().catch(e => console.log("Ошибка перезапуска:", e));
