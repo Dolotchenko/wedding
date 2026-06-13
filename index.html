@@ -82,7 +82,6 @@
             border-color: #fff0e0;
         }
 
-        /* Hero секция с фото на фоне */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -114,8 +113,8 @@
             border-radius: 0;
             box-shadow: none;
             margin: 20px;
-            /* Опускаем текст на 10px, чтобы он не перекрывал важные детали фото */
-            transform: translateY(10px);
+            /* Опускаем весь текст на 1 сантиметр (≈38px) */
+            transform: translateY(38px);
         }
 
         .hero h1 {
@@ -291,7 +290,6 @@
             background: #fef7ef;
         }
 
-        /* Фотогалерея */
         .photo-gallery {
             margin-top: 20px;
         }
@@ -328,7 +326,7 @@
             color: #b28a64;
             font-style: italic;
         }
-        /* Контакты без кнопки */
+
         .contact-links {
             display: flex;
             justify-content: center;
@@ -380,7 +378,7 @@
             .contact-item { padding: 6px 16px; font-size: 0.85rem; }
             .container { padding: 0 18px; }
             section { padding: 50px 0; }
-            .hero-content { padding: 12px; transform: translateY(6px); }
+            .hero-content { padding: 12px; transform: translateY(24px); }
         }
         @media (max-width: 550px) {
             .two-photos { flex-direction: column; align-items: center; }
@@ -397,7 +395,7 @@
 </head>
 <body>
 
-<!-- HERO С ФОТО НА ФОНЕ: PHOTO1.JPG, текст опущен на 10px, чтобы не перекрывать важные детали -->
+<!-- HERO: дата и весь текст ниже опущены на 1 сантиметр (38px) -->
 <section class="hero">
     <img class="hero-bg" src="photo1.jpg" alt="Максим и Екатерина">
     <div class="hero-content">
@@ -427,7 +425,7 @@
     </div>
 </section>
 
-<!-- СЕКЦИЯ ФОТОГРАФИЙ: PHOTO2 и PHOTO3 рядом -->
+<!-- ФОТОГАЛЕРЕЯ: PHOTO2 и PHOTO3 -->
 <section style="background: #fefbf6;">
     <div class="container">
         <h2>История любви в кадрах</h2>
@@ -447,7 +445,7 @@
     </div>
 </section>
 
-<!-- СЕКЦИЯ: ЦЕРЕМОНИЯ И БАНКЕТ -->
+<!-- ЦЕРЕМОНИЯ И БАНКЕТ -->
 <section style="background: #fefaf5;">
     <div class="container">
         <h2>Два важных момента</h2>
@@ -489,7 +487,7 @@
     </div>
 </section>
 
-<!-- СЕКЦИЯ ДРЕСС-КОД -->
+<!-- ДРЕСС-КОД -->
 <section>
     <div class="container">
         <h2>Дресс-код и атмосфера</h2>
@@ -506,7 +504,7 @@
     </div>
 </section>
 
-<!-- СЕКЦИЯ ПОДТВЕРЖДЕНИЯ: БЕЗ КНОПКИ, ТОЛЬКО КОНТАКТЫ В МЕССЕНДЖЕРАХ -->
+<!-- ПОДТВЕРЖДЕНИЕ ПРИСУТСТВИЯ (только контакты, без кнопки) -->
 <section style="background: #fdf9f3;">
     <div class="container">
         <h2>Пожалуйста, подтвердите присутствие</h2>
@@ -543,7 +541,6 @@
 </footer>
 
 <script>
-    // Таймер до 17 июля 2026
     function updateTimer() {
         const weddingDate = new Date(2026, 6, 17, 0, 0, 0);
         const now = new Date();
