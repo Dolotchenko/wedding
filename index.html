@@ -113,8 +113,8 @@
             border-radius: 0;
             box-shadow: none;
             margin: 20px;
-            /* Опускаем весь текст на 1 сантиметр (≈38px) */
-            transform: translateY(38px);
+            /* Опускаем текст на 2 см (76px) — на 1 см глубже, чем было */
+            transform: translateY(76px);
         }
 
         .hero h1 {
@@ -378,7 +378,7 @@
             .contact-item { padding: 6px 16px; font-size: 0.85rem; }
             .container { padding: 0 18px; }
             section { padding: 50px 0; }
-            .hero-content { padding: 12px; transform: translateY(24px); }
+            .hero-content { padding: 12px; transform: translateY(52px); }
         }
         @media (max-width: 550px) {
             .two-photos { flex-direction: column; align-items: center; }
@@ -395,7 +395,6 @@
 </head>
 <body>
 
-<!-- HERO: дата и весь текст ниже опущены на 1 сантиметр (38px) -->
 <section class="hero">
     <img class="hero-bg" src="photo1.jpg" alt="Максим и Екатерина">
     <div class="hero-content">
@@ -408,7 +407,6 @@
     </div>
 </section>
 
-<!-- СЕКЦИЯ ПРИГЛАШЕНИЕ -->
 <section id="details">
     <div class="container">
         <div class="invitation-card">
@@ -425,7 +423,6 @@
     </div>
 </section>
 
-<!-- ФОТОГАЛЕРЕЯ: PHOTO2 и PHOTO3 -->
 <section style="background: #fefbf6;">
     <div class="container">
         <h2>История любви в кадрах</h2>
@@ -445,7 +442,6 @@
     </div>
 </section>
 
-<!-- ЦЕРЕМОНИЯ И БАНКЕТ -->
 <section style="background: #fefaf5;">
     <div class="container">
         <h2>Два важных момента</h2>
@@ -473,7 +469,6 @@
     </div>
 </section>
 
-<!-- ТАЙМЕР -->
 <section class="timer-section">
     <div class="container">
         <h2>До самого важного дня</h2>
@@ -487,7 +482,6 @@
     </div>
 </section>
 
-<!-- ДРЕСС-КОД -->
 <section>
     <div class="container">
         <h2>Дресс-код и атмосфера</h2>
@@ -504,7 +498,6 @@
     </div>
 </section>
 
-<!-- ПОДТВЕРЖДЕНИЕ ПРИСУТСТВИЯ (только контакты, без кнопки) -->
 <section style="background: #fdf9f3;">
     <div class="container">
         <h2>Пожалуйста, подтвердите присутствие</h2>
@@ -531,7 +524,6 @@
     </div>
 </section>
 
-<!-- ФУТЕР -->
 <footer>
     <div class="container">
         <p>Дорогие гости, самый ценный подарок для нас — ваше внимание и присутствие. Если захотите порадовать нас, мы будем рады конверту с пожеланиями для осуществления наших общих мечт.</p>
