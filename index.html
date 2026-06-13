@@ -114,8 +114,8 @@
             border-radius: 0;
             box-shadow: none;
             margin: 20px;
-            /* Опускаем текст на 5 мм (примерно 19px при 96dpi) */
-            transform: translateY(19px);
+            /* Опускаем текст на 10px, чтобы он не перекрывал важные детали фото */
+            transform: translateY(10px);
         }
 
         .hero h1 {
@@ -380,7 +380,7 @@
             .contact-item { padding: 6px 16px; font-size: 0.85rem; }
             .container { padding: 0 18px; }
             section { padding: 50px 0; }
-            .hero-content { padding: 12px; transform: translateY(12px); }
+            .hero-content { padding: 12px; transform: translateY(6px); }
         }
         @media (max-width: 550px) {
             .two-photos { flex-direction: column; align-items: center; }
@@ -397,7 +397,7 @@
 </head>
 <body>
 
-<!-- HERO С ФОТО НА ФОНЕ: PHOTO1.JPG, текст опущен на 5 мм (19px) -->
+<!-- HERO С ФОТО НА ФОНЕ: PHOTO1.JPG, текст опущен на 10px, чтобы не перекрывать важные детали -->
 <section class="hero">
     <img class="hero-bg" src="photo1.jpg" alt="Максим и Екатерина">
     <div class="hero-content">
