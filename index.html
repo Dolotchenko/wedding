@@ -82,7 +82,7 @@
             border-color: #fff0e0;
         }
 
-        /* Hero секция с фото на фоне — без прямоугольника с закруглениями */
+        /* Hero секция с фото на фоне */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -109,12 +109,13 @@
             z-index: 2;
             max-width: 800px;
             padding: 20px;
-            /* Убрали фон, blur, скруглённый прямоугольник — теперь только чистый текст поверх фото */
             background: transparent;
             backdrop-filter: none;
             border-radius: 0;
             box-shadow: none;
             margin: 20px;
+            /* Опускаем текст на 5 мм (примерно 19px при 96dpi) */
+            transform: translateY(19px);
         }
 
         .hero h1 {
@@ -379,7 +380,7 @@
             .contact-item { padding: 6px 16px; font-size: 0.85rem; }
             .container { padding: 0 18px; }
             section { padding: 50px 0; }
-            .hero-content { padding: 12px; }
+            .hero-content { padding: 12px; transform: translateY(12px); }
         }
         @media (max-width: 550px) {
             .two-photos { flex-direction: column; align-items: center; }
@@ -396,7 +397,7 @@
 </head>
 <body>
 
-<!-- HERO С ФОТО НА ФОНЕ: PHOTO1.JPG без прямоугольника с закругленными краями -->
+<!-- HERO С ФОТО НА ФОНЕ: PHOTO1.JPG, текст опущен на 5 мм (19px) -->
 <section class="hero">
     <img class="hero-bg" src="photo1.jpg" alt="Максим и Екатерина">
     <div class="hero-content">
