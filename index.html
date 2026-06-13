@@ -13,7 +13,6 @@
         }
 
         body {
-            /* Основной фон страницы — очень нежный, почти белый с легким персиковым подтоном */
             background: #fff9f5;
             font-family: 'Montserrat', sans-serif;
             color: #2c2418;
@@ -28,11 +27,8 @@
 
         section {
             padding: 70px 0;
-            border-bottom: 1px solid rgba(210, 175, 145, 0.1);
-        }
-
-        section:last-child {
             border-bottom: none;
+            transition: background 0.2s ease;
         }
 
         h1, h2, h3, .script {
@@ -234,7 +230,6 @@
         }
 
         .timer-section {
-            background: #fff7f0;
             text-align: center;
         }
 
@@ -350,6 +345,7 @@
             color: #a0714b;
             text-decoration: none;
             transition: all 0.2s;
+            cursor: default;
         }
         .contact-item:hover {
             background: #fff5ec;
@@ -397,6 +393,13 @@
             margin-top: 30px;
             border: 1px solid #f6e8dd;
         }
+        /* два чередующихся цвета для блоков */
+        .color-bg-1 {
+            background-color: #fffaf6;
+        }
+        .color-bg-2 {
+            background-color: #fff7f0;
+        }
     </style>
 </head>
 <body>
@@ -413,7 +416,8 @@
     </div>
 </section>
 
-<section id="details">
+<!-- Блок 1 (цвет 1) -->
+<section id="details" class="color-bg-1">
     <div class="container">
         <div class="invitation-card">
             <span class="guest-placeholder">🌟 Дорогие наши гости 🌟</span>
@@ -429,7 +433,8 @@
     </div>
 </section>
 
-<section style="background: #fefaf5;">
+<!-- Блок 2 (цвет 2) -->
+<section class="color-bg-2">
     <div class="container">
         <h2>История любви в кадрах</h2>
         <div class="photo-gallery">
@@ -448,7 +453,8 @@
     </div>
 </section>
 
-<section style="background: #fff9f5;">
+<!-- Блок 3 (цвет 1) -->
+<section class="color-bg-1">
     <div class="container">
         <h2>Два важных момента</h2>
         <div class="info-grid">
@@ -475,7 +481,8 @@
     </div>
 </section>
 
-<section class="timer-section">
+<!-- Блок 4 (цвет 2) -->
+<section class="color-bg-2 timer-section">
     <div class="container">
         <h2>До самого важного дня</h2>
         <div class="timer-container" id="timer">
@@ -488,7 +495,8 @@
     </div>
 </section>
 
-<section>
+<!-- Блок 5 (цвет 1) -->
+<section class="color-bg-1">
     <div class="container">
         <h2>Дресс-код и атмосфера</h2>
         <div class="invitation-card" style="max-width: 700px; padding: 35px 28px;">
@@ -504,27 +512,22 @@
     </div>
 </section>
 
-<section style="background: #fffaf6;">
+<!-- Блок 6 (цвет 2) — подтверждение присутствия -->
+<section class="color-bg-2">
     <div class="container">
         <h2>Пожалуйста, подтвердите присутствие</h2>
         <div style="max-width: 650px; margin: 0 auto; text-align: center;">
-            <p style="margin-bottom: 24px; font-size: 1.05rem; color: #a57c58;">Нам очень важно знать, кто разделит с нами этот день. Свяжитесь с нами любым удобным способом:</p>
+            <p style="margin-bottom: 24px; font-size: 1.05rem; color: #a57c58;">Нам очень важно знать, кто разделит с нами этот день. Свяжитесь с нами по телефону:</p>
             
             <div class="contact-links">
-                <a href="https://wa.me/79876543210" target="_blank" class="contact-item">
-                    <span class="contact-icon">💚</span> WhatsApp
-                </a>
-                <a href="https://t.me/maxim_ekaterina_wedding" target="_blank" class="contact-item">
-                    <span class="contact-icon">✈️</span> Telegram
-                </a>
                 <div class="contact-item" style="cursor: default; background: #fff7ef;">
                     <span class="contact-icon">📞</span> +7 (987) 654-32-10
                 </div>
             </div>
             
             <div class="rsvp-note">
-                🌸 Вы также можете позвонить или написать в мессенджере Максиму или Екатерине.<br>
-                <span style="font-size: 0.85rem;">Мы будем рады каждому ответу!</span>
+                🌸 Мы будем рады каждому ответу!<br>
+                <span style="font-size: 0.85rem;">Пожалуйста, позвоните или напишите нам, чтобы мы знали, что вы с нами.</span>
             </div>
         </div>
     </div>
