@@ -393,16 +393,65 @@
             margin-top: 30px;
             border: 1px solid #f6e8dd;
         }
-        /* два чередующихся цвета для блоков */
         .color-bg-1 {
             background-color: #fffaf6;
         }
         .color-bg-2 {
             background-color: #fff7f0;
         }
+        /* Стили для музыкального плеера */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 245, 235, 0.95);
+            backdrop-filter: blur(8px);
+            border-radius: 60px;
+            padding: 8px 16px 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid #eedbc8;
+            font-size: 0.85rem;
+            color: #b47c5a;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .music-control:hover {
+            background: #fff5ea;
+            transform: scale(1.02);
+        }
+        .music-control span {
+            font-size: 1.2rem;
+        }
+        /* Скрытый аудиоэлемент */
+        audio {
+            display: none;
+        }
+        @media (max-width: 550px) {
+            .music-control {
+                bottom: 15px;
+                right: 15px;
+                padding: 6px 12px 6px 10px;
+                font-size: 0.75rem;
+            }
+        }
     </style>
 </head>
 <body>
+
+<!-- Аудио плеер с музыкой из папки music/wedding.mp3 -->
+<audio id="weddingAudio" loop preload="auto" src="music/wedding.mp3">
+    Ваш браузер не поддерживает аудио.
+</audio>
+
+<!-- Кнопка управления музыкой (видимая, чтобы пользователь мог включить/выключить) -->
+<div class="music-control" id="musicToggle">
+    <span id="musicIcon">🎵</span>
+    <span id="musicText">Музыка загружается...</span>
+</div>
 
 <section class="hero">
     <img class="hero-bg" src="photo1.jpg" alt="Максим и Екатерина">
@@ -416,7 +465,6 @@
     </div>
 </section>
 
-<!-- Блок 1 (цвет 1) -->
 <section id="details" class="color-bg-1">
     <div class="container">
         <div class="invitation-card">
@@ -433,7 +481,6 @@
     </div>
 </section>
 
-<!-- Блок 2 (цвет 2) -->
 <section class="color-bg-2">
     <div class="container">
         <h2>История любви в кадрах</h2>
@@ -453,7 +500,6 @@
     </div>
 </section>
 
-<!-- Блок 3 (цвет 1) -->
 <section class="color-bg-1">
     <div class="container">
         <h2>Два важных момента</h2>
@@ -481,7 +527,6 @@
     </div>
 </section>
 
-<!-- Блок 4 (цвет 2) -->
 <section class="color-bg-2 timer-section">
     <div class="container">
         <h2>До самого важного дня</h2>
@@ -495,7 +540,6 @@
     </div>
 </section>
 
-<!-- Блок 5 (цвет 1) -->
 <section class="color-bg-1">
     <div class="container">
         <h2>Дресс-код и атмосфера</h2>
@@ -512,7 +556,6 @@
     </div>
 </section>
 
-<!-- Блок 6 (цвет 2) — подтверждение присутствия -->
 <section class="color-bg-2">
     <div class="container">
         <h2>Пожалуйста, подтвердите присутствие</h2>
@@ -542,6 +585,7 @@
 </footer>
 
 <script>
+    // Таймер обратного отсчёта
     function updateTimer() {
         const weddingDate = new Date(2026, 6, 17, 0, 0, 0);
         const now = new Date();
@@ -569,9 +613,95 @@
     setInterval(updateTimer, 1000);
     updateTimer();
     
+    // Плавный скролл
     document.querySelector('a[href="#details"]')?.addEventListener('click', function(e) {
         e.preventDefault();
         document.querySelector('#details').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    // ========== АВТОМАТИЧЕСКОЕ ВОСПРОИЗВЕДЕНИЕ МУЗЫКИ ==========
+    const audio = document.getElementById('weddingAudio');
+    const toggleBtn = document.getElementById('musicToggle');
+    const musicIcon = document.getElementById('musicIcon');
+    const musicText = document.getElementById('musicText');
+    
+    let isPlaying = false;
+    let autoPlayAttempted = false;
+    
+    // Функция запуска музыки
+    function playMusic() {
+        if (isPlaying) return Promise.resolve(true);
+        return audio.play().then(() => {
+            isPlaying = true;
+            musicIcon.textContent = '🔊';
+            musicText.textContent = 'Выключить музыку';
+            return true;
+        }).catch((err) => {
+            console.warn("Автовоспроизведение заблокировано:", err);
+            musicIcon.textContent = '🔇';
+            musicText.textContent = 'Нажмите, чтобы включить музыку';
+            return false;
+        });
+    }
+    
+    // Пытаемся запустить музыку при первой возможности (после любого взаимодействия с пользователем)
+    function enableAutoPlay() {
+        if (autoPlayAttempted) return;
+        autoPlayAttempted = true;
+        
+        playMusic().then(success => {
+            if (!success) {
+                // Если не удалось, ждём следующего клика
+                const handler = () => {
+                    playMusic();
+                    document.removeEventListener('click', handler);
+                    document.removeEventListener('touchstart', handler);
+                };
+                document.addEventListener('click', handler);
+                document.addEventListener('touchstart', handler);
+            }
+        });
+    }
+    
+    // Пробуем запустить музыку сразу (для браузеров, которые разрешают автовоспроизведение тихих/фоновых звуков)
+    // Но современные браузеры (Chrome, Safari) блокируют, поэтому основной способ — через enableAutoPlay
+    audio.load();
+    // Устанавливаем низкую громкость, чтобы не пугать пользователя, но потом можно будет сделать громче по желанию
+    audio.volume = 0.6;
+    
+    // Запускаем попытку автовоспроизведения с небольшой задержкой
+    setTimeout(() => {
+        playMusic().catch(() => {
+            // Если не получилось, показываем сообщение и ждём клика
+            musicIcon.textContent = '🔇';
+            musicText.textContent = 'Нажмите, чтобы включить музыку';
+            enableAutoPlay();
+        });
+    }, 500);
+    
+    // Также запускаем автовоспроизведение при первом касании/клике в любом месте (на случай блокировки)
+    enableAutoPlay();
+    
+    // Обработчик клика по кнопке (вручную)
+    toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (isPlaying) {
+            audio.pause();
+            isPlaying = false;
+            musicIcon.textContent = '🔇';
+            musicText.textContent = 'Включить музыку';
+        } else {
+            playMusic().catch(() => {
+                alert("Пожалуйста, нажмите ещё раз или проверьте, что файл music/wedding.mp3 существует.");
+            });
+        }
+    });
+    
+    // Если музыка закончилась, перезапускаем (loop уже есть, но подстрахуем)
+    audio.addEventListener('ended', () => {
+        if (isPlaying) {
+            audio.play().catch(e => console.log("Ошибка перезапуска:", e));
+        }
     });
 </script>
 </body>
