@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Максим & Екатерина | Свадебное приглашение</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,62 +12,51 @@
             box-sizing: border-box;
         }
 
-        body {
-            background: #fff9f5;
-            font-family: 'Montserrat', sans-serif;
-            color: #2c2418;
+        :root {
+            --ink: #3a2c1f;
+            --ivory: #fdf8f3;
+            --panel: #f7ece1;
+            --panel-2: #fff9f4;
+            --line: #e8d4bd;
+            --gold: #c89567;
+            --terracotta: #a9714a;
+            --terracotta-deep: #8a5a37;
+        }
+
+        html {
             scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--ivory);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--ink);
             position: relative;
+            overflow-x: hidden;
         }
 
-        /* Таймлайн линия с сердечками на заднем фоне */
-        .timeline-line {
+        /* subtle paper texture */
+        body::before {
+            content: "";
             position: fixed;
-            left: 40px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, #e9cfb5, #d4a882, #e9cfb5);
-            z-index: 1;
+            inset: 0;
+            z-index: 0;
             pointer-events: none;
-        }
-
-        .timeline-heart {
-            position: fixed;
-            left: 30px;
-            width: 22px;
-            height: 22px;
-            background: #e8b58b;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            color: white;
-            z-index: 2;
-            pointer-events: none;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: all 0.2s;
-        }
-
-        .timeline-heart::before {
-            content: "❤";
-            font-size: 12px;
-            color: #fff;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(168, 122, 84, 0.04) 0, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(168, 122, 84, 0.05) 0, transparent 45%);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 760px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 28px;
             position: relative;
             z-index: 5;
         }
 
         section {
-            padding: 70px 0;
-            border-bottom: none;
-            transition: background 0.2s ease;
+            padding: 80px 0;
             position: relative;
             z-index: 5;
         }
@@ -75,286 +64,380 @@
         h1, h2, h3, .script {
             font-family: 'Cormorant Garamond', serif;
             font-weight: 500;
-            letter-spacing: 1px;
+        }
+
+        .eyebrow {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 14px;
         }
 
         h2 {
-            font-size: 2.4rem;
+            font-size: 2.6rem;
             text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-            display: inline-block;
-            width: 100%;
-            color: #9b7a5c;
+            margin-bottom: 8px;
+            font-style: italic;
+            color: var(--terracotta-deep);
+            font-weight: 500;
         }
 
-        h2:after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 2px;
-            background: #e9cfb5;
-            margin: 12px auto 0;
+        .section-head {
+            margin-bottom: 48px;
+        }
+
+        /* Botanical divider (signature line-art instead of emoji) */
+        .botanical {
+            display: flex;
+            justify-content: center;
+            margin: 18px 0 0;
+        }
+        .botanical svg {
+            width: 90px;
+            height: 28px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 1.3;
+            opacity: 0.85;
         }
 
         .btn {
             display: inline-block;
-            background: rgba(0, 0, 0, 0.55);
+            background: rgba(255,255,255,0.12);
             backdrop-filter: blur(3px);
-            border: 1.5px solid rgba(255, 235, 210, 0.8);
-            padding: 12px 28px;
+            border: 1.5px solid rgba(255, 240, 222, 0.85);
+            padding: 13px 32px;
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 500;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
             color: #ffffff;
             text-decoration: none;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            border-radius: 40px;
+            transition: all 0.35s ease;
+            border-radius: 24px;
             cursor: pointer;
         }
 
         .btn:hover {
-            background: rgba(210, 175, 135, 0.85);
-            color: white;
-            border-color: #fff0e0;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--terracotta-deep);
+            border-color: #fff;
+            letter-spacing: 4px;
         }
 
+        /* ===== HERO ===== */
         .hero {
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
             position: relative;
-            background: #2c2418;
+            background: var(--ink);
+            overflow: hidden;
         }
-        
-        .hero-bg {
+
+        .hero::before {
+            content: "";
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            inset: 0;
+            background:
+                radial-gradient(circle at 30% 25%, rgba(200, 149, 103, 0.18) 0, transparent 45%),
+                radial-gradient(circle at 75% 75%, rgba(200, 149, 103, 0.14) 0, transparent 50%);
             z-index: 0;
-            filter: brightness(0.7) contrast(1.05);
         }
-        
+
         .hero-content {
             position: relative;
             z-index: 2;
-            max-width: 800px;
+            max-width: 640px;
             padding: 20px;
-            background: transparent;
-            backdrop-filter: none;
-            border-radius: 0;
-            box-shadow: none;
-            margin: 20px;
-            transform: translateY(114px);
+            animation: heroFade 1.4s ease both;
         }
 
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 500;
+        @keyframes heroFade {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Wax-seal monogram — the signature element */
+        .seal {
+            width: 92px;
+            height: 92px;
+            margin: 0 auto 28px;
+            border: 1.5px solid rgba(255, 235, 215, 0.65);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 2.1rem;
+            color: #ffeedd;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        .seal::before, .seal::after {
+            content: "";
+            position: absolute;
+            border: 1px solid rgba(255, 235, 215, 0.3);
+            border-radius: 50%;
+        }
+        .seal::before { inset: -10px; }
+        .seal::after { inset: -20px; opacity: 0.6; }
+
+        .hero .eyebrow-light {
+            font-size: 0.7rem;
             letter-spacing: 4px;
-            color: #ffffff;
-            text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            text-transform: uppercase;
+            color: #f0d8c0;
+            margin-bottom: 18px;
+            font-weight: 500;
         }
 
         .hero .names {
-            font-size: 2.8rem;
-            margin: 16px 0;
-            font-family: 'Cormorant Garamond', serif;
-            color: #fff5ea;
-            text-shadow: 0 3px 10px rgba(0,0,0,0.5);
-        }
-
-        .flower-divider {
-            text-align: center;
-            margin: 20px 0;
-            opacity: 0.9;
-            font-size: 1.2rem;
-            color: #fae5ce;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
-        }
-
-        .hero p {
+            font-size: 3.6rem;
+            font-style: italic;
             color: #fff8f0;
-            text-shadow: 0 2px 6px rgba(0,0,0,0.4);
-            font-weight: 400;
+            line-height: 1.15;
+            text-shadow: 0 4px 24px rgba(0,0,0,0.4);
+            font-weight: 500;
         }
 
-        /* КРУПНЫЙ КАЛЕНДАРЬ перед приглашением */
+        .hero p.tagline {
+            margin: 28px auto 32px;
+            max-width: 420px;
+            color: #f0e2d2;
+            font-weight: 300;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .scroll-cue {
+            position: absolute;
+            bottom: 34px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            color: #f4e4d0;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.8;
+        }
+        .scroll-cue .line {
+            width: 1px;
+            height: 32px;
+            background: linear-gradient(to bottom, rgba(244,228,208,0.8), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* ===== Stationery cards (calendar, invitation, info etc.) ===== */
+        .card {
+            background: var(--panel-2);
+            border-radius: 32px;
+            padding: 44px 40px;
+            box-shadow:
+                0 1px 0 var(--line),
+                0 18px 40px -24px rgba(138, 90, 55, 0.25);
+            border: 1px solid var(--line);
+            position: relative;
+        }
+
+        /* corner ornament */
+        .card::before, .card::after {
+            content: "";
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            border: 1px solid var(--gold);
+            opacity: 0.55;
+        }
+        .card::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+        .card::after { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+        /* ===== Calendar ===== */
         .calendar-large {
-            background: #ffffffdd;
-            backdrop-filter: blur(2px);
-            border-radius: 48px;
-            padding: 30px 24px;
-            margin-bottom: 40px;
-            border: 1px solid #fff0e4;
+            margin-bottom: 36px;
             text-align: center;
         }
         .calendar-header {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--terracotta);
+            margin-bottom: 24px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
             font-weight: 500;
-            font-family: 'Cormorant Garamond', serif;
-            color: #b47c5a;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
         }
         .calendar-weekdays {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             gap: 8px;
             margin-bottom: 16px;
-            font-size: 0.9rem;
+            font-size: 0.68rem;
             font-weight: 600;
-            color: #b28b62;
+            color: var(--gold);
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .calendar-days-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 12px 8px;
+            gap: 10px 6px;
         }
         .calendar-day-cell {
             aspect-ratio: 1 / 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: #5a4a38;
-            background: rgba(255, 245, 235, 0.5);
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--ink);
+            opacity: 0.55;
             border-radius: 50%;
-            transition: all 0.2s;
             position: relative;
+            font-family: 'Cormorant Garamond', serif;
         }
         .calendar-day-cell.highlight {
-            background: #e8b58b;
-            color: white;
-            font-size: 1.7rem;
-            font-weight: bold;
-            box-shadow: 0 4px 12px rgba(232, 181, 139, 0.4);
-        }
-        .calendar-day-cell.highlight::after {
-            content: "❤";
-            position: absolute;
-            bottom: -20px;
-            font-size: 14px;
-            color: #e8b58b;
-            background: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-            left: 50%;
-            transform: translateX(-50%);
+            background: var(--terracotta);
+            color: #fff8f0;
+            font-size: 1.5rem;
+            font-weight: 600;
+            opacity: 1;
+            box-shadow: 0 6px 18px -6px rgba(169, 113, 74, 0.6);
         }
         .calendar-empty {
             aspect-ratio: 1 / 1;
         }
 
+        /* ===== Invitation text ===== */
         .invitation-card {
-            background: #ffffffdd;
-            backdrop-filter: blur(2px);
-            border-radius: 48px;
-            padding: 48px 36px;
-            box-shadow: 0 20px 35px rgba(140, 100, 70, 0.05);
             text-align: center;
-            max-width: 800px;
+            max-width: 720px;
             margin: 0 auto;
-            border: 1px solid #fff0e4;
         }
 
         .guest-placeholder {
-            font-size: 1.4rem;
-            background: #fcf1e8;
+            font-size: 1.05rem;
             display: inline-block;
-            padding: 6px 24px;
-            border-radius: 60px;
-            margin-bottom: 20px;
+            padding: 8px 28px;
+            border: 1px solid var(--line);
+            border-radius: 30px;
+            margin-bottom: 24px;
             font-weight: 500;
-            color: #b8825a;
-            letter-spacing: 1px;
+            color: var(--terracotta);
+            letter-spacing: 2px;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.25rem;
         }
 
         .invitation-text {
-            font-size: 1.45rem;
-            line-height: 1.65;
-            margin: 30px 0;
+            font-size: 1.5rem;
+            line-height: 1.75;
+            margin: 24px 0;
             font-family: 'Cormorant Garamond', serif;
-            font-weight: 500;
-            color: #4a3a2a;
-        }
-        
-        .invitation-text strong {
-            color: #b47c5a;
-            font-weight: 600;
-        }
-        
-        .wedding-signature {
-            font-size: 1.35rem;
-            margin-top: 15px;
-            font-style: italic;
-        }
-        
-        .banket-note {
-            font-size: 1.2rem;
-            margin-top: 20px;
-            color: #b47c5a;
-        }
-        
-        .invitation-card .flower-divider {
-            font-size: 1.6rem;
-            margin: 15px 0;
-            color: #dbbc97;
+            font-weight: 400;
+            color: var(--ink);
         }
 
+        .invitation-text strong {
+            color: var(--terracotta);
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .wedding-signature {
+            display: block;
+            font-size: 1.4rem;
+            margin-top: 22px;
+            font-style: italic;
+            color: var(--terracotta-deep);
+        }
+
+        .banket-note {
+            font-size: 1.05rem;
+            margin-top: 24px;
+            color: var(--terracotta);
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+        }
+
+        /* ===== Info grid ===== */
         .info-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 30px;
+            gap: 24px;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 0;
         }
 
         .info-card {
             flex: 1 1 280px;
-            background: #ffffffdd;
-            backdrop-filter: blur(2px);
-            border-radius: 32px;
-            padding: 32px 24px;
+            padding: 36px 30px;
             text-align: center;
-            transition: transform 0.2s;
-            border: 1px solid #fff3e9;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+        }
+
+        .info-card .info-icon {
+            font-size: 1.6rem;
+            margin-bottom: 14px;
+            display: block;
         }
 
         .info-card h3 {
-            font-size: 1.6rem;
-            margin-bottom: 18px;
+            font-size: 1.5rem;
+            margin-bottom: 16px;
             font-weight: 500;
-            color: #b8825a;
+            font-style: italic;
+            color: var(--terracotta-deep);
         }
 
         .time {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #dba572;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--terracotta);
             letter-spacing: 1px;
+            font-family: 'Cormorant Garamond', serif;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .place-name {
+            font-weight: 600;
+            color: var(--ink);
+            font-size: 1rem;
         }
 
         .address {
-            font-weight: 500;
+            font-weight: 400;
             color: #8b6946;
-            margin-top: 10px;
+            margin-top: 6px;
+            font-size: 0.9rem;
         }
 
+        .info-desc {
+            font-size: 0.85rem;
+            margin-top: 14px;
+            color: #a98c6f;
+            font-style: italic;
+        }
+
+        /* ===== Timer ===== */
         .timer-section {
             text-align: center;
         }
@@ -362,350 +445,437 @@
         .timer-container {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 16px;
             flex-wrap: wrap;
-            margin: 30px 0 20px;
+            margin: 32px 0 8px;
         }
 
         .timer-block {
-            background: #ffffffdd;
-            backdrop-filter: blur(2px);
-            border-radius: 32px;
-            padding: 18px 22px;
-            min-width: 90px;
+            background: var(--panel-2);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 22px 24px;
+            min-width: 96px;
             text-align: center;
-            box-shadow: 0 6px 14px rgba(0,0,0,0.02);
-            border: 1px solid #f6e8dd;
         }
 
         .timer-number {
             font-size: 2.6rem;
             font-weight: 500;
-            font-family: 'Montserrat', sans-serif;
-            color: #b8825a;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--terracotta);
             line-height: 1;
+            font-style: italic;
         }
 
         .timer-label {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-top: 8px;
-            color: #c8a882;
+            letter-spacing: 2.5px;
+            margin-top: 10px;
+            color: var(--gold);
+            font-weight: 600;
         }
 
         .hashtag {
-            background: rgba(255, 248, 240, 0.9);
-            border-radius: 60px;
-            padding: 8px 20px;
+            border: 1px solid var(--line);
+            border-radius: 30px;
+            padding: 10px 24px;
             display: inline-block;
-            font-family: monospace;
-            font-size: 1rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.1rem;
             letter-spacing: 1px;
-            border: 1px solid #f2e0cf;
-            color: #b28b62;
+            color: var(--terracotta);
         }
 
         footer {
             text-align: center;
-            padding: 40px 20px;
+            padding: 50px 20px 40px;
             font-size: 0.8rem;
-            color: #d1b18c;
-            background: #fff7f0;
+            color: #c8a87f;
+            background: var(--panel);
+            border-top: 1px solid var(--line);
+        }
+        footer p { max-width: 480px; margin: 0 auto; line-height: 1.7; }
+        footer .seal-mini {
+            width: 44px; height: 44px;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            margin: 0 auto 18px;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1rem;
+            color: var(--terracotta);
         }
 
-        .photo-gallery {
-            margin-top: 20px;
-        }
+        /* ===== Gallery ===== */
         .two-photos {
             display: flex;
             flex-wrap: wrap;
-            gap: 24px;
+            gap: 22px;
             justify-content: center;
         }
         .photo-card {
             flex: 1;
             min-width: 240px;
-            border-radius: 32px;
+            border-radius: 28px;
             overflow: hidden;
-            box-shadow: 0 15px 28px -8px rgba(0,0,0,0.06);
-            transition: all 0.3s ease;
-            background: #fffcf8;
-            border: 1px solid #f9ede2;
+            background: var(--panel-2);
+            border: 1px solid var(--line);
         }
         .photo-card img {
             width: 100%;
             aspect-ratio: 4 / 5;
             object-fit: cover;
             display: block;
-            transition: transform 0.4s ease;
+            filter: saturate(1.02);
+            transition: transform 0.6s ease;
         }
         .photo-card:hover img {
-            transform: scale(1.02);
+            transform: scale(1.03);
         }
         .photo-caption {
-            padding: 14px 12px 18px;
+            padding: 16px 12px 20px;
             text-align: center;
-            font-size: 0.85rem;
-            color: #c69a70;
+            font-size: 0.9rem;
+            color: var(--terracotta);
             font-style: italic;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 1px;
         }
 
+        /* ===== Contact / RSVP ===== */
         .contact-links {
             display: flex;
             justify-content: center;
-            gap: 28px;
+            gap: 20px;
             flex-wrap: wrap;
-            margin: 20px 0 15px;
+            margin: 28px 0 18px;
         }
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            background: #ffffffcc;
-            backdrop-filter: blur(2px);
-            padding: 10px 24px;
-            border-radius: 60px;
-            border: 1px solid #f0e0d0;
-            font-size: 1rem;
-            color: #a0714b;
-            text-decoration: none;
-            transition: all 0.2s;
-            cursor: default;
-        }
-        .contact-item:hover {
-            background: #fff5ec;
-            border-color: #e6cdb5;
+            gap: 12px;
+            padding: 14px 30px;
+            border: 1px solid var(--line);
+            border-radius: 30px;
+            font-size: 1.05rem;
+            color: var(--terracotta-deep);
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            background: var(--panel-2);
         }
         .contact-icon {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
         }
         .rsvp-note {
             font-size: 0.95rem;
-            background: #ffffffcc;
-            backdrop-filter: blur(2px);
-            border-radius: 32px;
-            padding: 22px 28px;
-            display: inline-block;
-            margin-top: 15px;
-            border: 1px solid #f0e0ce;
+            border-top: 1px solid var(--line);
+            padding-top: 22px;
+            margin-top: 22px;
+            color: #8b6946;
         }
-        .note {
-            font-size: 0.8rem;
-            margin-top: 16px;
-            color: #d1a87e;
+        .rsvp-note strong {
+            color: var(--terracotta);
+            font-style: italic;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
         }
-        @media (max-width: 680px) {
-            .hero h1 { font-size: 2.6rem; }
-            .hero .names { font-size: 2rem; }
-            h2 { font-size: 1.9rem; }
-            .invitation-text { font-size: 1.2rem; }
-            .guest-placeholder { font-size: 1.2rem; }
-            .wedding-signature { font-size: 1.15rem; }
-            .banket-note { font-size: 1rem; }
-            .timer-number { font-size: 1.8rem; }
-            .timer-block { min-width: 70px; padding: 12px 12px; }
-            .contact-item { padding: 6px 16px; font-size: 0.85rem; }
-            .container { padding: 0 18px; }
-            section { padding: 50px 0; }
-            .hero-content { padding: 12px; transform: translateY(80px); }
-            .timeline-line { left: 15px; }
-            .timeline-heart { left: 5px; width: 18px; height: 18px; font-size: 9px; }
-            .timeline-heart::before { font-size: 9px; }
-            .calendar-weekdays { font-size: 0.7rem; gap: 4px; }
-            .calendar-days-grid { gap: 6px; }
-            .calendar-day-cell { font-size: 0.9rem; }
-            .calendar-day-cell.highlight { font-size: 1.3rem; }
-            .calendar-header { font-size: 1.3rem; }
-        }
-        @media (max-width: 550px) {
-            .two-photos { flex-direction: column; align-items: center; }
-            .photo-card { max-width: 320px; width: 100%; }
-        }
+
         .map-link {
-            background: #fffbf5;
-            border-radius: 32px;
-            padding: 28px;
-            text-align: center;
             margin-top: 30px;
-            border: 1px solid #f6e8dd;
+            text-align: center;
         }
-        .color-bg-1 {
-            background-color: #fffaf6;
+        .map-link p {
+            margin-bottom: 16px;
+            font-style: italic;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            color: var(--terracotta-deep);
         }
-        .color-bg-2 {
-            background-color: #fff7f0;
+        .map-btn {
+            display: inline-block;
+            margin: 6px;
+            padding: 11px 26px;
+            border: 1px solid var(--line);
+            border-radius: 30px;
+            color: var(--terracotta-deep);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            background: var(--panel-2);
+            transition: all 0.25s ease;
         }
+        .map-btn:hover {
+            background: var(--terracotta);
+            color: #fff8f0;
+            border-color: var(--terracotta);
+        }
+
+        /* ===== Dress code section ===== */
+        .dress-card {
+            max-width: 640px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 48px 36px;
+        }
+        .dress-card .lead {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--terracotta-deep);
+            margin-bottom: 16px;
+        }
+        .dress-card p.body-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin: 18px 0;
+            color: var(--ink);
+        }
+        .dress-card .closing {
+            font-size: 0.95rem;
+            color: var(--terracotta);
+            font-style: italic;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .color-bg-1 { background-color: var(--ivory); }
+        .color-bg-2 { background-color: var(--panel); }
+
         .music-control {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 22px;
+            right: 22px;
             z-index: 1000;
-            background: rgba(255, 245, 235, 0.95);
+            background: rgba(255, 249, 244, 0.95);
             backdrop-filter: blur(8px);
-            border-radius: 60px;
-            padding: 8px 16px 8px 12px;
+            border-radius: 30px;
+            padding: 10px 20px 10px 16px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border: 1px solid #eedbc8;
-            font-size: 0.85rem;
-            color: #b47c5a;
+            gap: 10px;
+            box-shadow: 0 6px 20px rgba(138,90,55,0.12);
+            border: 1px solid var(--line);
+            font-size: 0.8rem;
+            color: var(--terracotta);
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
+            font-weight: 500;
         }
         .music-control:hover {
-            background: #fff5ea;
-            transform: scale(1.02);
+            background: #fff;
         }
-        .music-control span {
-            font-size: 1.2rem;
-        }
-        audio {
-            display: none;
+        audio { display: none; }
+
+        @media (max-width: 680px) {
+            .hero .names { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            .seal { width: 76px; height: 76px; font-size: 1.7rem; }
+            .invitation-text { font-size: 1.25rem; }
+            .card { padding: 32px 22px; }
+            section { padding: 56px 0; }
+            .calendar-header { font-size: 1.2rem; }
+            .calendar-day-cell.highlight { font-size: 1.2rem; }
+            .timer-number { font-size: 2rem; }
+            .timer-block { min-width: 74px; padding: 16px 12px; }
+            .dress-card { padding: 36px 22px; }
         }
     </style>
 </head>
 <body>
-
-<div class="timeline-line"></div>
-<div id="timelineHearts"></div>
 
 <audio id="weddingAudio" loop preload="auto" src="music/wedding.mp3">
     Ваш браузер не поддерживает аудио.
 </audio>
 
 <div class="music-control" id="musicToggle">
-    <span id="musicIcon">🎵</span>
-    <span id="musicText">Музыка загружается...</span>
+    <span id="musicIcon">♪</span>
+    <span id="musicText">Музыка</span>
 </div>
 
+<!-- ===== HERO ===== -->
 <section class="hero">
-    <img class="hero-bg" src="photo1.jpg" alt="Максим и Екатерина">
     <div class="hero-content">
-        <h1>МАКСИМ & ЕКАТЕРИНА</h1>
-        <div class="names">Приглашают на свадьбу</div>
-        <div class="flower-divider">✧ ✿ ✧</div>
-        <p style="max-width: 500px; margin: 16px auto; font-weight: 300;">Семья — это начало новой главы. Будем рады разделить этот день с вами.</p>
-        <a href="#details" class="btn" style="margin-top: 10px;">Подробнее о событии</a>
+        <div class="seal">М&Е</div>
+        <div class="eyebrow-light">Приглашение на свадьбу</div>
+        <div class="names">Максим<br>&amp; Екатерина</div>
+        <p class="tagline">Семья — это начало новой главы. Будем рады разделить этот день с вами.</p>
+        <a href="#details" class="btn">Подробнее о событии</a>
+    </div>
+    <div class="scroll-cue">
+        <span>Листайте</span>
+        <span class="line"></span>
     </div>
 </section>
 
-<!-- Секция с календарём и приглашением -->
+<!-- ===== Главное фото ===== -->
+<section class="color-bg-1" style="padding-top: 56px; padding-bottom: 56px;">
+    <div class="container">
+        <div class="photo-card reveal" style="max-width: 640px; margin: 0 auto;">
+            <img src="photo1.jpg" alt="Максим и Екатерина" style="aspect-ratio: 4 / 5;">
+        </div>
+    </div>
+</section>
+
+<!-- ===== Календарь + приглашение ===== -->
 <section id="details" class="color-bg-1">
     <div class="container">
-        <!-- КРУПНЫЙ КАЛЕНДАРЬ перед приглашением -->
-        <div class="calendar-large">
-            <div class="calendar-header">ИЮЛЬ 2026</div>
+        <div class="card calendar-large reveal">
+            <div class="calendar-header">Июль 2026</div>
             <div class="calendar-weekdays">
-                <span>ПН</span><span>ВТ</span><span>СР</span><span>ЧТ</span><span>ПТ</span><span>СБ</span><span>ВС</span>
+                <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
             </div>
             <div class="calendar-days-grid" id="calendarDaysGrid"></div>
         </div>
 
-        <div class="invitation-card">
-            <div class="guest-placeholder">🌟 Дорогие наши гости 🌟</div>
+        <div style="height: 28px;"></div>
+
+        <div class="card invitation-card reveal">
+            <div class="guest-placeholder">Дорогие наши гости</div>
             <div class="invitation-text">
-                «Любимые наши [Имена гостей]!<br>
-                В нашей жизни происходит прекрасное событие — мы создаем семью. Этот день станет началом нашей новой общей истории.<br>
-                Мы будем очень рады видеть вас на празднике нашей любви, который состоится <strong>17 июля 2026</strong> в <strong>12:40</strong> по адресу: <strong>ЗАГС Советского района, 50-летия Октября, 26, Уфа</strong>.<br>
-                <span class="wedding-signature">С любовью, <strong>Максим и Екатерина</strong></span>»
+                Любимые наши [Имена гостей]!<br>
+                В нашей жизни происходит прекрасное событие — мы создаём семью. Этот день станет началом нашей новой общей истории.<br><br>
+                Мы будем очень рады видеть вас на празднике нашей любви, который состоится <strong>17 июля 2026</strong> в <strong>12:40</strong> по адресу: <strong>ЗАГС Советского района, 50-летия Октября, 26, Уфа</strong>.
+                <span class="wedding-signature">С любовью, Максим и Екатерина</span>
             </div>
-            <div class="flower-divider">❁ ❁ ❁</div>
-            <div class="banket-note">Торжество продолжится банкетом в 17:00 в комплексе отдыха "Лель"</div>
+            <div class="botanical">
+                <svg viewBox="0 0 90 28"><path d="M2 14 C 20 2, 40 26, 45 14 C 50 2, 70 26, 88 14"/></svg>
+            </div>
+            <div class="banket-note">Торжество продолжится банкетом в 17:00 в комплексе отдыха «Лель»</div>
         </div>
     </div>
 </section>
 
+<!-- ===== Фото ===== -->
 <section class="color-bg-2">
     <div class="container">
-        <h2>История любви в кадрах</h2>
-        <div class="photo-gallery">
-            <div class="two-photos">
-                <div class="photo-card">
-                    <img src="photo2.jpg" alt="Счастливая пара">
-                    <div class="photo-caption">✨ Начало нашей любви ✨</div>
-                </div>
-                <div class="photo-card">
-                    <img src="photo3.jpg" alt="Романтическая встреча">
-                    <div class="photo-caption">🌸 Предвкушение чуда 🌸</div>
-                </div>
+        <div class="section-head reveal">
+            <div class="eyebrow">Наша история</div>
+            <h2>История любви в кадрах</h2>
+            <div class="botanical">
+                <svg viewBox="0 0 90 28"><path d="M2 14 C 20 2, 40 26, 45 14 C 50 2, 70 26, 88 14"/></svg>
             </div>
-            <div class="note" style="text-align: center; margin-top: 24px;">*Каждая фотография хранит тепло наших сердец</div>
+        </div>
+        <div class="two-photos reveal">
+            <div class="photo-card">
+                <img src="photo2.jpg" alt="Счастливая пара">
+                <div class="photo-caption">Начало нашей любви</div>
+            </div>
+            <div class="photo-card">
+                <img src="photo3.jpg" alt="Романтическая встреча">
+                <div class="photo-caption">Предвкушение чуда</div>
+            </div>
         </div>
     </div>
 </section>
 
+<!-- ===== Два важных момента ===== -->
 <section class="color-bg-1">
     <div class="container">
-        <h2>Два важных момента</h2>
-        <div class="info-grid">
-            <div class="info-card">
-                <h3>💍 Официальная церемония</h3>
-                <p class="time">🕛 12:40</p>
-                <p><strong>ЗАГС Советского района</strong></p>
-                <p class="address">50-летия Октября, 26, Уфа</p>
-                <p style="font-size: 0.85rem; margin-top: 12px;">Регистрация брака — начало новой истории</p>
-            </div>
-            <div class="info-card">
-                <h3>🍾 Банкет & Вечер</h3>
-                <p class="time">🕔 17:00</p>
-                <p><strong>Комплекс отдыха "Лель"</strong></p>
-                <p class="address">Левобережная улица, 51к1, Уфа</p>
-                <p style="font-size: 0.85rem; margin-top: 12px;">Ждём вас на ужин, танцы и душевное застолье</p>
+        <div class="section-head reveal">
+            <div class="eyebrow">Расписание дня</div>
+            <h2>Два важных момента</h2>
+            <div class="botanical">
+                <svg viewBox="0 0 90 28"><path d="M2 14 C 20 2, 40 26, 45 14 C 50 2, 70 26, 88 14"/></svg>
             </div>
         </div>
-        <div class="map-link">
-            <p style="margin-bottom: 15px;">📍 Как добраться?</p>
-            <a href="https://yandex.ru/maps/?text=Уфа, улица 50-летия Октября, 26" target="_blank" class="btn" style="margin: 6px; background: #e9dccd; color: #6b4c30;">ЗАГС на карте</a>
-            <a href="https://yandex.ru/maps/?text=Уфа, Левобережная улица, 51к1" target="_blank" class="btn" style="margin: 6px; background: #e9dccd; color: #6b4c30;">Комплекс "Лель" на карте</a>
+        <div class="info-grid reveal">
+            <div class="card info-card">
+                <span class="info-icon">♢</span>
+                <h3>Официальная церемония</h3>
+                <span class="time">12:40</span>
+                <p class="place-name">ЗАГС Советского района</p>
+                <p class="address">50-летия Октября, 26, Уфа</p>
+                <p class="info-desc">Регистрация брака — начало новой истории</p>
+            </div>
+            <div class="card info-card">
+                <span class="info-icon">♢</span>
+                <h3>Банкет и вечер</h3>
+                <span class="time">17:00</span>
+                <p class="place-name">Комплекс отдыха «Лель»</p>
+                <p class="address">Левобережная улица, 51к1, Уфа</p>
+                <p class="info-desc">Ждём вас на ужин, танцы и душевное застолье</p>
+            </div>
+        </div>
+        <div class="card map-link reveal">
+            <p>Как добраться?</p>
+            <a href="https://yandex.ru/maps/?text=Уфа, улица 50-летия Октября, 26" target="_blank" class="map-btn">ЗАГС на карте</a>
+            <a href="https://yandex.ru/maps/?text=Уфа, Левобережная улица, 51к1" target="_blank" class="map-btn">Комплекс «Лель» на карте</a>
         </div>
     </div>
 </section>
 
+<!-- ===== Таймер ===== -->
 <section class="color-bg-2 timer-section">
     <div class="container">
-        <h2>До самого важного дня</h2>
-        <div class="timer-container" id="timer">
-            <div class="timer-block"><div class="timer-number" id="days">0</div><div class="timer-label">ДНЕЙ</div></div>
-            <div class="timer-block"><div class="timer-number" id="hours">0</div><div class="timer-label">ЧАСОВ</div></div>
-            <div class="timer-block"><div class="timer-number" id="minutes">0</div><div class="timer-label">МИНУТ</div></div>
-            <div class="timer-block"><div class="timer-number" id="seconds">0</div><div class="timer-label">СЕКУНД</div></div>
+        <div class="section-head reveal">
+            <div class="eyebrow">Обратный отсчёт</div>
+            <h2>До самого важного дня</h2>
         </div>
-        <div class="flower-divider">✧ 17 июля 2026 ✧</div>
+        <div class="timer-container reveal" id="timer">
+            <div class="timer-block"><div class="timer-number" id="days">0</div><div class="timer-label">дней</div></div>
+            <div class="timer-block"><div class="timer-number" id="hours">0</div><div class="timer-label">часов</div></div>
+            <div class="timer-block"><div class="timer-number" id="minutes">0</div><div class="timer-label">минут</div></div>
+            <div class="timer-block"><div class="timer-number" id="seconds">0</div><div class="timer-label">секунд</div></div>
+        </div>
+        <div class="botanical reveal">
+            <svg viewBox="0 0 90 28"><path d="M2 14 C 20 2, 40 26, 45 14 C 50 2, 70 26, 88 14"/></svg>
+        </div>
     </div>
 </section>
 
+<!-- ===== Дресс-код ===== -->
 <section class="color-bg-1">
     <div class="container">
-        <h2>Дресс-код и атмосфера</h2>
-        <div class="invitation-card" style="max-width: 700px; padding: 35px 28px;">
-            <p style="font-size: 1.3rem; font-weight: 500; font-family: 'Cormorant Garamond', serif; margin-bottom: 12px;">✧ Никаких рамок, только красивые образы ✧</p>
-            <p style="font-size: 1rem; line-height: 1.6; margin: 18px 0;">Белый цвет уже занят, а яркие цвета и шорты — в заслуженном отпуске!</p>
-            <div class="flower-divider" style="margin: 20px 0 8px;">❁</div>
-            <p style="font-size: 0.9rem; color: #b8825a;">Элегантность, лёгкость и ваш лучший настрой — вот главный аксессуар этого дня</p>
+        <div class="section-head reveal">
+            <div class="eyebrow">Стиль вечера</div>
+            <h2>Дресс-код и атмосфера</h2>
         </div>
-        <div style="text-align: center; margin-top: 30px;">
-            <div class="hashtag">#СвадьбаМаксимЕкатерина2026</div>
+        <div class="card dress-card reveal">
+            <p class="lead">Никаких рамок, только красивые образы</p>
+            <p class="body-text">Белый цвет уже занят, а яркие цвета и шорты — в заслуженном отпуске!</p>
+            <div class="botanical" style="margin-bottom: 12px;">
+                <svg viewBox="0 0 90 28"><path d="M2 14 C 20 2, 40 26, 45 14 C 50 2, 70 26, 88 14"/></svg>
+            </div>
+            <p class="closing">Элегантность, лёгкость и ваш лучший настрой — вот главный аксессуар этого дня</p>
+        </div>
+        <div style="text-align: center; margin-top: 32px;">
+            <span class="hashtag">#СвадьбаМаксимЕкатерина2026</span>
         </div>
     </div>
 </section>
 
+<!-- ===== RSVP ===== -->
 <section class="color-bg-2">
     <div class="container">
-        <h2>Пожалуйста, подтвердите присутствие</h2>
-        <div style="max-width: 650px; margin: 0 auto; text-align: center;">
-            <p style="margin-bottom: 24px; font-size: 1.05rem; color: #a57c58;">Нам очень важно знать, кто разделит с нами этот день. Свяжитесь с нами по телефону:</p>
-            
+        <div class="section-head reveal">
+            <div class="eyebrow">Подтверждение</div>
+            <h2>Пожалуйста, подтвердите присутствие</h2>
+        </div>
+        <div class="card reveal" style="max-width: 620px; margin: 0 auto; text-align: center;">
+            <p style="margin-bottom: 6px; font-size: 1.05rem; color: #a57c58;">Нам очень важно знать, кто разделит с нами этот день.</p>
+            <p style="margin-bottom: 6px; font-size: 0.95rem; color: #b8966f;">Свяжитесь с нами по телефону:</p>
+
             <div class="contact-links">
-                <div class="contact-item" style="cursor: default; background: #fff7ef;">
-                    <span class="contact-icon">📞</span> +7 (987) 654-32-10
+                <div class="contact-item">
+                    <span class="contact-icon">☏</span> +7 (987) 654-32-10
                 </div>
             </div>
-            
+
             <div class="rsvp-note">
-                🌸 Мы будем рады каждому ответу!<br>
+                <strong>Мы будем рады каждому ответу!</strong><br>
                 <span style="font-size: 0.85rem;">Пожалуйста, позвоните или напишите нам, чтобы мы знали, что вы с нами.</span>
             </div>
         </div>
@@ -714,6 +884,7 @@
 
 <footer>
     <div class="container">
+        <div class="seal-mini">М&Е</div>
         <p>Дорогие гости, самый ценный подарок для нас — ваше внимание и присутствие. Если захотите порадовать нас, мы будем рады конверту с пожеланиями для осуществления наших общих мечт.</p>
         <p style="margin-top: 20px;">© 2026, Свадьба Максима и Екатерины. Уфа, 17 июля.</p>
         <p style="margin-top: 10px; font-size: 0.7rem;">Церемония в ЗАГСе в 12:40, просим быть за 15 минут. Банкет с 17:00, welcome-фуршет.</p>
@@ -721,29 +892,25 @@
 </footer>
 
 <script>
-    // Генерация календаря на июль 2026 (исправленная версия)
+    // Генерация календаря на июль 2026
     function generateCalendar() {
         const year = 2026;
-        const month = 6; // Июль (0 = январь, 6 = июль)
+        const month = 6; // Июль
         const firstDay = new Date(year, month, 1);
-        // Получаем номер дня недели (0 = воскресенье, 6 = суббота)
         let startWeekday = firstDay.getDay();
-        // Преобразуем в понедельник-первый (1 = понедельник, 7 = воскресенье)
         let startOffset = startWeekday === 0 ? 6 : startWeekday - 1;
-        
+
         const daysInMonth = new Date(year, month + 1, 0).getDate();
         const grid = document.getElementById('calendarDaysGrid');
         if (!grid) return;
         grid.innerHTML = '';
-        
-        // Пустые ячейки в начале
+
         for (let i = 0; i < startOffset; i++) {
             const empty = document.createElement('div');
             empty.className = 'calendar-empty';
             grid.appendChild(empty);
         }
-        
-        // Дни месяца
+
         for (let d = 1; d <= daysInMonth; d++) {
             const dayDiv = document.createElement('div');
             dayDiv.className = 'calendar-day-cell';
@@ -754,22 +921,19 @@
             grid.appendChild(dayDiv);
         }
     }
-    
-    // Запускаем генерацию календаря после загрузки DOM
-    document.addEventListener('DOMContentLoaded', generateCalendar);
-    // Также на всякий случай вызовем сразу, если DOM уже загружен
+
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', generateCalendar);
     } else {
         generateCalendar();
     }
-    
+
     // Таймер
     function updateTimer() {
         const weddingDate = new Date(2026, 6, 17, 0, 0, 0);
         const now = new Date();
         const diff = weddingDate - now;
-        
+
         if (diff <= 0) {
             document.getElementById('days').innerText = '0';
             document.getElementById('hours').innerText = '0';
@@ -777,59 +941,38 @@
             document.getElementById('seconds').innerText = '0';
             return;
         }
-        
+
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (86400000)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (3600000)) / (1000 * 60));
-        const seconds = Math.floor((diff % (60000)) / 1000);
-        
+        const hours = Math.floor((diff % 86400000) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % 3600000) / (1000 * 60));
+        const seconds = Math.floor((diff % 60000) / 1000);
+
         document.getElementById('days').innerText = days;
         document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
         document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
         document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
     }
-    
+
     setInterval(updateTimer, 1000);
     updateTimer();
-    
+
     document.querySelector('a[href="#details"]')?.addEventListener('click', function(e) {
         e.preventDefault();
         document.querySelector('#details').scrollIntoView({ behavior: 'smooth' });
     });
-    
-    // Таймлайн сердечки
-    function updateTimelineHearts() {
-        const sections = document.querySelectorAll('section');
-        const heartsContainer = document.getElementById('timelineHearts');
-        if (!heartsContainer) return;
-        heartsContainer.innerHTML = '';
-        
-        sections.forEach((section) => {
-            const rect = section.getBoundingClientRect();
-            const scrollTop = window.scrollY || document.documentElement.scrollTop;
-            let topPosition = rect.top + scrollTop + rect.height / 2;
-            const heart = document.createElement('div');
-            heart.className = 'timeline-heart';
-            heart.style.top = topPosition + 'px';
-            heartsContainer.appendChild(heart);
+
+    // Scroll-reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
         });
-        
-        const footer = document.querySelector('footer');
-        if (footer) {
-            const rect = footer.getBoundingClientRect();
-            const scrollTop = window.scrollY || document.documentElement.scrollTop;
-            let topPosition = rect.top + scrollTop + rect.height / 2;
-            const heart = document.createElement('div');
-            heart.className = 'timeline-heart';
-            heart.style.top = topPosition + 'px';
-            heartsContainer.appendChild(heart);
-        }
-    }
-    
-    window.addEventListener('load', updateTimelineHearts);
-    window.addEventListener('resize', updateTimelineHearts);
-    window.addEventListener('scroll', updateTimelineHearts);
-    
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => observer.observe(el));
+
     // Музыка
     const audio = document.getElementById('weddingAudio');
     const toggleBtn = document.getElementById('musicToggle');
@@ -837,22 +980,36 @@
     const musicText = document.getElementById('musicText');
     let isPlaying = false;
     let autoPlayAttempted = false;
-    
+
     function playMusic() {
         if (isPlaying) return Promise.resolve(true);
         return audio.play().then(() => {
             isPlaying = true;
-            musicIcon.textContent = '🔊';
-            musicText.textContent = 'Выключить музыку';
+            musicIcon.textContent = '❙❙';
+            musicText.textContent = 'Музыка';
             return true;
-        }).catch((err) => {
-            console.warn("Автовоспроизведение заблокировано:", err);
-            musicIcon.textContent = '🔇';
-            musicText.textContent = 'Нажмите, чтобы включить музыку';
+        }).catch(() => {
+            musicIcon.textContent = '♪';
+            musicText.textContent = 'Включить музыку';
             return false;
         });
     }
-    
+
+    function pauseMusic() {
+        audio.pause();
+        isPlaying = false;
+        musicIcon.textContent = '♪';
+        musicText.textContent = 'Музыка';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        if (isPlaying) {
+            pauseMusic();
+        } else {
+            playMusic();
+        }
+    });
+
     function enableAutoPlay() {
         if (autoPlayAttempted) return;
         autoPlayAttempted = true;
@@ -868,9 +1025,11 @@
             }
         });
     }
-    
+
     audio.load();
-    audio.volume = 0.6;
-    setTimeout(() => {
-        playMusic().catch(() => {
-            musicIcon.textContent =
+    audio.volume = 0.5;
+    window.addEventListener('load', enableAutoPlay);
+</script>
+
+</body>
+</html>
