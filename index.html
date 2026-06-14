@@ -128,7 +128,6 @@
             letter-spacing: 4px;
         }
 
-        /* HERO */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -210,15 +209,6 @@
             opacity: 0.95;
         }
 
-        .hero .invite-line {
-            margin-top: 28px;
-            font-size: 0.85rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            color: var(--terracotta-deep);
-            font-weight: 600;
-        }
-
         .hero p.tagline {
             margin: 24px auto 32px;
             max-width: 420px;
@@ -272,7 +262,6 @@
             50% { opacity: 1; }
         }
 
-        /* Карточки */
         .card {
             background: var(--panel-2);
             border-radius: 32px;
@@ -677,7 +666,7 @@
             border-color: var(--terracotta);
         }
 
-        /* Упрощённый блок дресс-кода (без палитры) */
+        /* Упрощённый блок дресс-кода (без палитры, только нужный текст) */
         .dress-card {
             max-width: 640px;
             margin: 0 auto;
@@ -789,7 +778,7 @@
     </div>
 </section>
 
-<!-- Дорогие гости + фото (фото сдвинуто вниз, чтобы не обрезался верх) -->
+<!-- Дорогие гости + фото (фото сдвинуто вниз object-position) -->
 <section id="details" class="color-bg-1" style="padding-top: 56px; padding-bottom: 0;">
     <div class="container">
         <div class="section-head reveal" style="margin-bottom: 28px;">
@@ -805,7 +794,7 @@
 <section class="color-bg-1" style="padding-top: 28px; padding-bottom: 56px;">
     <div class="container">
         <div class="photo-card reveal" style="max-width: 640px; margin: 0 auto;">
-            <img src="photo1.jpg" alt="Максим и Екатерина" style="aspect-ratio: 4 / 5; object-position: center 30%;">
+            <img src="photo1.jpg" alt="Максим и Екатерина" style="aspect-ratio: 4 / 5; object-fit: cover; object-position: center 30%;">
         </div>
     </div>
 </section>
@@ -860,7 +849,7 @@
     </div>
 </section>
 
-<!-- Дресс-код (упрощённый текст, без палитры) -->
+<!-- Дресс-код (упрощённый текст, без палитры, только нужные фразы) -->
 <section class="color-bg-1">
     <div class="container">
         <div class="section-head reveal">
@@ -933,4 +922,8 @@
 </section>
 
 <!-- Таймер -->
-<section class="
+<section class="color-bg-2 timer-section">
+    <div class="container">
+        <div class="section-head reveal">
+            <div class="eyebrow">Обратный отсчёт</div>
+            <
