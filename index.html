@@ -207,7 +207,7 @@
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             gap: 8px;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             font-size: 0.9rem;
             font-weight: 600;
             color: #b28b62;
@@ -234,14 +234,14 @@
         .calendar-day-cell.highlight {
             background: #e8b58b;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.7rem;
             font-weight: bold;
             box-shadow: 0 4px 12px rgba(232, 181, 139, 0.4);
         }
         .calendar-day-cell.highlight::after {
             content: "❤";
             position: absolute;
-            bottom: -18px;
+            bottom: -20px;
             font-size: 14px;
             color: #e8b58b;
             background: white;
@@ -252,6 +252,8 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            left: 50%;
+            transform: translateX(-50%);
         }
         .calendar-empty {
             aspect-ratio: 1 / 1;
@@ -513,7 +515,7 @@
             .calendar-weekdays { font-size: 0.7rem; gap: 4px; }
             .calendar-days-grid { gap: 6px; }
             .calendar-day-cell { font-size: 0.9rem; }
-            .calendar-day-cell.highlight { font-size: 1.2rem; }
+            .calendar-day-cell.highlight { font-size: 1.3rem; }
             .calendar-header { font-size: 1.3rem; }
         }
         @media (max-width: 550px) {
@@ -594,7 +596,7 @@
 <section id="details" class="color-bg-1">
     <div class="container">
         <!-- КРУПНЫЙ КАЛЕНДАРЬ перед приглашением -->
-        <div class="calendar-large" id="weddingCalendar">
+        <div class="calendar-large">
             <div class="calendar-header">ИЮЛЬ 2026</div>
             <div class="calendar-weekdays">
                 <span>ПН</span><span>ВТ</span><span>СР</span><span>ЧТ</span><span>ПТ</span><span>СБ</span><span>ВС</span>
@@ -719,25 +721,26 @@
 </footer>
 
 <script>
-    // Генерация календаря на июль 2026
+    // Генерация календаря на июль 2026 (исправленная версия)
     function generateCalendar() {
         const year = 2026;
-        const month = 6; // Июль (0-индекс)
-        const firstDayOfMonth = new Date(year, month, 1);
-        const startWeekday = firstDayOfMonth.getDay(); // 0 = воскресенье, но нам нужно понедельник первым
-        // Корректируем: в европейском формате понедельник = 1, воскресенье = 0 -> преобразуем
+        const month = 6; // Июль (0 = январь, 6 = июль)
+        const firstDay = new Date(year, month, 1);
+        // Получаем номер дня недели (0 = воскресенье, 6 = суббота)
+        let startWeekday = firstDay.getDay();
+        // Преобразуем в понедельник-первый (1 = понедельник, 7 = воскресенье)
         let startOffset = startWeekday === 0 ? 6 : startWeekday - 1;
         
         const daysInMonth = new Date(year, month + 1, 0).getDate();
-        const calendarGrid = document.getElementById('calendarDaysGrid');
-        if (!calendarGrid) return;
-        calendarGrid.innerHTML = '';
+        const grid = document.getElementById('calendarDaysGrid');
+        if (!grid) return;
+        grid.innerHTML = '';
         
-        // Пустые ячейки до первого дня
+        // Пустые ячейки в начале
         for (let i = 0; i < startOffset; i++) {
-            const emptyDiv = document.createElement('div');
-            emptyDiv.className = 'calendar-empty';
-            calendarGrid.appendChild(emptyDiv);
+            const empty = document.createElement('div');
+            empty.className = 'calendar-empty';
+            grid.appendChild(empty);
         }
         
         // Дни месяца
@@ -748,11 +751,18 @@
             if (d === 17) {
                 dayDiv.classList.add('highlight');
             }
-            calendarGrid.appendChild(dayDiv);
+            grid.appendChild(dayDiv);
         }
     }
     
-    generateCalendar();
+    // Запускаем генерацию календаря после загрузки DOM
+    document.addEventListener('DOMContentLoaded', generateCalendar);
+    // Также на всякий случай вызовем сразу, если DOM уже загружен
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', generateCalendar);
+    } else {
+        generateCalendar();
+    }
     
     // Таймер
     function updateTimer() {
@@ -863,14 +873,4 @@
     audio.volume = 0.6;
     setTimeout(() => {
         playMusic().catch(() => {
-            musicIcon.textContent = '🔇';
-            musicText.textContent = 'Нажмите, чтобы включить музыку';
-            enableAutoPlay();
-        });
-    }, 500);
-    enableAutoPlay();
-    
-    toggleBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (isPlaying) {
-           
+            musicIcon.textContent =
