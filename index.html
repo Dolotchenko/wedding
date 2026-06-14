@@ -17,18 +17,60 @@
             font-family: 'Montserrat', sans-serif;
             color: #2c2418;
             scroll-behavior: smooth;
+            position: relative;
+        }
+
+        /* Таймлайн линия с сердечками на заднем фоне */
+        .timeline-line {
+            position: fixed;
+            left: 40px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #e9cfb5, #d4a882, #e9cfb5);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .timeline-heart {
+            position: fixed;
+            left: 30px;
+            width: 22px;
+            height: 22px;
+            background: #e8b58b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: white;
+            z-index: 2;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+
+        /* Сердечки на точках (позиции задаются через JS) */
+        .timeline-heart::before {
+            content: "❤";
+            font-size: 12px;
+            color: #fff;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
+            position: relative;
+            z-index: 5;
         }
 
         section {
             padding: 70px 0;
             border-bottom: none;
             transition: background 0.2s ease;
+            position: relative;
+            z-index: 5;
         }
 
         h1, h2, h3, .script {
@@ -155,6 +197,49 @@
             color: #fff8f0;
             text-shadow: 0 2px 6px rgba(0,0,0,0.4);
             font-weight: 400;
+        }
+
+        /* Календарь с сердечком */
+        .wedding-calendar {
+            display: inline-block;
+            background: #fff9f0;
+            border-radius: 24px;
+            padding: 12px 24px;
+            margin: 20px auto;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border: 1px solid #f0e0ce;
+        }
+        .calendar-month {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #b8825a;
+            font-weight: 500;
+        }
+        .calendar-day {
+            font-size: 3rem;
+            font-weight: 600;
+            font-family: 'Cormorant Garamond', serif;
+            color: #8b6946;
+            line-height: 1;
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .calendar-day-number {
+            position: relative;
+        }
+        .calendar-heart {
+            font-size: 1.8rem;
+            color: #e8a87c;
+            margin-left: 8px;
+        }
+        .calendar-year {
+            font-size: 0.9rem;
+            color: #b28b62;
         }
 
         .invitation-card {
@@ -407,6 +492,9 @@
             .container { padding: 0 18px; }
             section { padding: 50px 0; }
             .hero-content { padding: 12px; transform: translateY(80px); }
+            .timeline-line { left: 15px; }
+            .timeline-heart { left: 5px; width: 18px; height: 18px; font-size: 9px; }
+            .timeline-heart::before { font-size: 9px; }
         }
         @media (max-width: 550px) {
             .two-photos { flex-direction: column; align-items: center; }
@@ -467,6 +555,10 @@
 </head>
 <body>
 
+<!-- Таймлайн линия с сердечками (создаётся через JS) -->
+<div class="timeline-line"></div>
+<div id="timelineHearts"></div>
+
 <audio id="weddingAudio" loop preload="auto" src="music/wedding.mp3">
     Ваш браузер не поддерживает аудио.
 </audio>
@@ -479,7 +571,16 @@
 <section class="hero">
     <img class="hero-bg" src="photo1.jpg" alt="Максим и Екатерина">
     <div class="hero-content">
-        <div class="date-badge">17 ИЮЛЯ 2026</div>
+        <div class="date-badge">ИЮЛЬ 2026</div>
+        <!-- Календарь с сердечком вместо точки -->
+        <div class="wedding-calendar">
+            <div class="calendar-month">Июль</div>
+            <div class="calendar-day">
+                <span class="calendar-day-number">17</span>
+                <span class="calendar-heart">❤</span>
+            </div>
+            <div class="calendar-year">2026</div>
+        </div>
         <h1>МАКСИМ & ЕКАТЕРИНА</h1>
         <div class="names">Приглашают на свадьбу</div>
         <div class="flower-divider">✧ ✿ ✧</div>
@@ -573,7 +674,6 @@
             <p style="font-size: 0.9rem; color: #b8825a;">Элегантность, лёгкость и ваш лучший настрой — вот главный аксессуар этого дня</p>
         </div>
         <div style="text-align: center; margin-top: 30px;">
-            <!-- Текст "Делитесь фотографиями с хештегом:" убран, оставлен только хештег -->
             <div class="hashtag">#СвадьбаМаксимЕкатерина2026</div>
         </div>
     </div>
@@ -608,6 +708,7 @@
 </footer>
 
 <script>
+    // Таймер
     function updateTimer() {
         const weddingDate = new Date(2026, 6, 17, 0, 0, 0);
         const now = new Date();
@@ -635,11 +736,54 @@
     setInterval(updateTimer, 1000);
     updateTimer();
     
+    // Плавный скролл
     document.querySelector('a[href="#details"]')?.addEventListener('click', function(e) {
         e.preventDefault();
         document.querySelector('#details').scrollIntoView({ behavior: 'smooth' });
     });
     
+    // === Таймлайн с сердечками: добавляем сердечки на каждый видимый блок ===
+    function updateTimelineHearts() {
+        const sections = document.querySelectorAll('section');
+        const heartsContainer = document.getElementById('timelineHearts');
+        if (!heartsContainer) return;
+        
+        // Очищаем старые сердечки
+        heartsContainer.innerHTML = '';
+        
+        // Для каждой секции создаём сердечко, если она не hero (hero оставляем без сердечка, но можно добавить)
+        sections.forEach((section, index) => {
+            // Пропускаем hero секцию? Нет, добавим и для неё сердечко внизу
+            const rect = section.getBoundingClientRect();
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            // Позиция сердечка: середина секции по вертикали
+            let topPosition = rect.top + scrollTop + rect.height / 2;
+            
+            const heart = document.createElement('div');
+            heart.className = 'timeline-heart';
+            heart.style.top = topPosition + 'px';
+            heartsContainer.appendChild(heart);
+        });
+        
+        // Добавляем сердечко для футера (как завершение)
+        const footer = document.querySelector('footer');
+        if (footer) {
+            const rect = footer.getBoundingClientRect();
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            let topPosition = rect.top + scrollTop + rect.height / 2;
+            const heart = document.createElement('div');
+            heart.className = 'timeline-heart';
+            heart.style.top = topPosition + 'px';
+            heartsContainer.appendChild(heart);
+        }
+    }
+    
+    // При загрузке и скролле обновляем позиции сердечек
+    window.addEventListener('load', updateTimelineHearts);
+    window.addEventListener('resize', updateTimelineHearts);
+    window.addEventListener('scroll', updateTimelineHearts);
+    
+    // Музыка
     const audio = document.getElementById('weddingAudio');
     const toggleBtn = document.getElementById('musicToggle');
     const musicIcon = document.getElementById('musicIcon');
