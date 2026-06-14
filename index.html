@@ -35,7 +35,6 @@
             overflow-x: hidden;
         }
 
-        /* subtle paper texture */
         body::before {
             content: "";
             position: fixed;
@@ -92,7 +91,6 @@
             margin-bottom: 48px;
         }
 
-        /* Botanical divider (signature line-art instead of emoji) */
         .botanical {
             display: flex;
             justify-content: center;
@@ -192,39 +190,22 @@
             font-style: italic;
         }
 
-        /* Wax-seal monogram with leaf — the signature element */
-        .seal {
-            width: 96px;
-            height: 96px;
+        /* Изображение вместо колец — ваше фото IMG_1005.PNG */
+        .rings-image {
             margin: 30px auto 0;
-            background: radial-gradient(circle at 35% 30%, #d6a877, var(--terracotta) 70%, var(--terracotta-deep) 100%);
-            border-radius: 50%;
             display: flex;
-            align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 24px -8px rgba(138, 90, 55, 0.45), inset 0 2px 6px rgba(255,255,255,0.25), inset 0 -3px 8px rgba(0,0,0,0.2);
-            position: relative;
+            align-items: center;
         }
-        .seal svg {
-            width: 50px;
-            height: 50px;
-            stroke: #fdf0e0;
-            fill: none;
-            stroke-width: 1.4;
-            opacity: 0.95;
-        }
-
-        .hero .invite-line {
-            margin-top: 28px;
-            font-size: 0.85rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            color: var(--terracotta-deep);
-            font-weight: 600;
+        .rings-image img {
+            max-width: 100px;
+            width: auto;
+            height: auto;
+            display: block;
         }
 
         .hero p.tagline {
-            margin: 24px auto 32px;
+            margin: 32px auto 32px;
             max-width: 420px;
             color: #9c8268;
             font-weight: 300;
@@ -276,7 +257,6 @@
             50% { opacity: 1; }
         }
 
-        /* ===== Stationery cards (calendar, invitation, info etc.) ===== */
         .card {
             background: var(--panel-2);
             border-radius: 32px;
@@ -288,7 +268,6 @@
             position: relative;
         }
 
-        /* corner ornament */
         .card::before, .card::after {
             content: "";
             position: absolute;
@@ -300,7 +279,6 @@
         .card::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
         .card::after { bottom: 10px; right: 10px; border-left: none; border-top: none; }
 
-        /* ===== Calendar ===== */
         .calendar-large {
             margin-bottom: 36px;
             text-align: center;
@@ -355,7 +333,6 @@
             aspect-ratio: 1 / 1;
         }
 
-        /* ===== Программа дня (timeline) ===== */
         .timeline {
             max-width: 640px;
             margin: 0 auto;
@@ -415,22 +392,6 @@
             line-height: 1.6;
         }
 
-        /* ===== Dress-code palette ===== */
-        .palette {
-            display: flex;
-            justify-content: center;
-            gap: 14px;
-            margin: 24px 0;
-        }
-        .swatch {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 4px 10px -4px rgba(138,90,55,0.35);
-        }
-
-        /* ===== Calendar times ===== */
         .calendar-times {
             display: flex;
             justify-content: center;
@@ -473,7 +434,6 @@
             font-size: 0.95rem;
         }
 
-        /* ===== Timer ===== */
         .timer-section {
             text-align: center;
         }
@@ -534,19 +494,13 @@
             border-top: 1px solid var(--line);
         }
         footer p { max-width: 480px; margin: 0 auto; line-height: 1.7; }
-        footer .seal-mini {
-            width: 44px; height: 44px;
-            border: 1px solid var(--gold);
-            border-radius: 50%;
-            margin: 0 auto 18px;
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-size: 1rem;
-            color: var(--terracotta);
+        footer .rings-mini img {
+            max-width: 36px;
+            margin: 0 auto 12px;
+            display: block;
+            opacity: 0.7;
         }
 
-        /* ===== Gallery ===== */
         .two-photos {
             display: flex;
             flex-wrap: wrap;
@@ -582,80 +536,6 @@
             letter-spacing: 1px;
         }
 
-        /* ===== Анкета гостя (RSVP form) ===== */
-        .rsvp-form {
-            display: flex;
-            flex-direction: column;
-            gap: 22px;
-        }
-        .form-label {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-size: 1.1rem;
-            color: var(--terracotta-deep);
-        }
-        .form-input {
-            border: none;
-            border-bottom: 1px solid var(--line);
-            background: transparent;
-            padding: 8px 4px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.95rem;
-            color: var(--ink);
-            outline: none;
-            transition: border-color 0.25s ease;
-        }
-        .form-input:focus {
-            border-color: var(--terracotta);
-        }
-        .form-group {
-            border-top: 1px solid var(--line);
-            padding-top: 20px;
-        }
-        .form-question {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-size: 1.1rem;
-            color: var(--terracotta-deep);
-            margin-bottom: 4px;
-        }
-        .form-hint {
-            font-size: 0.78rem;
-            color: #c8a87f;
-            margin-bottom: 12px;
-        }
-        .radio-label, .checkbox-label {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.95rem;
-            color: var(--ink);
-            margin-bottom: 10px;
-            cursor: pointer;
-        }
-        .radio-label input, .checkbox-label input {
-            width: 16px;
-            height: 16px;
-            accent-color: var(--terracotta);
-        }
-        .submit-btn {
-            border: none;
-            margin-top: 8px;
-            align-self: center;
-        }
-        .form-footnote {
-            font-size: 0.8rem;
-            color: #c8a87f;
-            text-align: center;
-            line-height: 1.7;
-            margin-top: 4px;
-        }
-            margin-top: 30px;
-            text-align: center;
-        }
         .map-link p {
             margin-bottom: 16px;
             font-style: italic;
@@ -682,7 +562,6 @@
             border-color: var(--terracotta);
         }
 
-        /* ===== Dress code section ===== */
         .dress-card {
             max-width: 640px;
             margin: 0 auto;
@@ -702,7 +581,6 @@
             font-family: 'Cormorant Garamond', serif;
         }
 
-        /* scroll reveal */
         .reveal {
             opacity: 0;
             transform: translateY(24px);
@@ -746,9 +624,7 @@
             .hero .amp { font-size: 1.6rem; }
             .greeting-script { font-size: 2.3rem; }
             h2 { font-size: 2rem; }
-            .seal { width: 76px; height: 76px; }
-            .seal svg { width: 40px; height: 40px; }
-            .invitation-text { font-size: 1.25rem; }
+            .rings-image img { max-width: 70px; }
             .card { padding: 32px 22px; }
             section { padding: 56px 0; }
             .calendar-header { font-size: 1.2rem; }
@@ -758,11 +634,9 @@
             .dress-card { padding: 36px 22px; }
             .timeline { padding-left: 78px; }
             .timeline::before { left: 46px; }
-            .timeline-time { left: -100px; width: 60px; font-size: 1.6rem; }
+            .timeline-time { left: -100px; width: 60px; font-size: 1.2rem; }
             .timeline-item::before { left: -18px; }
             .calendar-times { gap: 28px; }
-            .palette { gap: 10px; }
-            .swatch { width: 30px; height: 30px; }
         }
     </style>
 </head>
@@ -777,18 +651,17 @@
     <span id="musicText">Музыка</span>
 </div>
 
-<!-- ===== HERO ===== -->
 <section class="hero">
     <div class="hero-content">
         <div class="monogram">М · Е</div>
         <div class="date-pill">17 июля 2026</div>
         <div class="names">Максим<span class="amp">и</span>Екатерина</div>
-        <div class="seal">
-            <svg viewBox="0 0 50 50">
-                <path d="M25 6 C 25 6, 12 14, 12 26 C 12 36, 18 42, 25 44 C 32 42, 38 36, 38 26 C 38 14, 25 6, 25 6 Z"/>
-                <path d="M25 10 V 40 M25 18 C 25 18, 18 20, 16 26 M25 26 C 25 26, 33 28, 35 34 M25 22 C 25 22, 32 24, 34 30 M25 30 C 25 30, 17 32, 15 38"/>
-            </svg>
+        
+        <!-- Ваше изображение IMG_1005.PNG вместо колец -->
+        <div class="rings-image">
+            <img src="IMG_1005.PNG" alt="Максим и Екатерина">
         </div>
+        
         <p class="tagline">Семья — это начало новой главы. Будем рады разделить этот день с вами.</p>
         <a href="#details" class="btn">Подробнее о событии</a>
     </div>
@@ -798,7 +671,6 @@
     </div>
 </section>
 
-<!-- ===== Дорогие гости + фото ===== -->
 <section id="details" class="color-bg-1" style="padding-top: 56px; padding-bottom: 0;">
     <div class="container">
         <div class="section-head reveal" style="margin-bottom: 28px;">
@@ -814,12 +686,11 @@
 <section class="color-bg-1" style="padding-top: 28px; padding-bottom: 56px;">
     <div class="container">
         <div class="photo-card reveal" style="max-width: 640px; margin: 0 auto;">
-            <img src="photo1.jpg" alt="Максим и Екатерина" style="aspect-ratio: 4 / 5;">
+            <img src="photo1.jpg" alt="Максим и Екатерина" style="aspect-ratio: 4 / 5; object-fit: cover; object-position: center 30%;">
         </div>
     </div>
 </section>
 
-<!-- ===== Программа дня ===== -->
 <section class="color-bg-2">
     <div class="container">
         <div class="section-head reveal">
@@ -869,7 +740,6 @@
     </div>
 </section>
 
-<!-- ===== Дресс-код ===== -->
 <section class="color-bg-1">
     <div class="container">
         <div class="section-head reveal">
@@ -885,7 +755,6 @@
     </div>
 </section>
 
-<!-- ===== Пожелания ===== -->
 <section class="color-bg-2">
     <div class="container">
         <div class="section-head reveal">
@@ -908,7 +777,6 @@
     </div>
 </section>
 
-<!-- ===== Календарь + Банкет/Локация ===== -->
 <section class="color-bg-1">
     <div class="container">
         <div class="card calendar-large reveal">
@@ -933,7 +801,9 @@
                 <a href="https://yandex.ru/maps/-/CPtPjVzb" target="_blank" class="map-btn">Смотреть на карте</a>
             </div>
         </div>
-        &nbsp;
+        
+        <div style="height: 28px;"></div>
+        
         <div class="card reveal" style="text-align: center;">
             <div class="eyebrow" style="margin-bottom: 6px;">Праздничный банкет</div>
             <h3 class="place-title">Комплекс отдыха «Лель»</h3>
@@ -945,7 +815,6 @@
     </div>
 </section>
 
-<!-- ===== Таймер ===== -->
 <section class="color-bg-2 timer-section">
     <div class="container">
         <div class="section-head reveal">
@@ -963,38 +832,34 @@
 
 <footer>
     <div class="container">
-        <div class="seal-mini">М&Е</div>
-        <p style="margin-top: 20px;">© 2026, Свадьба Максима и Екатерины. Уфа, 17 июля.</p>
+        <div class="rings-mini">
+            <img src="IMG_1005.PNG" alt="Максим и Екатерина" style="max-width: 42px; opacity: 0.7;">
+        </div>
+        <p>© 2026, Свадьба Максима и Екатерины. Уфа, 17 июля.</p>
     </div>
 </footer>
 
 <script>
-    // Генерация календаря на июль 2026
     function generateCalendar() {
         const year = 2026;
-        const month = 6; // Июль
+        const month = 6;
         const firstDay = new Date(year, month, 1);
         let startWeekday = firstDay.getDay();
         let startOffset = startWeekday === 0 ? 6 : startWeekday - 1;
-
         const daysInMonth = new Date(year, month + 1, 0).getDate();
         const grid = document.getElementById('calendarDaysGrid');
         if (!grid) return;
         grid.innerHTML = '';
-
         for (let i = 0; i < startOffset; i++) {
             const empty = document.createElement('div');
             empty.className = 'calendar-empty';
             grid.appendChild(empty);
         }
-
         for (let d = 1; d <= daysInMonth; d++) {
             const dayDiv = document.createElement('div');
             dayDiv.className = 'calendar-day-cell';
             dayDiv.textContent = d;
-            if (d === 17) {
-                dayDiv.classList.add('highlight');
-            }
+            if (d === 17) dayDiv.classList.add('highlight');
             grid.appendChild(dayDiv);
         }
     }
@@ -1005,12 +870,10 @@
         generateCalendar();
     }
 
-    // Таймер
     function updateTimer() {
         const weddingDate = new Date(2026, 6, 17, 0, 0, 0);
         const now = new Date();
         const diff = weddingDate - now;
-
         if (diff <= 0) {
             document.getElementById('days').innerText = '0';
             document.getElementById('hours').innerText = '0';
@@ -1018,12 +881,10 @@
             document.getElementById('seconds').innerText = '0';
             return;
         }
-
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % 86400000) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % 3600000) / (1000 * 60));
         const seconds = Math.floor((diff % 60000) / 1000);
-
         document.getElementById('days').innerText = days;
         document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
         document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
@@ -1038,7 +899,6 @@
         document.querySelector('#details').scrollIntoView({ behavior: 'smooth' });
     });
 
-    // Scroll-reveal
     const revealEls = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -1050,7 +910,6 @@
     }, { threshold: 0.15 });
     revealEls.forEach(el => observer.observe(el));
 
-    // Музыка
     const audio = document.getElementById('weddingAudio');
     const toggleBtn = document.getElementById('musicToggle');
     const musicIcon = document.getElementById('musicIcon');
@@ -1088,25 +947,3 @@
     });
 
     function enableAutoPlay() {
-        if (autoPlayAttempted) return;
-        autoPlayAttempted = true;
-        playMusic().then(success => {
-            if (!success) {
-                const handler = () => {
-                    playMusic();
-                    document.removeEventListener('click', handler);
-                    document.removeEventListener('touchstart', handler);
-                };
-                document.addEventListener('click', handler);
-                document.addEventListener('touchstart', handler);
-            }
-        });
-    }
-
-    audio.load();
-    audio.volume = 0.5;
-    window.addEventListener('load', enableAutoPlay);
-</script>
-
-</body>
-</html>
